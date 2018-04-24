@@ -16,6 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.PIDCalc;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.TeleopDriveCommand;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
+import jaci.pathfinder.modifiers.TankModifier;
 
 public class DriveSystem extends Subsystem {
 
@@ -27,6 +31,7 @@ public class DriveSystem extends Subsystem {
     public final AHRS navX;
     public final PIDCalc pid;
     public double pidOutput;
+    public Pathfinder pathfinder;
 
     public DriveSystem() {
         leftFront = new TalonSRX(RobotMap.leftFrontDrive);
@@ -45,7 +50,7 @@ public class DriveSystem extends Subsystem {
         rightRear.config_kF(0, 1, 100);
 
         navX = new AHRS(SPI.Port.kMXP);
-
+        pathfinder = new Pathfinder();
         pid = new PIDCalc(0.03, 0, 0, 0);
     }
 
@@ -62,6 +67,26 @@ public class DriveSystem extends Subsystem {
     public void stop() {
         leftRear.set(ControlMode.PercentOutput, 0);
         rightRear.set(ControlMode.PercentOutput, 0);
+    }
+
+    public int getLeftEncoderPosition() {
+        return leftRear.getSelectedSensorPosition(0);
+    }
+
+    public int getRightEncoderPosition() {
+        return rightRear.getSelectedSensorPosition(0);
+    }
+
+    public double getGyroAngle() {
+        return navX.getYaw();
+    }
+
+    public void setLeftDrivePower(double power) {
+        leftRear.set(ControlMode.PercentOutput, power);
+    }
+
+    public void setRightDrivePower(double power) {
+        rightRear.set(ControlMode.PercentOutput, power);
     }
 
     public void driveStraightToEncoderCounts(int counts) {
@@ -107,4 +132,13 @@ public class DriveSystem extends Subsystem {
     public void noShiftInput() {
         shifter.set(DoubleSolenoid.Value.kOff);
     }
+
+    public TankModifier configTrajectory(Waypoint[] points) {
+        Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
+        Trajectory trajectory = Pathfinder.generate(points, config);
+        // 2.16 feet in meters = 0.658368
+        TankModifier modifier = new TankModifier(trajectory).modify(0.658368);
+        return modifier;
+    }
+
 }
