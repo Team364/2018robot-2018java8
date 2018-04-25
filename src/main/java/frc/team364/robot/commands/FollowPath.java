@@ -41,7 +41,7 @@ public class FollowPath extends Command {
         left.configureEncoder(0, 4096, 0.1524);
         right.configureEncoder(0, 4096, 0.1524);
         left.configurePIDVA(0.25, 0, 0, 1/6, 0);
-        right.configurePIDVA(0.25, 0, 0, 1/5, 0);
+        right.configurePIDVA(0.25, 0, 0, 1/6, 0);
     }
 
     @Override

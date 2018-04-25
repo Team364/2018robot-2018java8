@@ -7,7 +7,8 @@ import frc.team364.robot.commands.LiftSecondStage;
 public class FollowPathAuto extends CommandGroup {
 
     public FollowPathAuto() {
-        addSequential(new FollowPath("/home/lvuser/mp_left.csv", "home/lvuser/mp_right.csv"));
+        // We use the _detailed files from the generator. These work with Jaci's Pathfinder.
+        addSequential(new FollowPath("/home/lvuser/mp_left_detailed.csv", "home/lvuser/mp_right_detailed.csv"));
         addSequential(new LiftSecondStage());
         //addSequential(new OuttakeCube());
     }
