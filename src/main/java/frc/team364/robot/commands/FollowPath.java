@@ -13,7 +13,6 @@ import frc.team364.robot.Robot;
 
 public class FollowPath extends Command {
 
-    private TankModifier trajectory;
     private EncoderFollower left;
     private EncoderFollower right;
 
@@ -23,6 +22,7 @@ public class FollowPath extends Command {
     private double desiredHeading;
     private double angleDifference;
     private double turn;
+    
     private File leftFile = new File("/home/lvuser/mp_left.csv");
     private File rightFile = new File("/home/lvuser/mp_right.csv");
     private Trajectory leftTraj;
@@ -61,7 +61,7 @@ public class FollowPath extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return left.isFinished();
     }
     
     @Override
