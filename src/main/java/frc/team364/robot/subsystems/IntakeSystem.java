@@ -13,7 +13,6 @@ public class IntakeSystem extends Subsystem {
     private VictorSPX rightIntake;
     private DoubleSolenoid pincher;
     private DoubleSolenoid claw;
-    private int state;
 
     public IntakeSystem() {
         leftIntake = new VictorSPX(RobotMap.intakeLeft);
@@ -24,24 +23,6 @@ public class IntakeSystem extends Subsystem {
 
     protected void initDefaultCommand() {
         setDefaultCommand(new TeleopIntakeCommand());
-    }
-
-    public void stateController() {
-        switch(state) {
-            case 0:
-                intake();
-                break;
-            case 1:
-                outtake();
-                break;
-            case 2:
-                stop();
-                break;
-        }
-    }
-
-    public void changeState(int state) {
-        this.state = state;
     }
 
     public void intake() {

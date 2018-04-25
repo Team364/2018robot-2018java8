@@ -1,5 +1,7 @@
 package frc.team364.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +25,8 @@ public class Robot extends IterativeRobot {
     public static Command leftAutonSwitch;
     public static Command rightAutonSwitch;
 
+    public static UsbCamera camera;
+
 	@Override
     public void robotInit() {
 	    driveSystem = new DriveSystem();
@@ -31,7 +35,12 @@ public class Robot extends IterativeRobot {
 	    intakeSystem = new IntakeSystem();
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitch2Cube();
-	    rightAutonSwitch = new LeftSwitch2Cube();
+        rightAutonSwitch = new LeftSwitch2Cube();
+        camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(640, 480);
+        camera.setExposureManual(100);
+        camera.setBrightness(100);
+        camera.setFPS(30);
     }
 
     @Override

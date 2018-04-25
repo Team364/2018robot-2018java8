@@ -14,8 +14,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.TeleopLiftCommand;
 
+// Class declaration : extends Subsystem
 public class LiftSystem extends Subsystem {
 
+    /**
+     * Create all object names here.
+     */
     public final TalonSRX firstStage1;
     public final TalonSRX firstStage2;
     public final VictorSPX secondStage1;
@@ -25,6 +29,13 @@ public class LiftSystem extends Subsystem {
     public final DigitalInput secondStageTopLimit;
     public final DigitalInput secondStageBottomLimit;
 
+    /**
+     * LiftSystem()
+     * -Constructor-
+     * This function is called when you create a new instance
+     * of this subsystem (= new Liftsystem();). This sets all
+     * of the port numbers for each motor controller/solenoid.
+     */
     public LiftSystem() {
         firstStage1 = new TalonSRX(RobotMap.firstStage1);
         firstStage2 = new TalonSRX(RobotMap.firstStage2);
@@ -44,11 +55,24 @@ public class LiftSystem extends Subsystem {
         secondStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);
     }
 
+    /**
+     * initDefaultCommand()
+     * This function sets the default command to be run when there
+     * are no other commands scheduled for this subsystem.
+     * Put a TeleopCommand here.
+     */
     @Override
     protected void initDefaultCommand(){
         setDefaultCommand(new TeleopLiftCommand());
     }
 
+
+    /**
+     * firstStageControl(double speed)
+     * @param speed This is a double type that appliess a speed to the motors.
+     * The limit switches will tell the lift to not move further in that
+     * direction if they are triggered.
+     */
     public void firstStageControl(double speed) {
         if (getFirstStageTopLimit()) {
             if(speed < 0) {
@@ -63,6 +87,12 @@ public class LiftSystem extends Subsystem {
         }
     }
 
+    /**
+     * secondStageControl(double speed)
+     * @param speed This is a double type that applies a speed to the motors.
+     * The limit switches will tell the lift to not move further in that
+     * direction if they are triggered.
+     */
     public void secondStageControl(double speed) {
         if (getSecondStageTopLimit()) {
             if(speed < 0) {
@@ -77,30 +107,59 @@ public class LiftSystem extends Subsystem {
         }
     }
 
+    /**
+     * keepFirstStagePosition(int counts)
+     * @param counts This is an int that tells the lift to stay at a certain encoder count.
+     * When the lift is not being told to move, it will be told to keep its current position.
+     */
     public void keepFirstStagePosition(int counts) {
         firstStage1.set(ControlMode.Position, counts);
     }
 
+    /**
+     * getEncoderCounts()
+     * @return returns current encoder counts of the first stage.
+     */
     public int getEncoderCounts() {
         return firstStage1.getSelectedSensorPosition(0);
     }
 
+    /**
+     * getFirstStageTopLimit()
+     * @return returns the first stage top limit switch position.
+     */
     public boolean getFirstStageTopLimit() {
         return firstStageTopLimit.get();
     }
 
+    /**
+     * getFirstStageBottomLimit()
+     * @return returns the first stage bottom limit switch position.
+     */
     public boolean getFirstStageBottomLimit() {
         return firstStageBottomLimit.get();
     }
 
+    /**
+     * getSecondStageTopLimit()
+     * @return returns the second stage top limit switch position.
+     */
     public boolean getSecondStageTopLimit() {
         return secondStageTopLimit.get();
     }
 
+    /**
+     * getSecondStageBottomLimit()
+     * @return returns the second stage bottom limit switch position.
+     */
     public boolean getSecondStageBottomLimit() {
         return secondStageBottomLimit.get();
     }
 
+    /**
+     * stopBoth()
+     * Stops both lift motors.
+     */
     public void stopBoth() {
         firstStage1.set(ControlMode.PercentOutput, 0);
         secondStage1.set(ControlMode.PercentOutput, 0);
