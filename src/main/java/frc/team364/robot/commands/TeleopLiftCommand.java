@@ -29,11 +29,12 @@ public class TeleopLiftCommand extends Command {
         if(liftUp) {
             liftSystem.firstStageControl(1);
             liftSystem.secondStageControl(1);
+            counts = liftSystem.getEncoderCounts();
         } else if(liftDown) {
             liftSystem.firstStageControl(-1);
             liftSystem.secondStageControl(-1);
-        } else {
             counts = liftSystem.getEncoderCounts();
+        } else {
             liftSystem.keepFirstStagePosition(counts);
         }
 
