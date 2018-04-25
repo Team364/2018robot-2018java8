@@ -23,17 +23,20 @@ public class FollowPath extends Command {
     private double angleDifference;
     private double turn;
     
-    private File leftFile = new File("/home/lvuser/mp_left.csv");
-    private File rightFile = new File("/home/lvuser/mp_right.csv");
+    private File leftFile;
+    private File rightFile;
     private Trajectory leftTraj;
     private Trajectory rightTraj;    
 
-    public FollowPath() {
+    public FollowPath(String leftFileName, String rightFileName) {
+        leftFile = new File(leftFileName);
+        rightFile = new File(rightFileName);
         requires(Robot.driveSystem);
     }
 
     @Override
     protected void initialize() {
+        
         leftTraj = Pathfinder.readFromCSV(leftFile);
         rightTraj = Pathfinder.readFromCSV(rightFile);
         left = new EncoderFollower(leftTraj);
