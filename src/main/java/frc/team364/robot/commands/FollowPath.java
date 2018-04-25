@@ -36,7 +36,6 @@ public class FollowPath extends Command {
 
     @Override
     protected void initialize() {
-        
         leftTraj = Pathfinder.readFromCSV(leftFile);
         rightTraj = Pathfinder.readFromCSV(rightFile);
         left = new EncoderFollower(leftTraj);
