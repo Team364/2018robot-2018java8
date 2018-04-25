@@ -8,14 +8,9 @@
 package frc.team364.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team364.robot.OI;
 import frc.team364.robot.Robot;
 
 public class TeleopIntakeCommand extends Command {
-
-    public boolean intake = OI.intakeButton.get();
-    public boolean outtake = OI.outtakeButton.get();
-    public boolean flipClaw = OI.clawButton.get();
 
     public TeleopIntakeCommand() {
         requires(Robot.intakeSystem);

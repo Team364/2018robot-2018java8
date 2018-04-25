@@ -1,9 +1,5 @@
 package frc.team364.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 public class RobotMap {
 
     // Drive objects

@@ -30,7 +30,7 @@ public class PIDCalc {
         error = setpoint - actual;
         integral += (error * 0.02);
         derivative = (error - prev_error) / 0.02;
-        return (kP * error) + (kI * integral) + (kD * derivative);
+        return kF + (kP * error) + (kI * integral) + (kD * derivative);
     }
 
     public void resetPID() {

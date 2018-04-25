@@ -5,23 +5,23 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
 
-    public static Joystick leftStick;
-    public static Joystick rightStick;
-    public static Joystick operationStation;
+    public Joystick leftStick;
+    public Joystick rightStick;
+    public Joystick operationStation;
 
-    public static double leftPower;
-    public static double rightPower;
+    public double leftPower;
+    public double rightPower;
 
-    public static JoystickButton shiftLow;
-    public static JoystickButton shiftHigh;
+    public JoystickButton shiftLow;
+    public JoystickButton shiftHigh;
 
-    public static JoystickButton clawButton;
-    public static JoystickButton pinchButton;
-    public static JoystickButton intakeButton;
-    public static JoystickButton outtakeButton;
-    public static JoystickButton liftButton;
-    public static JoystickButton dropButton;
-    public static JoystickButton buddyBarButton;
+    public JoystickButton clawButton;
+    public JoystickButton pinchButton;
+    public JoystickButton intakeButton;
+    public JoystickButton outtakeButton;
+    public JoystickButton liftButton;
+    public JoystickButton dropButton;
+    public JoystickButton buddyBarButton;
 
     public OI() {
 

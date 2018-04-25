@@ -9,10 +9,11 @@ import frc.team364.robot.commands.TeleopIntakeCommand;
 
 public class IntakeSystem extends Subsystem {
 
-    public VictorSPX leftIntake;
-    public VictorSPX rightIntake;
-    public DoubleSolenoid pincher;
-    public DoubleSolenoid claw;
+    private VictorSPX leftIntake;
+    private VictorSPX rightIntake;
+    private DoubleSolenoid pincher;
+    private DoubleSolenoid claw;
+    private int state;
 
     public IntakeSystem() {
         leftIntake = new VictorSPX(RobotMap.intakeLeft);
@@ -25,8 +26,24 @@ public class IntakeSystem extends Subsystem {
         setDefaultCommand(new TeleopIntakeCommand());
     }
 
+    public void stateController() {
+        switch(state) {
+            case 0:
+                intake();
+                break;
+            case 1:
+                outtake();
+                break;
+            case 2:
+                stop();
+                break;
+        }
+    }
 
-    //TODO: Implement state controllers for these functions - the code below is a bad way to approach this
+    public void changeState(int state) {
+        this.state = state;
+    }
+
     public void intake() {
         leftIntake.set(ControlMode.PercentOutput, 1);
         rightIntake.set(ControlMode.PercentOutput, 1);
