@@ -61,7 +61,7 @@ public class FollowPath extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return left.isFinished();
+		return left.isFinished() && right.isFinished();
     }
     
     @Override
