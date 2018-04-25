@@ -1,20 +1,17 @@
 package frc.team364.robot.commands;
 
 import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
+
+import java.io.File;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 public class FollowPath extends Command {
-
-    Waypoint[] points = new Waypoint[] {
-        new Waypoint(10, 0, 0),
-        new Waypoint(12, -5, Pathfinder.d2r(-90)),
-        new Waypoint(12, -10, Pathfinder.d2r(-90)),
-        new Waypoint(15, -13, 0)
-    };
 
     private TankModifier trajectory;
     private EncoderFollower left;
@@ -26,6 +23,10 @@ public class FollowPath extends Command {
     private double desiredHeading;
     private double angleDifference;
     private double turn;
+    private File leftFile = new File("/home/lvuser/mp_left.csv");
+    private File rightFile = new File("/home/lvuser/mp_right.csv");
+    private Trajectory leftTraj;
+    private Trajectory rightTraj;    
 
     public FollowPath() {
         requires(Robot.driveSystem);
@@ -33,12 +34,14 @@ public class FollowPath extends Command {
 
     @Override
     protected void initialize() {
-        trajectory = Robot.driveSystem.configTrajectory(points);
-        left = new EncoderFollower(trajectory.getLeftTrajectory());
-        right = new EncoderFollower(trajectory.getRightTrajectory());
+        leftTraj = Pathfinder.readFromCSV(leftFile);
+        rightTraj = Pathfinder.readFromCSV(rightFile);
+        left = new EncoderFollower(leftTraj);
+        right = new EncoderFollower(rightTraj);
         left.configureEncoder(0, 4096, 0.1524);
         right.configureEncoder(0, 4096, 0.1524);
         left.configurePIDVA(0.25, 0, 0, 1/6, 0);
+        right.configurePIDVA(0.25, 0, 0, 1/5, 0);
     }
 
     @Override
