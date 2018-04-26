@@ -3,7 +3,7 @@ package frc.team364.robot;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team364.robot.autons.LeftSwitch2Cube;
@@ -12,7 +12,7 @@ import frc.team364.robot.subsystems.DriveSystem;
 import frc.team364.robot.subsystems.IntakeSystem;
 import frc.team364.robot.subsystems.LiftSystem;
 
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 
     public static DriveSystem driveSystem;
     public static LiftSystem liftSystem;
@@ -27,8 +27,16 @@ public class Robot extends IterativeRobot {
 
     public static UsbCamera camera;
 
+    /**
+     * robotInit()
+     * Note the setPeriod(0.05) function. This is a function with the
+     * TimedRobot class that sets the robot loop period (50ms in this case).
+     * This will allow the motion profiling code to run at a constant rate without
+     * fluctuation. 
+     */
 	@Override
     public void robotInit() {
+        setPeriod(0.05);
 	    driveSystem = new DriveSystem();
 	    liftSystem = new LiftSystem();
 	    buddySystem = new BuddySystem();
