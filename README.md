@@ -26,5 +26,3 @@ On Linux, just run in terminal:
 `sudo apt-get install openjdk-8-jre`
 
 `sudo apt-get install openjdk-8-jdk`
-
-On 
