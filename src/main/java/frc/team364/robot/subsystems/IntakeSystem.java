@@ -35,7 +35,7 @@ public class IntakeSystem extends Subsystem {
         rightIntake.set(ControlMode.PercentOutput, -1);
     }
 
-    public void stop() {
+    public void intakeStop() {
         leftIntake.set(ControlMode.PercentOutput, 0);
         rightIntake.set(ControlMode.PercentOutput, 0);
     }
@@ -48,12 +48,20 @@ public class IntakeSystem extends Subsystem {
         claw.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void clawOff() {
+        claw.set(DoubleSolenoid.Value.kOff);
+    }
+
     public void openPincher() {
         pincher.set(DoubleSolenoid.Value.kForward);
     }
 
     public void closePincher() {
         pincher.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void pincherOff() {
+        pincher.set(DoubleSolenoid.Value.kOff);
     }
 
 }
