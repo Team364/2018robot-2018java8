@@ -21,9 +21,9 @@ public class TeleopIntakeCommand extends Command {
     public TeleopIntakeCommand() {
         requires(Robot.intakeSystem);
         clawState = 0;
-        clawLatch = 0;
+        clawLatch = false;
         pincherState = 0;
-        pincherLatch = 0;
+        pincherLatch = false;
     }
 
     @Override
