@@ -14,16 +14,16 @@ import frc.team364.robot.subsystems.LiftSystem;
 
 public class Robot extends TimedRobot {
 
-    public DriveSystem driveSystem;
-    public LiftSystem liftSystem;
-    public BuddySystem buddySystem;
-    public IntakeSystem intakeSystem;
+    public static DriveSystem driveSystem;
+    public static LiftSystem liftSystem;
+    public static BuddySystem buddySystem;
+    public static IntakeSystem intakeSystem;
     public String gameData = "";
 
-    public OI oi;
+    public static OI oi;
 
-    public Command leftAutonSwitch;
-    public Command rightAutonSwitch;
+    public static Command leftAutonSwitch;
+    public static Command rightAutonSwitch;
 
     public UsbCamera camera;
 

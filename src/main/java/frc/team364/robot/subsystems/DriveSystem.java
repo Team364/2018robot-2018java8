@@ -21,6 +21,11 @@ import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.modifiers.TankModifier;
 
+
+/**
+ * @author Landon Haugh
+ * @version v1.0
+ */ 
 public class DriveSystem extends Subsystem {
 
     public TalonSRX leftFront;
