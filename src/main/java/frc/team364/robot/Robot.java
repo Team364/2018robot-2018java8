@@ -14,18 +14,18 @@ import frc.team364.robot.subsystems.LiftSystem;
 
 public class Robot extends TimedRobot {
 
-    public static DriveSystem driveSystem;
-    public static LiftSystem liftSystem;
-    public static BuddySystem buddySystem;
-    public static IntakeSystem intakeSystem;
-    public static String gameData = "";
+    public DriveSystem driveSystem;
+    public LiftSystem liftSystem;
+    public BuddySystem buddySystem;
+    public IntakeSystem intakeSystem;
+    public String gameData = "";
 
-    public static OI oi;
+    public OI oi;
 
-    public static Command leftAutonSwitch;
-    public static Command rightAutonSwitch;
+    public Command leftAutonSwitch;
+    public Command rightAutonSwitch;
 
-    public static UsbCamera camera;
+    public UsbCamera camera;
 
     /**
      * robotInit()
@@ -37,12 +37,12 @@ public class Robot extends TimedRobot {
 	@Override
     public void robotInit() {
         setPeriod(0.05);
-	    driveSystem = new DriveSystem();
-	    liftSystem = new LiftSystem();
-	    buddySystem = new BuddySystem();
-	    intakeSystem = new IntakeSystem();
-	    oi = new OI();
-	    leftAutonSwitch = new LeftSwitch2Cube();
+	driveSystem = new DriveSystem();
+	liftSystem = new LiftSystem();
+	buddySystem = new BuddySystem();
+	intakeSystem = new IntakeSystem();
+	oi = new OI();
+	leftAutonSwitch = new LeftSwitch2Cube();
         rightAutonSwitch = new LeftSwitch2Cube();
         camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(640, 480);
