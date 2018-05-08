@@ -48,26 +48,29 @@ public class DriveSystem extends Subsystem {
      * Initializes Pathfinder class
      */ 
     public DriveSystem() {
+        
+        // Initialize TalonSRX objects
         leftFront = new TalonSRX(RobotMap.leftFrontDrive);
         leftRear = new TalonSRX(RobotMap.leftRearDrive);
         rightFront = new TalonSRX(RobotMap.rightFrontDrive);
         rightRear = new TalonSRX(RobotMap.rightRearDrive);
 
+        // Initialize DoubleSolenoid shifter object
         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
 
-	// Set the front drive motors to follow the rear
+	    // Set the front drive motors to follow the rear
         leftFront.follow(leftRear);
         rightFront.follow(rightRear);
 
-	// Config PF on left side
+	    // Config PF on left side
         leftRear.config_kP(0, 0.25, 100);
         leftRear.config_kF(0, 1, 100);
 
-	// Config PF on right side
+	    // Config PF on right side
         rightRear.config_kP(0, 0.25, 100);
         rightRear.config_kF(0, 1, 100);
 
-	// Init the navX, Pathfinder, and PIDCalc
+	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
         pid = new PIDCalc(0.03, 0, 0, 0);
@@ -77,7 +80,6 @@ public class DriveSystem extends Subsystem {
     protected void initDefaultCommand() {
         setDefaultCommand(new TeleopDriveCommand());
     }
-
 
     /**
      * tankDrive()
@@ -116,7 +118,6 @@ public class DriveSystem extends Subsystem {
         return rightRear.getSelectedSensorPosition(0);
     }
 
-
     /**
      * getGyroAngle()
      * @return returns the navX angle (yaw)
@@ -124,7 +125,6 @@ public class DriveSystem extends Subsystem {
     public double getGyroAngle() {
         return navX.getYaw();
     }
-
 
     /**
      * setLeftDrivePower()
@@ -134,7 +134,6 @@ public class DriveSystem extends Subsystem {
     public void setLeftDrivePower(double power) {
         leftRear.set(ControlMode.PercentOutput, power);
     }
-
 
     /**
      * setRightDrivePower()
@@ -202,7 +201,6 @@ public class DriveSystem extends Subsystem {
             return false;
         }
     }
-
 
     /**
      * shiftHigh()
