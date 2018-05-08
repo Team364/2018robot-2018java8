@@ -19,7 +19,6 @@ public class BuddySystem extends Subsystem {
 
     public BuddySystem() {
         buddyBar = new DoubleSolenoid(RobotMap.buddyBarPistonPort1, RobotMap.buddyBarPistonPort2);
-        locker = new DoubleSolenoid(RobotMap.lockPistonPort1, RobotMap.lockPistonPort2);
     }
 
     @Override
@@ -30,10 +29,8 @@ public class BuddySystem extends Subsystem {
     public void setLock(boolean mode) {
         if(mode == true) {
             buddyBar.set(DoubleSolenoid.Value.kForward);
-            locker.set(DoubleSolenoid.Value.kForward);
         } else {
             buddyBar.set(DoubleSolenoid.Value.kReverse);
-            locker.set(DoubleSolenoid.Value.kReverse);
         }
     }
 
