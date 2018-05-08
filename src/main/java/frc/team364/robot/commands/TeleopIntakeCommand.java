@@ -50,13 +50,21 @@ public class TeleopIntakeCommand extends Command {
         if(Robot.oi.clawButton.get()) {
             if(!clawLatch) {
                 if(clawState == 0) {
+                    System.out.println("Flipping claw up.");
                     Robot.intakeSystem.flipClawUp();
                     clawLatch = true;
                 } else {
+                    System.out.println("Flipping claw down.");
                     Robot.intakeSystem.flipClawDown();
                     clawLatch = true;
                 }
             } else {
+                System.out.println("Off!");
+                if(clawState == 1) {
+                    clawState = 0;
+                } else {
+                    clawState = 1;
+                }
                 Robot.intakeSystem.clawOff();
             }
         } else {
@@ -74,6 +82,11 @@ public class TeleopIntakeCommand extends Command {
                     pincherLatch = true;
                 }
             } else {
+                if(pincherState == 1) {
+                    pincherState = 0;
+                } else {
+                    pincherState = 1;
+                }
                 Robot.intakeSystem.clawOff();
             }
         } else {

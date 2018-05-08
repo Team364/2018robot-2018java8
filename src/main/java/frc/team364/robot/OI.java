@@ -29,19 +29,16 @@ public class OI {
         rightStick = new Joystick(1);
         operationStation = new Joystick(2);
 
-        leftPower = leftStick.getRawAxis(0);
-        rightPower = rightStick.getRawAxis(0);
+        shiftLow = new JoystickButton(leftStick, 1);
+        shiftHigh = new JoystickButton(rightStick, 1);
 
-        shiftLow = new JoystickButton(leftStick, 0);
-        shiftHigh = new JoystickButton(rightStick, 0);
-
-        clawButton = new JoystickButton(operationStation, 0);
-        pinchButton = new JoystickButton(operationStation, 1);
-        intakeButton = new JoystickButton(operationStation, 2);
-        outtakeButton = new JoystickButton(operationStation, 3);
-        liftButton = new JoystickButton(operationStation, 4);
-        dropButton = new JoystickButton(operationStation, 5);
-        buddyBarButton = new JoystickButton(operationStation, 6);
+        clawButton = new JoystickButton(operationStation, 6);
+        pinchButton = new JoystickButton(operationStation, 3);
+        intakeButton = new JoystickButton(operationStation, 1);
+        outtakeButton = new JoystickButton(operationStation, 2);
+        liftButton = new JoystickButton(operationStation, 5);
+        dropButton = new JoystickButton(operationStation, 6);
+        buddyBarButton = new JoystickButton(operationStation, 4);
 
     }
 }

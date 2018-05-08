@@ -21,6 +21,9 @@ public class TurnToHeading extends Command {
 
     @Override
     protected void execute() {
+        System.out.println("In Turn to heading!");
+        System.out.println("Heading: ");
+        System.out.println(Robot.driveSystem.getGyroAngle());
         Robot.driveSystem.turnToHeading(wantedHeading);
     }
 

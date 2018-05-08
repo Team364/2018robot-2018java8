@@ -35,7 +35,11 @@ public class DriveSystem extends Subsystem {
     public DoubleSolenoid shifter;
     public AHRS navX;
     public PIDCalc pid;
+    public PIDCalc pidLeft;
+    public PIDCalc pidRight;
     public double pidOutput;
+    public double pidOutputLeft;
+    public double pidOutputRight;
     public Pathfinder pathfinder;
 
     /**
@@ -57,7 +61,7 @@ public class DriveSystem extends Subsystem {
 
         // Initialize DoubleSolenoid shifter object
         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
-
+        
 	    // Set the front drive motors to follow the rear
         leftFront.follow(leftRear);
         rightFront.follow(rightRear);
@@ -73,7 +77,9 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
-        pid = new PIDCalc(0.03, 0, 0, 0);
+        pid = new PIDCalc(0.005, 0, 1, 0);
+        pidLeft = new PIDCalc(0.0003, 0, 0, 0);
+        pidRight = new PIDCalc(0.0003, 0, 0, 0);
     }
 
     @Override
@@ -89,7 +95,7 @@ public class DriveSystem extends Subsystem {
      */
     public void tankDrive(double left, double right) {
         leftRear.set(ControlMode.PercentOutput, left);
-        rightRear.set(ControlMode.PercentOutput, right);
+        rightRear.set(ControlMode.PercentOutput, -right);
     }
 
     /**
@@ -115,7 +121,7 @@ public class DriveSystem extends Subsystem {
      * @return returns the right encoder position in counts
      */ 
     public int getRightEncoderPosition() {
-        return rightRear.getSelectedSensorPosition(0);
+        return -rightRear.getSelectedSensorPosition(0);
     }
 
     /**
@@ -150,8 +156,10 @@ public class DriveSystem extends Subsystem {
      * @param counts specify encoder counts to drive to
      */ 
     public void driveStraightToEncoderCounts(int counts) {
-        leftRear.set(ControlMode.Position, counts);
-        rightRear.set(ControlMode.Position, counts);
+        pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
+        pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
+        leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
+        rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
     }
 
     /**
@@ -164,8 +172,13 @@ public class DriveSystem extends Subsystem {
 
         double leftRearPos = leftRear.getSelectedSensorPosition(0);
         double rightRearPos = rightRear.getSelectedSensorPosition(0);
-
-        return leftRearPos >= (counts - 10) && leftRearPos <= (counts + 10) && rightRearPos >= (counts - 10) && rightRearPos <= (counts + 10);
+        if(leftRearPos >= (counts - 100)) {
+            System.out.println("Reached target!");
+            return true;
+        } else {
+            System.out.println("Haven't reached target!");
+            return false;
+        }
 
     }
 
@@ -184,8 +197,13 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutput = pid.calculateOutput(heading, navX.getYaw());
-        leftRear.set(ControlMode.PercentOutput, pidOutput);
-        rightRear.set(ControlMode.PercentOutput, -pidOutput);
+        if(pidOutput > 1) {
+            pidOutput = 1;
+        } else if(pidOutput < -1) {
+            pidOutput = -1;
+        }
+        leftRear.set(ControlMode.PercentOutput, pidOutput * 0.3);
+        rightRear.set(ControlMode.PercentOutput, pidOutput * 0.3);
     }
 
     /**
@@ -239,6 +257,11 @@ public class DriveSystem extends Subsystem {
         // 2.16 feet in meters = 0.658368
         TankModifier modifier = new TankModifier(trajectory).modify(0.658368);
         return modifier;
+    }
+
+    public void resetEncoders() {
+        leftRear.setSelectedSensorPosition(0, 0, 0);
+        rightRear.setSelectedSensorPosition(0, 0, 0);
     }
 
 }

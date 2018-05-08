@@ -21,9 +21,9 @@ public class TeleopBuddyCommand extends Command {
     protected void execute() {
 
         if(Robot.oi.buddyBarButton.get() == true) {
-            buddySystem.setLock(true);
-        } else if(Robot.oi.buddyBarButton.get() == false) {
             buddySystem.setLock(false);
+        } else if(Robot.oi.buddyBarButton.get() == false) {
+            buddySystem.setLock(true);
         }
 
     }

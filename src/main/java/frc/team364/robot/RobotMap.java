@@ -33,6 +33,6 @@ public class RobotMap {
     public static final int pinchPistonPort2 = 5;
 
     // Buddy bar objects
-    public static final int buddyBarPistonPort1 = 1;
-    public static final int buddyBarPistonPort2 = 6;
+    public static final int buddyBarPistonPort1 = 0;
+    public static final int buddyBarPistonPort2 = 7;
 }

@@ -24,10 +24,10 @@ public class LiftSystem extends Subsystem {
     public final TalonSRX firstStage2;
     public final VictorSPX secondStage1;
     public final VictorSPX secondStage2;
-    public final DigitalInput firstStageTopLimit;
-    public final DigitalInput firstStageBottomLimit;
-    public final DigitalInput secondStageTopLimit;
-    public final DigitalInput secondStageBottomLimit;
+    //public final DigitalInput firstStageTopLimit;
+    //public final DigitalInput firstStageBottomLimit;
+    //public final DigitalInput secondStageTopLimit;
+    //public final DigitalInput secondStageBottomLimit;
 
     /**
      * LiftSystem()
@@ -43,16 +43,13 @@ public class LiftSystem extends Subsystem {
         secondStage1 = new VictorSPX(RobotMap.secondStage1);
         secondStage2 = new VictorSPX(RobotMap.secondStage2);
 
-        firstStage2.follow(firstStage1);
-        secondStage2.follow(secondStage1);
-
         firstStage1.config_kP(0, 0.25, 100);
 
-        firstStageTopLimit = new DigitalInput(RobotMap.firstStageTopLimit);
-        firstStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);
+        //firstStageTopLimit = new DigitalInput(RobotMap.firstStageTopLimit);
+        //firstStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);
 
-        secondStageTopLimit = new DigitalInput(RobotMap.secondStageTopLimit);
-        secondStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);
+        //secondStageTopLimit = new DigitialInput(3);
+        //secondStageBottomLimit = new DigitalInput(2);
     }
 
     /**
@@ -74,6 +71,7 @@ public class LiftSystem extends Subsystem {
      * direction if they are triggered.
      */
     public void firstStageControl(double speed) {
+        /*
         if (getFirstStageTopLimit()) {
             if(speed < 0) {
                 firstStage1.set(ControlMode.PercentOutput, speed);
@@ -85,6 +83,9 @@ public class LiftSystem extends Subsystem {
         } else {
             firstStage1.set(ControlMode.PercentOutput, 0);
         }
+        */
+        firstStage1.set(ControlMode.PercentOutput, speed);
+        firstStage2.set(ControlMode.PercentOutput, speed);
     }
 
     /**
@@ -94,6 +95,7 @@ public class LiftSystem extends Subsystem {
      * direction if they are triggered.
      */
     public void secondStageControl(double speed) {
+        /*
         if (getSecondStageTopLimit()) {
             if(speed < 0) {
                 secondStage1.set(ControlMode.PercentOutput, speed);
@@ -105,6 +107,9 @@ public class LiftSystem extends Subsystem {
         } else {
             secondStage1.set(ControlMode.PercentOutput, 0);
         }
+    */
+    secondStage1.set(ControlMode.PercentOutput, -speed);
+    secondStage2.set(ControlMode.PercentOutput, speed);
     }
 
     /**
@@ -123,39 +128,44 @@ public class LiftSystem extends Subsystem {
     public int getEncoderCounts() {
         return firstStage1.getSelectedSensorPosition(0);
     }
-
+    
     /**
      * getFirstStageTopLimit()
      * @return returns the first stage top limit switch position.
      */
+    /*
     public boolean getFirstStageTopLimit() {
         return firstStageTopLimit.get();
     }
-
+    */
     /**
      * getFirstStageBottomLimit()
      * @return returns the first stage bottom limit switch position.
      */
+    /*
     public boolean getFirstStageBottomLimit() {
         return firstStageBottomLimit.get();
     }
-
+    */
     /**
      * getSecondStageTopLimit()
      * @return returns the second stage top limit switch position.
      */
+    /*
     public boolean getSecondStageTopLimit() {
         return secondStageTopLimit.get();
     }
+    */
 
     /**
      * getSecondStageBottomLimit()
      * @return returns the second stage bottom limit switch position.
      */
+    /*
     public boolean getSecondStageBottomLimit() {
         return secondStageBottomLimit.get();
     }
-
+    */
     /**
      * stopBoth()
      * Stops both lift motors.
@@ -163,6 +173,8 @@ public class LiftSystem extends Subsystem {
     public void stopBoth() {
         firstStage1.set(ControlMode.PercentOutput, 0);
         secondStage1.set(ControlMode.PercentOutput, 0);
+        firstStage2.set(ControlMode.PercentOutput, 0);
+        secondStage2.set(ControlMode.PercentOutput, 0);
     }
 
 }

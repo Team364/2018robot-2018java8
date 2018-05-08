@@ -22,7 +22,7 @@ public class LiftSecondStage extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.liftSystem.getSecondStageTopLimit();
+        return false;//Robot.liftSystem.getSecondStageTopLimit();
     }
 
     @Override

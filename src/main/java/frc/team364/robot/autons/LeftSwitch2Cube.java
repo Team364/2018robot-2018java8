@@ -12,23 +12,23 @@ public class LeftSwitch2Cube extends CommandGroup {
         //TODO: Implement OuttakeCube() and IntakeCube() commands
         //TODO: Tune encoder counts and heading arguments
         //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
-        addSequential(new DriveStraightForCounts(1000));
-        addSequential(new TurnToHeading(40));
-        addSequential(new DriveStraightForCounts(1000));
+        addSequential(new DriveStraightForCounts(2000));
         addSequential(new TurnToHeading(-40));
-        addParallel(new LiftSecondStage());
-        addSequential(new DriveStraightForCounts(1000));
+        addSequential(new DriveStraightForCounts(5000));
+        addSequential(new TurnToHeading(40));
+        //addParallel(new LiftSecondStage());
+        addSequential(new DriveStraightForCounts(2000));
         //addSequential(new OuttakeCube());
-        addParallel(new DropSecondStage());
-        addSequential(new DriveStraightForCounts(-1000));
-        addSequential(new TurnToHeading(-90));
-        addParallel(new DriveStraightForCounts(1000));
+        //addParallel(new DropSecondStage());
+        //addSequential(new DriveStraightForCounts(-1000));
+        //addSequential(new TurnToHeading(-90));
+        //addSequential(new DriveStraightForCounts(1000));
         //addSequential(new IntakeCube());
-        addSequential(new DriveStraightForCounts(-1000));
-        addParallel(new LiftSecondStage());
-        addSequential(new TurnToHeading(90));
-        addSequential(new DriveStraightForCounts(1000));
+        //addSequential(new DriveStraightForCounts(-1000));
+        //addParallel(new LiftSecondStage());
+        //addSequential(new TurnToHeading(90));
+        //addSequential(new DriveStraightForCounts(1000));
         //addSequential(new OuttakeCube());
-        addSequential(new DriveStraightForCounts(-1000));
+        //addSequential(new DriveStraightForCounts(-1000));
     }
 }

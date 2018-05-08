@@ -15,7 +15,6 @@ import frc.team364.robot.commands.TeleopBuddyCommand;
 public class BuddySystem extends Subsystem {
 
     private DoubleSolenoid buddyBar;
-    private DoubleSolenoid locker;
 
     public BuddySystem() {
         buddyBar = new DoubleSolenoid(RobotMap.buddyBarPistonPort1, RobotMap.buddyBarPistonPort2);

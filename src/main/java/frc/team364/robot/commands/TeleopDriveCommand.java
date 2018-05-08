@@ -29,7 +29,7 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.driveSystem.tankDrive(Robot.oi.leftPower, Robot.oi.rightPower);
+        Robot.driveSystem.tankDrive(Robot.oi.leftStick.getRawAxis(1), Robot.oi.rightStick.getRawAxis(1));
         if(Robot.oi.shiftHigh.get()) {
             Robot.driveSystem.shiftHigh();
         } else if(Robot.oi.shiftLow.get()) {
@@ -37,6 +37,10 @@ public class TeleopDriveCommand extends Command {
         } else {
             Robot.driveSystem.noShiftInput();
         }
+        System.out.println(Robot.driveSystem.getLeftEncoderPosition());
+        System.out.println(Robot.driveSystem.getRightEncoderPosition());
+        System.out.println("GyroAngle:");
+        System.out.println(Robot.driveSystem.getGyroAngle());
     }
 
     @Override

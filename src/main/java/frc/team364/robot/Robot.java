@@ -37,18 +37,20 @@ public class Robot extends TimedRobot {
 	@Override
     public void robotInit() {
         setPeriod(0.05);
-	driveSystem = new DriveSystem();
-	liftSystem = new LiftSystem();
-	buddySystem = new BuddySystem();
-	intakeSystem = new IntakeSystem();
-	oi = new OI();
-	leftAutonSwitch = new LeftSwitch2Cube();
+	    driveSystem = new DriveSystem();
+	    liftSystem = new LiftSystem();
+	    buddySystem = new BuddySystem();
+	    intakeSystem = new IntakeSystem();
+	    oi = new OI();
+	    leftAutonSwitch = new LeftSwitch2Cube();
         rightAutonSwitch = new LeftSwitch2Cube();
         camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(640, 480);
         camera.setExposureManual(100);
         camera.setBrightness(100);
         camera.setFPS(30);
+        driveSystem.resetEncoders();
+        driveSystem.resetHeading();
     }
 
     @Override
@@ -66,6 +68,8 @@ public class Robot extends TimedRobot {
 	            rightAutonSwitch.start();
             }
         }
+        driveSystem.resetHeading();
+        driveSystem.resetEncoders();
     }
 
     @Override
