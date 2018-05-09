@@ -38,6 +38,7 @@ public class TurnToHeading extends Command {
     @Override
     protected void end() {
         Robot.driveSystem.resetEncoders();
+        Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
     }
 

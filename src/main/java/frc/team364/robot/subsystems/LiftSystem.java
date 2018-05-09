@@ -9,7 +9,6 @@ package frc.team364.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.TeleopLiftCommand;
@@ -107,9 +106,9 @@ public class LiftSystem extends Subsystem {
         } else {
             secondStage1.set(ControlMode.PercentOutput, 0);
         }
-    */
-    secondStage1.set(ControlMode.PercentOutput, -speed);
-    secondStage2.set(ControlMode.PercentOutput, speed);
+        */
+        secondStage1.set(ControlMode.PercentOutput, -speed);
+        secondStage2.set(ControlMode.PercentOutput, speed);
     }
 
     /**
