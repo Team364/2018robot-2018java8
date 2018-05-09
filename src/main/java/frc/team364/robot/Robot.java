@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team364.robot.autons.LeftSwitch2Cube;
+import frc.team364.robot.autons.RightSwitch2Cube;
 import frc.team364.robot.subsystems.BuddySystem;
 import frc.team364.robot.subsystems.DriveSystem;
 import frc.team364.robot.subsystems.IntakeSystem;
@@ -43,7 +45,7 @@ public class Robot extends TimedRobot {
 	    intakeSystem = new IntakeSystem();
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitch2Cube();
-        rightAutonSwitch = new LeftSwitch2Cube();
+        rightAutonSwitch = new RightSwitch2Cube();
         camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(640, 480);
         camera.setExposureManual(100);
@@ -58,6 +60,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        Scheduler.getInstance().removeAll();
 	    gameData = DriverStation.getInstance().getGameSpecificMessage();
 	    if(gameData.charAt(0) == 'L') {
 	        if(leftAutonSwitch != null) {
@@ -74,11 +77,16 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-	    Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
+        SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
+        SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
     }
 
     @Override
-    public void teleopInit() { }
+    public void teleopInit() {
+        Scheduler.getInstance().removeAll(); 
+    }
 
     @Override
     public void testInit() { }

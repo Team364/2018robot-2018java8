@@ -77,9 +77,9 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
-        pid = new PIDCalc(0.005, 0, 1, 0);
-        pidLeft = new PIDCalc(0.0003, 0, 0, 0);
-        pidRight = new PIDCalc(0.0003, 0, 0, 0);
+        pid = new PIDCalc(0.005, 0, 5, 0);
+        pidLeft = new PIDCalc(0.0008, 0, 0, 0);
+        pidRight = new PIDCalc(0.0008, 0, 0, 0);
     }
 
     @Override
@@ -202,8 +202,8 @@ public class DriveSystem extends Subsystem {
         } else if(pidOutput < -1) {
             pidOutput = -1;
         }
-        leftRear.set(ControlMode.PercentOutput, pidOutput * 0.3);
-        rightRear.set(ControlMode.PercentOutput, pidOutput * 0.3);
+        leftRear.set(ControlMode.PercentOutput, pidOutput * 0.2);
+        rightRear.set(ControlMode.PercentOutput, pidOutput * 0.2);
     }
 
     /**
@@ -213,7 +213,7 @@ public class DriveSystem extends Subsystem {
      * @return returns true if the robot is within 2 degrees of wanted heading
      */ 
     public boolean reachedHeading(double heading) {
-        if(navX.getYaw() <= (heading + 1) && navX.getYaw() >= (heading - 1)) {
+        if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
             return true;
         } else {
             return false;

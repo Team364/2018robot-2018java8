@@ -6,6 +6,8 @@ import frc.team364.robot.Robot;
 
 public class DropSecondStage extends Command {
 
+    private int iterations = 0;
+
     public DropSecondStage() {
         requires(Robot.liftSystem);
     }
@@ -18,11 +20,12 @@ public class DropSecondStage extends Command {
     @Override
     protected void execute() {
         Robot.liftSystem.secondStageControl(-1);
+        iterations++;
     }
 
     @Override
     protected boolean isFinished() {
-        return false;//Robot.liftSystem.getSecondStageBottomLimit();
+        return iterations >= 30;
     }
 
     @Override

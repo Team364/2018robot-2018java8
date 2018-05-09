@@ -7,6 +7,7 @@ import frc.team364.robot.Robot;
 public class TurnToHeading extends Command {
 
     private double wantedHeading;
+    private int iterations = 0;
 
     public TurnToHeading(double heading) {
         requires(Robot.driveSystem);
@@ -17,6 +18,7 @@ public class TurnToHeading extends Command {
     protected void initialize() {
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
+        Robot.driveSystem.resetEncoders();
     }
 
     @Override
@@ -25,15 +27,17 @@ public class TurnToHeading extends Command {
         System.out.println("Heading: ");
         System.out.println(Robot.driveSystem.getGyroAngle());
         Robot.driveSystem.turnToHeading(wantedHeading);
+        iterations++;
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.reachedHeading(wantedHeading);
+        return Robot.driveSystem.reachedHeading(wantedHeading) || iterations >= 30;
     }
 
     @Override
     protected void end() {
+        Robot.driveSystem.resetEncoders();
         Robot.driveSystem.stop();
     }
 

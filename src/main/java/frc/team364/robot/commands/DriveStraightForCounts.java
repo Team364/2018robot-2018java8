@@ -20,6 +20,8 @@ public class DriveStraightForCounts extends Command {
 
     @Override
     protected void execute() {
+        System.out.println("In Drive Straight!");
+        System.out.println(driveCounts);
         System.out.println(Robot.driveSystem.getLeftEncoderPosition());
         System.out.println(Robot.driveSystem.getRightEncoderPosition());
         Robot.driveSystem.driveStraightToEncoderCounts(driveCounts);
@@ -27,15 +29,13 @@ public class DriveStraightForCounts extends Command {
 
     @Override
     protected boolean isFinished() {
-        if(Robot.driveSystem.withinEncoderCountRange(driveCounts) == true) {
-            return true;   
-        } else {
-            return false;
-        }
+        return Robot.driveSystem.withinEncoderCountRange(driveCounts);
     }
 
     @Override
     protected void end() {
+        Robot.driveSystem.resetEncoders();
+        Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
     }
 
