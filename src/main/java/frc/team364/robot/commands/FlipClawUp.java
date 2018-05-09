@@ -4,31 +4,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class DropSecondStage extends Command {
+public class FlipClawUp extends Command {
 
-    public DropSecondStage() {
-        requires(Robot.liftSystem);
-        setTimeout(1.5);
+    public FlipClawUp() {
+        requires(Robot.intakeSystem);
     }
 
     @Override
     protected void initialize() {
-        Robot.liftSystem.stopBoth();
+        Robot.intakeSystem.clawOff();
     }
 
     @Override
     protected void execute() {
-        Robot.liftSystem.secondStageControl(-1);
+        Robot.intakeSystem.flipClawUp();
     }
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        return true;
     }
 
     @Override
     protected void end() {
-        Robot.liftSystem.stopBoth();
+        Robot.intakeSystem.clawOff();
     }
 
     @Override

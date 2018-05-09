@@ -10,6 +10,7 @@ public class DriveStraightForCounts extends Command {
     public DriveStraightForCounts(int counts) {
         requires(Robot.driveSystem);
         driveCounts = counts;
+        setTimeout(1.5);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class DriveStraightForCounts extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.withinEncoderCountRange(driveCounts);
+        return Robot.driveSystem.withinEncoderCountRange(driveCounts) || isTimedOut();
     }
 
     @Override

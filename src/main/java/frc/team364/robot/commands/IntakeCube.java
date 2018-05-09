@@ -4,21 +4,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class DropSecondStage extends Command {
+public class IntakeCube extends Command {
 
-    public DropSecondStage() {
-        requires(Robot.liftSystem);
+    public IntakeCube() {
+        requires(Robot.intakeSystem);
         setTimeout(1.5);
     }
 
     @Override
     protected void initialize() {
-        Robot.liftSystem.stopBoth();
+        Robot.intakeSystem.intakeStop();
     }
 
     @Override
     protected void execute() {
-        Robot.liftSystem.secondStageControl(-1);
+        Robot.intakeSystem.intake();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class DropSecondStage extends Command {
 
     @Override
     protected void end() {
-        Robot.liftSystem.stopBoth();
+        Robot.intakeSystem.intakeStop();
     }
 
     @Override

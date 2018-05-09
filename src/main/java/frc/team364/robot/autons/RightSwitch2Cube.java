@@ -1,35 +1,37 @@
 package frc.team364.robot.autons;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.team364.robot.commands.*;
+import frc.team364.robot.commands.DriveStraightForCounts;
+import frc.team364.robot.commands.LiftSecondStage;
+import frc.team364.robot.commands.DropSecondStage;
+import frc.team364.robot.commands.OuttakeCube;
+import frc.team364.robot.commands.IntakeCube;
+import frc.team364.robot.commands.TurnToHeading;
 
-public class LeftSwitch2Cube extends CommandGroup {
+public class RightSwitch2Cube extends CommandGroup {
 
-    public LeftSwitch2Cube() {
+    public RightSwitch2Cube() {
+        //TODO: Implement OuttakeCube() and IntakeCube() commands
+        //TODO: Tune encoder counts and heading arguments
         //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
         addSequential(new DriveStraightForCounts(1500));
-        addSequential(new TurnToHeading(-50));
-        addSequential(new DriveStraightForCounts(8000));
-        addSequential(new TurnToHeading(50));
-        addParallel(new LiftSecondStage());
-        addParallel(new FlipClawDown());
+        addSequential(new TurnToHeading(25));
+        addSequential(new DriveStraightForCounts(5000));
+        addSequential(new TurnToHeading(-25));
         addSequential(new DriveStraightForCounts(1000));
+        addParallel(new LiftSecondStage());
+        addSequential(new DriveStraightForCounts(2000));
         addSequential(new OuttakeCube());
         addParallel(new DropSecondStage());
         addSequential(new DriveStraightForCounts(-1000));
-        addParallel(new OpenPincher());
         addSequential(new TurnToHeading(-90));
         addSequential(new DriveStraightForCounts(1000));
         addSequential(new IntakeCube());
-        addParallel(new ClosePincher());
-        addParallel(new IntakeCube());
         addSequential(new DriveStraightForCounts(-1000));
         addParallel(new LiftSecondStage());
         addSequential(new TurnToHeading(90));
         addSequential(new DriveStraightForCounts(1000));
         addSequential(new OuttakeCube());
-        addParallel(new FlipClawDown());
-        addParallel(new DropSecondStage());
         addSequential(new DriveStraightForCounts(-1000));
     }
 }

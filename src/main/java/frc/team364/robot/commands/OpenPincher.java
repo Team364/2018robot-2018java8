@@ -4,31 +4,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class DropSecondStage extends Command {
+public class OpenPincher extends Command {
 
-    public DropSecondStage() {
-        requires(Robot.liftSystem);
-        setTimeout(1.5);
+    public OpenPincher() {
+        requires(Robot.intakeSystem);
     }
 
     @Override
     protected void initialize() {
-        Robot.liftSystem.stopBoth();
+        Robot.intakeSystem.pincherOff();
     }
 
     @Override
     protected void execute() {
-        Robot.liftSystem.secondStageControl(-1);
+        Robot.intakeSystem.openPincher();
     }
 
     @Override
     protected boolean isFinished() {
-        return isTimedOut();
+        return true;
     }
 
     @Override
     protected void end() {
-        Robot.liftSystem.stopBoth();
+        Robot.intakeSystem.pincherOff();
     }
 
     @Override
