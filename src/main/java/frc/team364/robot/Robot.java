@@ -77,10 +77,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+        putSmartDashVars();
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
-        SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
-        SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
     }
 
     @Override
@@ -89,16 +87,30 @@ public class Robot extends TimedRobot {
     }
 
     @Override
-    public void testInit() { }
+    public void testInit() { 
+
+    }
 
     @Override
-    public void disabledPeriodic() { }
+    public void disabledPeriodic() {
+        putSmartDashVars();
+    }
 
     @Override
     public void teleopPeriodic() {
 	    Scheduler.getInstance().run();
+        putSmartDashVars();
     }
 
     @Override
-    public void testPeriodic() { }
+    public void testPeriodic() { 
+
+    }
+
+    private void putSmartDashVars() {
+        SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
+        SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
+        SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
+        //SmartDashboard.putString("Current auto", gameData.charAt(0));
+    }
 }

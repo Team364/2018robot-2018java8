@@ -27,10 +27,6 @@ public class TeleopIntakeCommand extends Command {
     }
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected void execute() {
        
         // Run the intake/outtake on button press.
