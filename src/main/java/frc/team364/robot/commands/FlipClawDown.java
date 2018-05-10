@@ -8,6 +8,7 @@ public class FlipClawDown extends Command {
 
     public FlipClawDown() {
         requires(Robot.intakeSystem);
+        setTimeout(0.1);
     }
 
     @Override
@@ -17,12 +18,12 @@ public class FlipClawDown extends Command {
 
     @Override
     protected void execute() {
-        Robot.intakeSystem.flipClawDown();
+        Robot.intakeSystem.flipClawUp();
     }
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     @Override

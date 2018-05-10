@@ -7,8 +7,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team364.robot.autons.LeftSwitch2Cube;
-import frc.team364.robot.autons.RightSwitch2Cube;
+import frc.team364.robot.autons.*;
 import frc.team364.robot.subsystems.BuddySystem;
 import frc.team364.robot.subsystems.DriveSystem;
 import frc.team364.robot.subsystems.IntakeSystem;
@@ -38,18 +37,18 @@ public class Robot extends TimedRobot {
      */
 	@Override
     public void robotInit() {
-        setPeriod(0.05);
+        setPeriod(0.02);
 	    driveSystem = new DriveSystem();
 	    liftSystem = new LiftSystem();
 	    buddySystem = new BuddySystem();
 	    intakeSystem = new IntakeSystem();
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitch2Cube();
-        rightAutonSwitch = new RightSwitch2Cube();
+        rightAutonSwitch = new FarScale1Cube();
         camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(640, 480);
-        camera.setExposureManual(100);
-        camera.setBrightness(100);
+        camera.setResolution(320, 240);
+        camera.setExposureManual(50);
+        camera.setBrightness(50);
         camera.setFPS(30);
         driveSystem.resetEncoders();
         driveSystem.resetHeading();

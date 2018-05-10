@@ -78,8 +78,8 @@ public class DriveSystem extends Subsystem {
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
         pid = new PIDCalc(0.005, 0, 5, 0);
-        pidLeft = new PIDCalc(0.0008, 0, 0, 0);
-        pidRight = new PIDCalc(0.0008, 0, 0, 0);
+        pidLeft = new PIDCalc(0.0005, 0, 0, 0);
+        pidRight = new PIDCalc(0.0005, 0, 0, 0);
     }
 
     @Override
@@ -155,11 +155,18 @@ public class DriveSystem extends Subsystem {
      * Uses the TalonSRX PID to drive to a certain number of counts
      * @param counts specify encoder counts to drive to
      */ 
-    public void driveStraightToEncoderCounts(int counts) {
-        pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
-        pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
-        leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
-        rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
+    public void driveStraightToEncoderCounts(int counts, boolean backwards) {
+        if(backwards) {
+            pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
+            pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
+            leftRear.set(ControlMode.PercentOutput, -pidOutputLeft);
+            rightRear.set(ControlMode.PercentOutput, pidOutputRight);
+        } else {
+            pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
+            pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
+            leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
+            rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
+        }
     }
 
     /**
@@ -197,10 +204,10 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutput = pid.calculateOutput(heading, navX.getYaw());
-        if(pidOutput > 1) {
-            pidOutput = 1;
-        } else if(pidOutput < -1) {
-            pidOutput = -1;
+        if(pidOutput > 1.15) {
+            pidOutput = 1.15;
+        } else if(pidOutput < -1.15) {
+            pidOutput = -1.15;
         }
         leftRear.set(ControlMode.PercentOutput, pidOutput * 0.2);
         rightRear.set(ControlMode.PercentOutput, pidOutput * 0.2);

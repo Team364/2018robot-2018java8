@@ -8,6 +8,7 @@ public class OpenPincher extends Command {
 
     public OpenPincher() {
         requires(Robot.intakeSystem);
+        setTimeout(0.1);
     }
 
     @Override
@@ -17,12 +18,12 @@ public class OpenPincher extends Command {
 
     @Override
     protected void execute() {
-        Robot.intakeSystem.openPincher();
+        Robot.intakeSystem.closePincher();
     }
 
     @Override
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     @Override

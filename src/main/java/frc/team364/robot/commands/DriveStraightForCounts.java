@@ -6,11 +6,12 @@ import frc.team364.robot.Robot;
 public class DriveStraightForCounts extends Command {
 
     private int driveCounts;
+    private boolean driveBackwards;
 
-    public DriveStraightForCounts(int counts) {
+    public DriveStraightForCounts(int counts, boolean backwards) {
         requires(Robot.driveSystem);
         driveCounts = counts;
-        setTimeout(1.5);
+        driveBackwards = backwards;
     }
 
     @Override
@@ -25,12 +26,12 @@ public class DriveStraightForCounts extends Command {
         System.out.println(driveCounts);
         System.out.println(Robot.driveSystem.getLeftEncoderPosition());
         System.out.println(Robot.driveSystem.getRightEncoderPosition());
-        Robot.driveSystem.driveStraightToEncoderCounts(driveCounts);
+        Robot.driveSystem.driveStraightToEncoderCounts(driveCounts, driveBackwards);
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.withinEncoderCountRange(driveCounts) || isTimedOut();
+        return Robot.driveSystem.withinEncoderCountRange(driveCounts);
     }
 
     @Override

@@ -4,21 +4,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class ClosePincher extends Command {
+public class DropFirstStage extends Command {
 
-    public ClosePincher() {
-        requires(Robot.intakeSystem);
-        setTimeout(0.1);
+    public DropFirstStage() {
+        requires(Robot.liftSystem);
+        setTimeout(1);
     }
 
     @Override
     protected void initialize() {
-        Robot.intakeSystem.pincherOff();
+        Robot.liftSystem.stopBoth();
     }
 
     @Override
     protected void execute() {
-        Robot.intakeSystem.openPincher();
+        Robot.liftSystem.firstStageControl(1);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ClosePincher extends Command {
 
     @Override
     protected void end() {
-        Robot.intakeSystem.pincherOff();
+        Robot.liftSystem.stopBoth();
     }
 
     @Override

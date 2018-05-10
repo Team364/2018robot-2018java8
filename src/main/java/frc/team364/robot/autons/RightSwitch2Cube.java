@@ -14,24 +14,24 @@ public class RightSwitch2Cube extends CommandGroup {
         //TODO: Implement OuttakeCube() and IntakeCube() commands
         //TODO: Tune encoder counts and heading arguments
         //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
-        addSequential(new DriveStraightForCounts(1500));
+        addSequential(new DriveStraightForCounts(1500, false));
         addSequential(new TurnToHeading(25));
-        addSequential(new DriveStraightForCounts(5000));
+        addSequential(new DriveStraightForCounts(5000, false));
         addSequential(new TurnToHeading(-25));
-        addSequential(new DriveStraightForCounts(1000));
+        addSequential(new DriveStraightForCounts(1000, false));
         addParallel(new LiftSecondStage());
-        addSequential(new DriveStraightForCounts(2000));
+        addSequential(new DriveStraightForCounts(2000, false));
         addSequential(new OuttakeCube());
         addParallel(new DropSecondStage());
-        addSequential(new DriveStraightForCounts(-1000));
+        addSequential(new DriveStraightForCounts(-1000, true));
         addSequential(new TurnToHeading(-90));
-        addSequential(new DriveStraightForCounts(1000));
+        addSequential(new DriveStraightForCounts(1000, false));
         addSequential(new IntakeCube());
-        addSequential(new DriveStraightForCounts(-1000));
+        addSequential(new DriveStraightForCounts(-1000, true));
         addParallel(new LiftSecondStage());
         addSequential(new TurnToHeading(90));
-        addSequential(new DriveStraightForCounts(1000));
+        addSequential(new DriveStraightForCounts(1000, false));
         addSequential(new OuttakeCube());
-        addSequential(new DriveStraightForCounts(-1000));
+        addSequential(new DriveStraightForCounts(-1000, true));
     }
 }

@@ -8,7 +8,7 @@ public class DropSecondStage extends Command {
 
     public DropSecondStage() {
         requires(Robot.liftSystem);
-        setTimeout(1.5);
+        setTimeout(1);
     }
 
     @Override

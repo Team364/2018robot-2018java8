@@ -11,7 +11,6 @@ public class TurnToHeading extends Command {
     public TurnToHeading(double heading) {
         requires(Robot.driveSystem);
         wantedHeading = heading;
-        setTimeout(1.5);
     }
 
     @Override
@@ -31,14 +30,14 @@ public class TurnToHeading extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.reachedHeading(wantedHeading) || isTimedOut();
+        return Robot.driveSystem.reachedHeading(wantedHeading);
     }
 
     @Override
     protected void end() {
+        Robot.driveSystem.stop();
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
-        Robot.driveSystem.stop();
     }
 
     @Override
