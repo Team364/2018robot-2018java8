@@ -7,18 +7,18 @@ import frc.team364.robot.Robot;
 public class FlipClawUp extends Command {
 
     public FlipClawUp() {
-        requires(Robot.intakeSystem);
+        requires(Robot.clawSystem);
         setTimeout(0.1);
     }
 
     @Override
     protected void initialize() {
-        Robot.intakeSystem.clawOff();
+        Robot.clawSystem.clawOff();
     }
 
     @Override
     protected void execute() {
-        Robot.intakeSystem.flipClawDown();
+        Robot.clawSystem.flipClawDown();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class FlipClawUp extends Command {
 
     @Override
     protected void end() {
-        Robot.intakeSystem.clawOff();
+        Robot.clawSystem.clawOff();
     }
 
     @Override

@@ -7,18 +7,18 @@ import frc.team364.robot.Robot;
 public class ClosePincher extends Command {
 
     public ClosePincher() {
-        requires(Robot.intakeSystem);
+        requires(Robot.clawSystem);
         setTimeout(0.1);
     }
 
     @Override
     protected void initialize() {
-        Robot.intakeSystem.pincherOff();
+        Robot.clawSystem.pincherOff();
     }
 
     @Override
     protected void execute() {
-        Robot.intakeSystem.openPincher();
+        Robot.clawSystem.openPincher();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ClosePincher extends Command {
 
     @Override
     protected void end() {
-        Robot.intakeSystem.pincherOff();
+        Robot.clawSystem.pincherOff();
     }
 
     @Override

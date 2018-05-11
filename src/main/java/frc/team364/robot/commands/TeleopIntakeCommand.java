@@ -12,18 +12,8 @@ import frc.team364.robot.Robot;
 
 public class TeleopIntakeCommand extends Command {
 
-    // Variables for claw toggle
-    private int clawState;
-    private boolean clawLatch;
-    private int pincherState;
-    private boolean pincherLatch;
-
     public TeleopIntakeCommand() {
         requires(Robot.intakeSystem);
-        clawState = 0;
-        clawLatch = false;
-        pincherState = 0;
-        pincherLatch = false;
     }
 
     @Override
@@ -37,48 +27,6 @@ public class TeleopIntakeCommand extends Command {
             Robot.intakeSystem.outtake();
         } else {
             Robot.intakeSystem.intakeStop();
-        }
-
-        // This is a toggle algorithm. If the button is pressed, it will
-        // set the mechanism to a certain state on the first loop when the
-        // button is pressed. Each loop afterwards will turn the solenoid off
-        // and wait until the button is depressed.
-        if(Robot.oi.clawButton.get()) {
-            if(!clawLatch) {
-                if(clawState == 0) {
-                    Robot.intakeSystem.flipClawUp();
-                    clawState = 1;
-                    clawLatch = true;
-                } else {
-                    Robot.intakeSystem.flipClawDown();
-                    clawState = 0;
-                    clawLatch = true;
-                }
-            } else {
-                Robot.intakeSystem.clawOff();
-            }
-        } else {
-            Robot.intakeSystem.clawOff();
-            clawLatch = false;
-        }
-
-        if(Robot.oi.pinchButton.get()) {
-            if(!pincherLatch) {
-                if(pincherState == 0) {
-                    Robot.intakeSystem.openPincher();
-                    pincherLatch = true;
-                    pincherState = 1;
-                } else {
-                    Robot.intakeSystem.closePincher();
-                    pincherLatch = true;
-                    pincherState = 0;
-                }
-            } else {
-                Robot.intakeSystem.clawOff();
-            }
-        } else {
-            Robot.intakeSystem.pincherOff();
-            pincherLatch = false;
         }
 
     }

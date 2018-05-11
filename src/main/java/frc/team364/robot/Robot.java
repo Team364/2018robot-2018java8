@@ -8,10 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team364.robot.autons.*;
-import frc.team364.robot.subsystems.BuddySystem;
-import frc.team364.robot.subsystems.DriveSystem;
-import frc.team364.robot.subsystems.IntakeSystem;
-import frc.team364.robot.subsystems.LiftSystem;
+import frc.team364.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
 
@@ -19,6 +16,7 @@ public class Robot extends TimedRobot {
     public static LiftSystem liftSystem;
     public static BuddySystem buddySystem;
     public static IntakeSystem intakeSystem;
+    public static ClawSystem clawSystem;
     public String gameData = "";
 
     public static OI oi;
@@ -41,7 +39,8 @@ public class Robot extends TimedRobot {
 	    driveSystem = new DriveSystem();
 	    liftSystem = new LiftSystem();
 	    buddySystem = new BuddySystem();
-	    intakeSystem = new IntakeSystem();
+        intakeSystem = new IntakeSystem();
+        clawSystem = new ClawSystem();
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitch2Cube();
         rightAutonSwitch = new FarScale1Cube();

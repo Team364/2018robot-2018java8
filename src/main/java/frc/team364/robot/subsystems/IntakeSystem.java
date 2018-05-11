@@ -17,8 +17,6 @@ public class IntakeSystem extends Subsystem {
     public IntakeSystem() {
         leftIntake = new VictorSPX(RobotMap.intakeLeft);
         rightIntake = new VictorSPX(RobotMap.intakeRight);
-        pincher = new DoubleSolenoid(RobotMap.pinchPistonPort1, RobotMap.pinchPistonPort2);
-        claw = new DoubleSolenoid(RobotMap.clawPistonPort1, RobotMap.clawPistonPort2);
     }
 
     protected void initDefaultCommand() {
@@ -38,30 +36,6 @@ public class IntakeSystem extends Subsystem {
     public void intakeStop() {
         leftIntake.set(ControlMode.PercentOutput, 0);
         rightIntake.set(ControlMode.PercentOutput, 0);
-    }
-
-    public void flipClawDown() {
-        claw.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void flipClawUp() {
-        claw.set(DoubleSolenoid.Value.kReverse);
-    }
-
-    public void clawOff() {
-        claw.set(DoubleSolenoid.Value.kOff);
-    }
-
-    public void openPincher() {
-        pincher.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void closePincher() {
-        pincher.set(DoubleSolenoid.Value.kReverse);
-    }
-
-    public void pincherOff() {
-        pincher.set(DoubleSolenoid.Value.kOff);
     }
 
 }

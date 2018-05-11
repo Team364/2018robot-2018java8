@@ -17,14 +17,10 @@ public class TurnToHeading extends Command {
     protected void initialize() {
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
-        Robot.driveSystem.resetEncoders();
     }
 
     @Override
     protected void execute() {
-        System.out.println("In Turn to heading!");
-        System.out.println("Heading: ");
-        System.out.println(Robot.driveSystem.getGyroAngle());
         Robot.driveSystem.turnToHeading(wantedHeading);
     }
 
@@ -36,7 +32,6 @@ public class TurnToHeading extends Command {
     @Override
     protected void end() {
         Robot.driveSystem.stop();
-        Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
     }
 

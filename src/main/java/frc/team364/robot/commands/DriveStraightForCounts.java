@@ -17,15 +17,15 @@ public class DriveStraightForCounts extends Command {
     @Override
     protected void initialize() {
         Robot.driveSystem.resetEncoders();
+        Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
+        Robot.driveSystem.pidLeft.resetPID();
+        Robot.driveSystem.pidRight.resetPID();
+        Robot.driveSystem.pidNavX.resetPID();
     }
 
     @Override
     protected void execute() {
-        System.out.println("In Drive Straight!");
-        System.out.println(driveCounts);
-        System.out.println(Robot.driveSystem.getLeftEncoderPosition());
-        System.out.println(Robot.driveSystem.getRightEncoderPosition());
         Robot.driveSystem.driveStraightToEncoderCounts(driveCounts, driveBackwards);
     }
 
