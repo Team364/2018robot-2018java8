@@ -23,6 +23,8 @@ public class DriveStraightForCounts extends Command {
         Robot.driveSystem.pidLeft.resetPID();
         Robot.driveSystem.pidRight.resetPID();
         Robot.driveSystem.pidNavX.resetPID();
+        Robot.driveSystem.leftRear.configOpenloopRamp(0.6, 1);
+        Robot.driveSystem.rightRear.configOpenloopRamp(0.6, 1);
     }
 
     @Override
@@ -40,7 +42,9 @@ public class DriveStraightForCounts extends Command {
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
-        System.out.println("Reached target distance.");
+        Robot.driveSystem.leftRear.configOpenloopRamp(0, 0);
+        Robot.driveSystem.rightRear.configOpenloopRamp(0, 0);
+        System.out.println("Reached target distance.\nWanted: " + driveCounts + "Actual: " + Robot.driveSystem.getLeftEncoderPosition());
     }
 
     @Override

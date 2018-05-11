@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 	    leftAutonSwitch = new LeftSwitch2Cube();
         rightAutonSwitch = new FarScale1Cube();
         farAutonScale = new FarScale1Cube();
-        closeAutonScale = new CloseScale2Cube();
+        closeAutonScale = new CloseScale3Cube();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setResolution(640, 480);
         driveSystem.resetEncoders();
@@ -96,7 +96,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        Scheduler.getInstance().removeAll(); 
+        Scheduler.getInstance().removeAll();
+        driveSystem.leftRear.configOpenloopRamp(0, 0);
+        driveSystem.rightRear.configOpenloopRamp(0, 0); 
     }
 
     @Override

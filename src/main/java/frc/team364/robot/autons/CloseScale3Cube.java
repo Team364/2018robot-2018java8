@@ -3,9 +3,9 @@ package frc.team364.robot.autons;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.team364.robot.commands.*;
 
-public class CloseScale2Cube extends CommandGroup {
+public class CloseScale3Cube extends CommandGroup {
 
-    public CloseScale2Cube() {
+    public CloseScale3Cube() {
         //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
         addSequential(new DriveStraightForCounts(15000, false)); // Drive to scale
         addSequential(new TurnToHeading(-22)); // Turn towards scale
@@ -30,6 +30,21 @@ public class CloseScale2Cube extends CommandGroup {
         addSequential(new FlipClawDown()); // Flip claw back up
         addSequential(new OuttakeCube()); // Spit out cub
         addParallel(new FlipClawUp());
-        addSequential(new DropBothStages()); // Drop lift
+        addParallel(new DropBothStages()); // Drop lift
+        addSequential(new TurnToHeading(-90));
+        addSequential(new FlipClawDown());
+        addParallel(new OpenPincher());
+        addParallel(new IntakeCube());
+        addSequential(new DriveStraightForCounts(4200, false));
+        addSequential(new ClosePincher());
+        addSequential(new WaitCommand(1));
+        addParallel(new FlipClawUp());
+        addSequential(new DriveStraightForCounts(4200, true));
+        addParallel(new LiftBothStages());
+        addSequential(new TurnToHeading(80));
+        addSequential(new FlipClawDown());
+        addSequential(new OuttakeCube());
+        addParallel(new FlipClawUp());
+        addParallel(new DropBothStages());
     }
 }

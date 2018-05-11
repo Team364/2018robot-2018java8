@@ -77,7 +77,7 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
-        pidNavX = new PIDCalc(0.005, 0.01, 5, 0);
+        pidNavX = new PIDCalc(0.005, 0.01, 50, 0);
         pidLeft = new PIDCalc(0.0005, 0, 0, 0);
         pidRight = new PIDCalc(0.0005, 0, 0, 0);
     }
@@ -209,8 +209,8 @@ public class DriveSystem extends Subsystem {
         } else if(pidOutputNavX < -1.15) {
             pidOutputNavX = -1.15;
         }
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.25);
-        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.25);
+        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.275);
+        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.275);
     }
 
     /**

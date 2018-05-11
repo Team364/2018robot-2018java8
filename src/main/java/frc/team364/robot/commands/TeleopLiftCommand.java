@@ -25,20 +25,22 @@ public class TeleopLiftCommand extends Command {
 
     @Override
     protected void execute() {
-
-        if(Robot.oi.operationStation.getRawAxis(1) < -0.5) {
+        if(Robot.oi.firstStageLiftButton.get()) {
             liftSystem.firstStageControl(-1);
-            liftSystem.secondStageControl(1);
-            counts = liftSystem.getEncoderCounts();
-        } else if(Robot.oi.operationStation.getRawAxis(1) > 0.5) {
-            liftSystem.firstStageControl(1);
-            liftSystem.secondStageControl(-1);
-            counts = liftSystem.getEncoderCounts();
         } else {
-            liftSystem.stopBoth();
-            //liftSystem.keepFirstStagePosition(counts);
+            if(Robot.oi.operationStation.getRawAxis(1) < -0.5) {
+                liftSystem.firstStageControl(-1);
+                liftSystem.secondStageControl(1);
+                counts = liftSystem.getEncoderCounts();
+            } else if(Robot.oi.operationStation.getRawAxis(1) > 0.5) {
+                liftSystem.firstStageControl(1);
+                liftSystem.secondStageControl(-1);
+                counts = liftSystem.getEncoderCounts();
+            } else {
+                liftSystem.stopBoth();
+                //liftSystem.keepFirstStagePosition(counts);
+            }
         }
-
     }
 
     @Override
