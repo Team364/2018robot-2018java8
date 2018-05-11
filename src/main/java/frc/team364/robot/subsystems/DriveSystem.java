@@ -77,7 +77,7 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
-        pidNavX = new PIDCalc(0.005, 0, 5, 0);
+        pidNavX = new PIDCalc(0.005, 0.01, 5, 0);
         pidLeft = new PIDCalc(0.0005, 0, 0, 0);
         pidRight = new PIDCalc(0.0005, 0, 0, 0);
     }
@@ -160,14 +160,14 @@ public class DriveSystem extends Subsystem {
             pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            leftRear.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
-            rightRear.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
+            leftRear.set(ControlMode.PercentOutput, -pidOutputLeft);
+            rightRear.set(ControlMode.PercentOutput, pidOutputRight);
         } else {
             pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            leftRear.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
-            rightRear.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
+            leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
+            rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
         }
     }
 
@@ -181,11 +181,9 @@ public class DriveSystem extends Subsystem {
 
         double leftRearPos = leftRear.getSelectedSensorPosition(0);
         double rightRearPos = rightRear.getSelectedSensorPosition(0);
-        if(leftRearPos >= (counts - 100)) {
-            System.out.println("Reached target!");
+        if(Math.abs(leftRearPos) >= (counts - 100)) {
             return true;
         } else {
-            System.out.println("Haven't reached target!");
             return false;
         }
 
@@ -211,8 +209,8 @@ public class DriveSystem extends Subsystem {
         } else if(pidOutputNavX < -1.15) {
             pidOutputNavX = -1.15;
         }
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.2);
-        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.2);
+        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.25);
+        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.25);
     }
 
     /**

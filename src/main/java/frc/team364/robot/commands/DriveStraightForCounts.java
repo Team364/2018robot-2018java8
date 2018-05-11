@@ -12,6 +12,7 @@ public class DriveStraightForCounts extends Command {
         requires(Robot.driveSystem);
         driveCounts = counts;
         driveBackwards = backwards;
+        setTimeout(5);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DriveStraightForCounts extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.withinEncoderCountRange(driveCounts);
+        return Robot.driveSystem.withinEncoderCountRange(driveCounts) || isTimedOut();
     }
 
     @Override
@@ -39,6 +40,7 @@ public class DriveStraightForCounts extends Command {
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
+        System.out.println("Reached target distance.");
     }
 
     @Override

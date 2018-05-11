@@ -37,10 +37,6 @@ public class TeleopDriveCommand extends Command {
         } else {
             Robot.driveSystem.noShiftInput();
         }
-        System.out.println(Robot.driveSystem.getLeftEncoderPosition());
-        System.out.println(Robot.driveSystem.getRightEncoderPosition());
-        System.out.println("GyroAngle:");
-        System.out.println(Robot.driveSystem.getGyroAngle());
     }
 
     @Override

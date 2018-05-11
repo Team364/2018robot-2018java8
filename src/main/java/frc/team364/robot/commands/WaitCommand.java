@@ -4,22 +4,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class DropBothStages extends Command {
+public class WaitCommand extends Command {
 
-    public DropBothStages() {
-        requires(Robot.liftSystem);
-        setTimeout(1.3);
+
+    public WaitCommand(double time) {
+        setTimeout(time);
     }
 
     @Override
     protected void initialize() {
-        Robot.liftSystem.stopBoth();
     }
 
     @Override
     protected void execute() {
-        Robot.liftSystem.firstStageControl(1);
-        Robot.liftSystem.secondStageControl(-1);
     }
 
     @Override
@@ -29,7 +26,6 @@ public class DropBothStages extends Command {
 
     @Override
     protected void end() {
-        Robot.liftSystem.stopBoth();
     }
 
     @Override

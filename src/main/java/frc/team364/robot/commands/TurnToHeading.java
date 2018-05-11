@@ -33,6 +33,7 @@ public class TurnToHeading extends Command {
     protected void end() {
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
+        System.out.println("Reached target heading." + Robot.driveSystem.getGyroAngle());
     }
 
     @Override

@@ -2,7 +2,6 @@ package frc.team364.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.TeleopIntakeCommand;
@@ -11,8 +10,6 @@ public class IntakeSystem extends Subsystem {
 
     private VictorSPX leftIntake;
     private VictorSPX rightIntake;
-    private DoubleSolenoid pincher;
-    private DoubleSolenoid claw;
 
     public IntakeSystem() {
         leftIntake = new VictorSPX(RobotMap.intakeLeft);

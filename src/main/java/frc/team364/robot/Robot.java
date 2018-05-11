@@ -48,11 +48,8 @@ public class Robot extends TimedRobot {
         rightAutonSwitch = new FarScale1Cube();
         farAutonScale = new FarScale1Cube();
         closeAutonScale = new CloseScale2Cube();
-        camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(320, 240);
-        camera.setExposureManual(50);
-        camera.setBrightness(50);
-        camera.setFPS(30);
+        camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
+        camera.setResolution(640, 480);
         driveSystem.resetEncoders();
         driveSystem.resetHeading();
     }
@@ -67,6 +64,7 @@ public class Robot extends TimedRobot {
 	    if(gameData.charAt(0) == 'L') {
             if(oi.autoSelectorButton.get()) {
                 if(farAutonScale != null) {
+                    System.out.println("Far scale");
                     farAutonScale.start();
                 }
             } else {
@@ -77,6 +75,7 @@ public class Robot extends TimedRobot {
         } else {
             if(oi.autoSelectorButton.get()) {
                 if(closeAutonScale != null) {
+                    System.out.println("Close scale");
                     closeAutonScale.start();
                 }
             } else {
