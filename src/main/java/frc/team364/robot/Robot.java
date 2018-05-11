@@ -23,6 +23,8 @@ public class Robot extends TimedRobot {
 
     public static Command leftAutonSwitch;
     public static Command rightAutonSwitch;
+    public static Command farAutonScale;
+    public static Command closeAutonScale;
 
     public UsbCamera camera;
 
@@ -44,6 +46,8 @@ public class Robot extends TimedRobot {
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitch2Cube();
         rightAutonSwitch = new FarScale1Cube();
+        farAutonScale = new FarScale1Cube();
+        closeAutonScale = new CloseScale2Cube();
         camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(320, 240);
         camera.setExposureManual(50);
@@ -61,12 +65,24 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().removeAll();
 	    gameData = DriverStation.getInstance().getGameSpecificMessage();
 	    if(gameData.charAt(0) == 'L') {
-	        if(leftAutonSwitch != null) {
-                leftAutonSwitch.start();
+            if(oi.autoSelectorButton.get()) {
+                if(farAutonScale != null) {
+                    farAutonScale.start();
+                }
+            } else {
+	            if(leftAutonSwitch != null) {
+                   leftAutonSwitch.start();
+               }
             }
         } else {
-	        if(rightAutonSwitch != null) {
-	            rightAutonSwitch.start();
+            if(oi.autoSelectorButton.get()) {
+                if(closeAutonScale != null) {
+                    closeAutonScale.start();
+                }
+            } else {
+	            if(rightAutonSwitch != null) {
+	                rightAutonSwitch.start();
+               }
             }
         }
         driveSystem.resetHeading();

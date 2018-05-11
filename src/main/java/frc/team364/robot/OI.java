@@ -19,9 +19,12 @@ public class OI {
     public JoystickButton pinchButton;
     public JoystickButton intakeButton;
     public JoystickButton outtakeButton;
+    public JoystickButton firstStageLiftButton;
     public JoystickButton liftButton;
     public JoystickButton dropButton;
     public JoystickButton buddyBarButton;
+
+    public JoystickButton autoSelectorButton;
 
     public OI() {
 
@@ -36,9 +39,11 @@ public class OI {
         pinchButton = new JoystickButton(operationStation, 3);
         intakeButton = new JoystickButton(operationStation, 1);
         outtakeButton = new JoystickButton(operationStation, 2);
+        firstStageLiftButton = new JoystickButton(operationStation, 5);
         liftButton = new JoystickButton(operationStation, 5);
         dropButton = new JoystickButton(operationStation, 6);
         buddyBarButton = new JoystickButton(operationStation, 4);
 
+        autoSelectorButton = new JoystickButton(operationStation, 10);
     }
 }
