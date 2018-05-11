@@ -209,8 +209,8 @@ public class DriveSystem extends Subsystem {
         } else if(pidOutputNavX < -1.15) {
             pidOutputNavX = -1.15;
         }
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.275);
-        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.275);
+        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.35);
+        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.35);
     }
 
     /**

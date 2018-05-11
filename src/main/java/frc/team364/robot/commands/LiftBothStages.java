@@ -8,7 +8,7 @@ public class LiftBothStages extends Command {
 
     public LiftBothStages() {
        requires(Robot.liftSystem);
-       setTimeout(1.3);
+       setTimeout(1.45);
     }
 
     @Override
