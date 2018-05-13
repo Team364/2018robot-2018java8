@@ -20,8 +20,7 @@ public class TurnToHeading extends Command {
         Robot.driveSystem.pidNavX.resetPID();
         Robot.driveSystem.pidLeft.resetPID();
         Robot.driveSystem.pidRight.resetPID();
-        Robot.driveSystem.leftRear.configOpenloopRamp(0, 0);
-        Robot.driveSystem.rightRear.configOpenloopRamp(0, 0);
+        Robot.driveSystem.pidNavX.setPIDParameters(0.005, 0.01, 50, 0);
     }
 
     @Override

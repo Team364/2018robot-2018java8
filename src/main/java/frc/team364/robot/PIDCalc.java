@@ -8,8 +8,11 @@
 
 package frc.team364.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class PIDCalc {
 
+    private String pidName;
     private double kP = 0;
     private double kI = 0;
     private double kD = 0;
@@ -18,19 +21,26 @@ public class PIDCalc {
     private double integral = 0;
     private double prev_error = 0;
     private double error = 0;
+    private double result = 0;
 
-    public PIDCalc(double pTerm, double iTerm, double dTerm, double fTerm) {
-        kP = pTerm;
-        kI = iTerm;
-        kD = dTerm;
-        kF = fTerm;
+    public PIDCalc(double pTerm, double iTerm, double dTerm, double fTerm, String name) {
+        setPIDParameters(pTerm, iTerm, dTerm, fTerm);
+        pidName = name;
     }
 
     public double calculateOutput(double setpoint, double actual) {
         error = setpoint - actual;
         integral += (error * 0.02);
         derivative = (error - prev_error) / 0.02;
-        return kF + (kP * error) + (kI * integral) + (kD * derivative);
+        result = kF + (kP * error) + (kI * integral) + (kD * derivative);
+        smartDashVars();
+        if(result > 1) {
+            return 1;
+        } else if(result < -1) {
+            return -1;
+        } else {
+            return result;
+        }
     }
 
     public void resetPID() {
@@ -38,6 +48,21 @@ public class PIDCalc {
         integral = 0;
         prev_error = 0;
         error = 0;
+    }
+
+    public void setPIDParameters(double pTerm, double iTerm, double dTerm, double fTerm) {
+        kP = pTerm;
+        kI = iTerm;
+        kD = dTerm;
+        kF = fTerm;
+    }
+
+    private void smartDashVars() {
+        SmartDashboard.putNumber(pidName + "Error", error);
+        SmartDashboard.putNumber(pidName + "Prev Error", prev_error);
+        SmartDashboard.putNumber(pidName + "Integral", integral);
+        SmartDashboard.putNumber(pidName + "Derivative", derivative);
+        SmartDashboard.putNumber(pidName + "Result", result);
     }
 
 }

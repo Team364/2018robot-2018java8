@@ -42,6 +42,8 @@ public class FollowPath extends Command {
         right.configureEncoder(0, 4096, 0.1524);
         left.configurePIDVA(0.25, 0, 0, 1/6, 0);
         right.configurePIDVA(0.25, 0, 0, 1/6, 0);
+        Robot.driveSystem.resetEncoders();
+        Robot.driveSystem.resetHeading();
     }
 
     @Override

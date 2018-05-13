@@ -160,14 +160,14 @@ public class DriveSystem extends Subsystem {
             pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            leftRear.set(ControlMode.PercentOutput, -pidOutputLeft);
-            rightRear.set(ControlMode.PercentOutput, pidOutputRight);
+            leftRear.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
+            rightRear.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
         } else {
             pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
-            rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
+            leftRear.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
+            rightRear.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
         }
     }
 
@@ -204,11 +204,6 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        if(pidOutputNavX > 1.15) {
-            pidOutputNavX = 1.15;
-        } else if(pidOutputNavX < -1.15) {
-            pidOutputNavX = -1.15;
-        }
         leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.35);
         rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.35);
     }
