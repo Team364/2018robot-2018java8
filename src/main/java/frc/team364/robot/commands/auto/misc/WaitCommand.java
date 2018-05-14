@@ -1,7 +1,6 @@
 package frc.team364.robot.commands.auto.misc;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team364.robot.Robot;
 
 
 public class WaitCommand extends Command {

@@ -10,7 +10,7 @@ package frc.team364.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
-import frc.team364.robot.commands.TeleopBuddyCommand;
+import frc.team364.robot.commands.teleop.TeleopBuddyCommand;
 
 public class BuddySystem extends Subsystem {
 
