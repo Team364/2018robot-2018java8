@@ -1,24 +1,24 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class IntakeCube extends Command {
+public class ClosePincher extends Command {
 
-    public IntakeCube() {
-        requires(Robot.intakeSystem);
-        setTimeout(1.5);
+    public ClosePincher() {
+        requires(Robot.clawSystem);
+        setTimeout(0.1);
     }
 
     @Override
     protected void initialize() {
-        Robot.intakeSystem.intakeStop();
+        Robot.clawSystem.pincherOff();
     }
 
     @Override
     protected void execute() {
-        Robot.intakeSystem.intake();
+        Robot.clawSystem.openPincher();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class IntakeCube extends Command {
 
     @Override
     protected void end() {
-        Robot.intakeSystem.intakeStop();
+        Robot.clawSystem.pincherOff();
     }
 
     @Override

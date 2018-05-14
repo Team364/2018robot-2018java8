@@ -11,7 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
-import frc.team364.robot.commands.TeleopLiftCommand;
+import frc.team364.robot.commands.teleop.TeleopLiftCommand;
 
 // Class declaration : extends Subsystem
 public class LiftSystem extends Subsystem {

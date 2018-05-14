@@ -1,24 +1,24 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class OpenPincher extends Command {
+public class DropFirstStage extends Command {
 
-    public OpenPincher() {
-        requires(Robot.clawSystem);
-        setTimeout(0.1);
+    public DropFirstStage() {
+        requires(Robot.liftSystem);
+        setTimeout(1);
     }
 
     @Override
     protected void initialize() {
-        Robot.clawSystem.pincherOff();
+        Robot.liftSystem.stopBoth();
     }
 
     @Override
     protected void execute() {
-        Robot.clawSystem.closePincher();
+        Robot.liftSystem.firstStageControl(1);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class OpenPincher extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.pincherOff();
+        Robot.liftSystem.stopBoth();
     }
 
     @Override

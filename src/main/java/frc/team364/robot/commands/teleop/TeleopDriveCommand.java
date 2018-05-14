@@ -6,7 +6,7 @@
  *  The shifters are also set using the triggers from each joystick.
  */
 
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;

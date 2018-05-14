@@ -1,24 +1,24 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.claw;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class ClosePincher extends Command {
+public class FlipClawUp extends Command {
 
-    public ClosePincher() {
+    public FlipClawUp() {
         requires(Robot.clawSystem);
         setTimeout(0.1);
     }
 
     @Override
     protected void initialize() {
-        Robot.clawSystem.pincherOff();
+        Robot.clawSystem.clawOff();
     }
 
     @Override
     protected void execute() {
-        Robot.clawSystem.openPincher();
+        Robot.clawSystem.flipClawDown();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ClosePincher extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.pincherOff();
+        Robot.clawSystem.clawOff();
     }
 
     @Override

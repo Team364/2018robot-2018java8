@@ -1,14 +1,14 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class DropBothStages extends Command {
+public class DropSecondStage extends Command {
 
-    public DropBothStages() {
+    public DropSecondStage() {
         requires(Robot.liftSystem);
-        setTimeout(1.5);
+        setTimeout(1);
     }
 
     @Override
@@ -18,7 +18,6 @@ public class DropBothStages extends Command {
 
     @Override
     protected void execute() {
-        Robot.liftSystem.firstStageControl(1);
         Robot.liftSystem.secondStageControl(-1);
     }
 

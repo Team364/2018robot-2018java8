@@ -3,7 +3,7 @@ package frc.team364.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
-import frc.team364.robot.commands.TeleopClawCommand;
+import frc.team364.robot.commands.teleop.TeleopClawCommand;
 
 public class ClawSystem extends Subsystem {
 

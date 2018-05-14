@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.PIDCalc;
 import frc.team364.robot.RobotMap;
-import frc.team364.robot.commands.TeleopDriveCommand;
+import frc.team364.robot.commands.teleop.TeleopDriveCommand;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
@@ -180,7 +180,6 @@ public class DriveSystem extends Subsystem {
     public boolean withinEncoderCountRange(int counts) {
 
         double leftRearPos = leftRear.getSelectedSensorPosition(0);
-        double rightRearPos = rightRear.getSelectedSensorPosition(0);
         if(Math.abs(leftRearPos) >= (counts - 100)) {
             return true;
         } else {

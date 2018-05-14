@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
-import frc.team364.robot.commands.TeleopIntakeCommand;
+import frc.team364.robot.commands.teleop.TeleopIntakeCommand;
 
 public class IntakeSystem extends Subsystem {
 

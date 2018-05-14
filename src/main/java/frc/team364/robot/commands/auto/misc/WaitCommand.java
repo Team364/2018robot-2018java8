@@ -1,24 +1,22 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.misc;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class DropFirstStage extends Command {
+public class WaitCommand extends Command {
 
-    public DropFirstStage() {
-        requires(Robot.liftSystem);
-        setTimeout(1);
+
+    public WaitCommand(double time) {
+        setTimeout(time);
     }
 
     @Override
     protected void initialize() {
-        Robot.liftSystem.stopBoth();
     }
 
     @Override
     protected void execute() {
-        Robot.liftSystem.firstStageControl(1);
     }
 
     @Override
@@ -28,7 +26,6 @@ public class DropFirstStage extends Command {
 
     @Override
     protected void end() {
-        Robot.liftSystem.stopBoth();
     }
 
     @Override

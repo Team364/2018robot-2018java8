@@ -1,4 +1,4 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.drive;
 
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;

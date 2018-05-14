@@ -1,24 +1,25 @@
-package frc.team364.robot.commands;
+package frc.team364.robot.commands.auto.lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
 
-public class FlipClawDown extends Command {
+public class LiftBothStages extends Command {
 
-    public FlipClawDown() {
-        requires(Robot.clawSystem);
-        setTimeout(0.1);
+    public LiftBothStages() {
+       requires(Robot.liftSystem);
+       setTimeout(1.45);
     }
 
     @Override
     protected void initialize() {
-        Robot.clawSystem.clawOff();
+        Robot.liftSystem.stopBoth();
     }
 
     @Override
     protected void execute() {
-        Robot.clawSystem.flipClawUp();
+        Robot.liftSystem.firstStageControl(-1);
+        Robot.liftSystem.secondStageControl(1);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class FlipClawDown extends Command {
 
     @Override
     protected void end() {
-        Robot.clawSystem.clawOff();
+        Robot.liftSystem.stopBoth();
     }
 
     @Override
