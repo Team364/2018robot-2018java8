@@ -33,14 +33,14 @@ public class PIDCalc {
         integral += (error * 0.02);
         derivative = (error - prev_error) / 0.02;
         result = kF + (kP * error) + (kI * integral) + (kD * derivative);
-        smartDashVars();
         if(result > 1) {
-            return 1;
+            result = 1;
         } else if(result < -1) {
-            return -1;
-        } else {
-            return result;
+            result = -1;
         }
+        smartDashVars();
+        prev_error = error;
+        return result;
     }
 
     public void resetPID() {
@@ -63,6 +63,7 @@ public class PIDCalc {
         SmartDashboard.putNumber(pidName + "Integral", integral);
         SmartDashboard.putNumber(pidName + "Derivative", derivative);
         SmartDashboard.putNumber(pidName + "Result", result);
+        SmartDashboard.putNumber(pidName + "kP", kP);
     }
 
 }

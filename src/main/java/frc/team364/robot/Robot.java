@@ -61,27 +61,17 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
 	    gameData = DriverStation.getInstance().getGameSpecificMessage();
-	    if(gameData.charAt(0) == 'L') {
-            if(oi.autoSelectorButton.get()) {
-                if(farAutonScale != null) {
-                    System.out.println("Far scale");
-                    farAutonScale.start();
-                }
+        if(oi.autoSelectorButton.get()) {
+            if(gameData.charAt(1) == 'L') {
+                farAutonScale.start();
             } else {
-	            if(leftAutonSwitch != null) {
-                   leftAutonSwitch.start();
-               }
+                closeAutonScale.start();
             }
         } else {
-            if(oi.autoSelectorButton.get()) {
-                if(closeAutonScale != null) {
-                    System.out.println("Close scale");
-                    closeAutonScale.start();
-                }
+            if(gameData.charAt(0) == 'L') {
+                leftAutonSwitch.start();
             } else {
-	            if(rightAutonSwitch != null) {
-	                rightAutonSwitch.start();
-               }
+                rightAutonSwitch.start();
             }
         }
         driveSystem.resetHeading();

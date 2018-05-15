@@ -77,7 +77,7 @@ public class DriveSystem extends Subsystem {
 	    // Init the navX, Pathfinder, and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
         pathfinder = new Pathfinder();
-        pidNavX = new PIDCalc(0.005, 0.01, 50, 0, "NavX");
+        pidNavX = new PIDCalc(0.00005, 0.01, 50, 0, "NavX");
         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
     }
@@ -155,19 +155,29 @@ public class DriveSystem extends Subsystem {
      * Uses the TalonSRX PID to drive to a certain number of counts
      * @param counts specify encoder counts to drive to
      */ 
-    public void driveStraightToEncoderCounts(int counts, boolean backwards) {
+    public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
         if(backwards) {
             pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            leftRear.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
-            rightRear.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
+            if(useGyro) {
+                leftRear.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
+                rightRear.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
+            } else {
+                leftRear.set(ControlMode.PercentOutput, -pidOutputLeft);
+                rightRear.set(ControlMode.PercentOutput, pidOutputRight);
+            }
         } else {
             pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            leftRear.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
-            rightRear.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
+            if(useGyro) {
+                leftRear.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
+                rightRear.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
+            } else {
+                leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
+                rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
+            }
         }
     }
 
@@ -203,8 +213,8 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.35);
-        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.35);
+        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.6);
+        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.6);
     }
 
     /**

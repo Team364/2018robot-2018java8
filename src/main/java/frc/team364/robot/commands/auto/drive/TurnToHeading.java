@@ -11,16 +11,17 @@ public class TurnToHeading extends Command {
     public TurnToHeading(double heading) {
         requires(Robot.driveSystem);
         wantedHeading = heading;
+        setTimeout(2);
     }
 
     @Override
     protected void initialize() {
+        Robot.driveSystem.pidNavX.setPIDParameters(0.05, 0.01, 0, 0);
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.pidNavX.resetPID();
         Robot.driveSystem.pidLeft.resetPID();
         Robot.driveSystem.pidRight.resetPID();
-        Robot.driveSystem.pidNavX.setPIDParameters(0.005, 0.01, 50, 0);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class TurnToHeading extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.driveSystem.reachedHeading(wantedHeading);
+        return Robot.driveSystem.reachedHeading(wantedHeading) || isTimedOut();
     }
 
     @Override

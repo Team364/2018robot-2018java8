@@ -7,11 +7,13 @@ public class DriveStraightForCounts extends Command {
 
     private int driveCounts;
     private boolean driveBackwards;
+    private boolean driveWithGyro;
 
-    public DriveStraightForCounts(int counts, boolean backwards) {
+    public DriveStraightForCounts(int counts, boolean backwards, boolean useGyro) {
         requires(Robot.driveSystem);
         driveCounts = counts;
         driveBackwards = backwards;
+        driveWithGyro = useGyro;
         setTimeout(5);
     }
 
@@ -23,12 +25,12 @@ public class DriveStraightForCounts extends Command {
         Robot.driveSystem.pidLeft.resetPID();
         Robot.driveSystem.pidRight.resetPID();
         Robot.driveSystem.pidNavX.resetPID();
-        Robot.driveSystem.pidNavX.setPIDParameters(0.0001, 0, 0, 0);
+        Robot.driveSystem.pidNavX.setPIDParameters(0.1, 0.1, 0, 0);
     }
 
     @Override
     protected void execute() {
-        Robot.driveSystem.driveStraightToEncoderCounts(driveCounts, driveBackwards);
+        Robot.driveSystem.driveStraightToEncoderCounts(driveCounts, driveBackwards, driveWithGyro);
     }
 
     @Override
