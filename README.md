@@ -1,11 +1,15 @@
 # Team364-2018java
 
 # Notes:
-This codebase uses GradleRIO. To build and deploy, run these commands:
+This codebase uses GradleRIO. To initialize the project, run:
 
-`./gradlew build`
+`./gradlew`
 
-`./gradlew deploy`
+To build and deploy, run these commands:
+
+`./gradlew build --offline`
+
+`./gradlew deploy --offline`
 
 If on Mac/Linux, and running those commands gives a permission denied error, run:
 
