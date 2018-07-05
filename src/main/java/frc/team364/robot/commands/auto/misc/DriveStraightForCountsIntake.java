@@ -1,21 +1,21 @@
-package frc.team364.robot.commands.auto.drive;
+package frc.team364.robot.commands.auto.misc;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
 
-public class DriveStraightForCounts extends Command {
+public class DriveStraightForCountsIntake extends Command {
 
     private int driveCounts;
     private boolean driveBackwards;
     private boolean driveWithGyro;
 
-    public DriveStraightForCounts(int counts, boolean backwards, boolean useGyro) {
+    public DriveStraightForCountsIntake(int counts, boolean backwards, boolean useGyro) {
         requires(Robot.driveSystem);
         driveCounts = counts;
         driveBackwards = backwards;
         driveWithGyro = useGyro;
         System.out.println("Backwards: " + backwards);
-        setTimeout(5);
+        setTimeout(1.6);
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
@@ -23,10 +23,12 @@ public class DriveStraightForCounts extends Command {
         Robot.driveSystem.pidRight.resetPID();
         Robot.driveSystem.pidNavX.resetPID();
         Robot.driveSystem.pidNavX.setPIDParameters(0.1, 0.1, 0, 0);
+        requires(Robot.intakeSystem);
     }
 
     @Override
     protected void initialize() {
+        Robot.intakeSystem.intakeStop();
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();
@@ -39,6 +41,7 @@ public class DriveStraightForCounts extends Command {
     @Override
     protected void execute() {
         Robot.driveSystem.driveStraightToEncoderCounts(driveCounts, driveBackwards, driveWithGyro);
+        Robot.intakeSystem.intake();
     }
 
     @Override
@@ -48,6 +51,7 @@ public class DriveStraightForCounts extends Command {
 
     @Override
     protected void end() {
+        Robot.intakeSystem.intakeStop();
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.stop();

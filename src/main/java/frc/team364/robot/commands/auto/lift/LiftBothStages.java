@@ -5,10 +5,14 @@ import frc.team364.robot.Robot;
 
 
 public class LiftBothStages extends Command {
-
-    public LiftBothStages() {
+    public LiftBothStages(boolean scale) {
        requires(Robot.liftSystem);
-       setTimeout(1.45);
+       if(scale){
+           setTimeout(1.35);
+       } else {
+           setTimeout(0.5);
+       }
+      
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.teleop.TeleopLiftCommand;
+import frc.team364.robot.PIDCalc;
 
 // Class declaration : extends Subsystem
 public class LiftSystem extends Subsystem {
@@ -23,6 +24,8 @@ public class LiftSystem extends Subsystem {
     public final TalonSRX firstStage2;
     public final VictorSPX secondStage1;
     public final VictorSPX secondStage2;
+    public PIDCalc pidLift;
+    public double pidOutputLift;
     //public final DigitalInput firstStageTopLimit;
     //public final DigitalInput firstStageBottomLimit;
     //public final DigitalInput secondStageTopLimit;
@@ -41,8 +44,8 @@ public class LiftSystem extends Subsystem {
 
         secondStage1 = new VictorSPX(RobotMap.secondStage1);
         secondStage2 = new VictorSPX(RobotMap.secondStage2);
-
-        firstStage1.config_kP(0, 0.25, 100);
+        
+        pidLift = new PIDCalc(0.0003, 0, 0, 0, "Lift"); 
 
         //firstStageTopLimit = new DigitalInput(RobotMap.firstStageTopLimit);
         //firstStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);
@@ -116,8 +119,12 @@ public class LiftSystem extends Subsystem {
      * @param counts This is an int that tells the lift to stay at a certain encoder count.
      * When the lift is not being told to move, it will be told to keep its current position.
      */
-    public void keepFirstStagePosition(int counts) {
-        firstStage1.set(ControlMode.Position, counts);
+    public void keepFirstStagePosition(int counts) { 
+        pidOutputLift = pidLift.calculateOutput(counts, getEncoderCounts());  
+        firstStage1.set(ControlMode.PercentOutput, -pidOutputLift);
+        firstStage2.set(ControlMode.PercentOutput, -pidOutputLift);
+        secondStage1.set(ControlMode.PercentOutput, 0);
+        secondStage2.set(ControlMode.PercentOutput, 0);
     }
 
     /**
@@ -128,6 +135,9 @@ public class LiftSystem extends Subsystem {
         return firstStage1.getSelectedSensorPosition(0);
     }
     
+    public void resetEncoders() {
+        firstStage1.setSelectedSensorPosition(0, 0, 0);
+    }
     /**
      * getFirstStageTopLimit()
      * @return returns the first stage top limit switch position.
@@ -169,6 +179,7 @@ public class LiftSystem extends Subsystem {
      * stopBoth()
      * Stops both lift motors.
      */
+
     public void stopBoth() {
         firstStage1.set(ControlMode.PercentOutput, 0);
         secondStage1.set(ControlMode.PercentOutput, 0);

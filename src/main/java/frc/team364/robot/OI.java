@@ -25,6 +25,7 @@ public class OI {
     public JoystickButton buddyBarButton;
 
     public JoystickButton autoSelectorButton;
+    public JoystickButton flippyShitButton;
 
     public OI() {
 
@@ -45,5 +46,6 @@ public class OI {
         buddyBarButton = new JoystickButton(operationStation, 4);
 
         autoSelectorButton = new JoystickButton(operationStation, 10);
+        flippyShitButton = new JoystickButton(operationStation, 11);
     }
 }

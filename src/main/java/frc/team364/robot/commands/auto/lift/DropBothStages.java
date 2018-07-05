@@ -6,9 +6,13 @@ import frc.team364.robot.Robot;
 
 public class DropBothStages extends Command {
 
-    public DropBothStages() {
+    public DropBothStages(boolean scale) {
         requires(Robot.liftSystem);
-        setTimeout(1.5);
+        if(scale){
+      setTimeout(1.5);
+        } else{
+            setTimeout(0.55);
+        }
     }
 
     @Override

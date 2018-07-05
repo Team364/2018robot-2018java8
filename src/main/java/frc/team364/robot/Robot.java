@@ -25,6 +25,7 @@ public class Robot extends TimedRobot {
     public static Command rightAutonSwitch;
     public static Command farAutonScale;
     public static Command closeAutonScale;
+    public static Command flippyShit;
 
     public UsbCamera camera;
 
@@ -44,10 +45,11 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
-	    leftAutonSwitch = new LeftSwitch2Cube();
-        rightAutonSwitch = new FarScale1Cube();
+	    leftAutonSwitch = new LeftSwitch3Cube();
+        rightAutonSwitch = new RightSwitch3Cube();
         farAutonScale = new FarScale1Cube();
         closeAutonScale = new CloseScale3Cube();
+        flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setResolution(640, 480);
         driveSystem.resetEncoders();
@@ -89,6 +91,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().removeAll();
         driveSystem.leftRear.configOpenloopRamp(0, 0);
         driveSystem.rightRear.configOpenloopRamp(0, 0); 
+        liftSystem.resetEncoders();
     }
 
     @Override
@@ -105,6 +108,9 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 	    Scheduler.getInstance().run();
         putSmartDashVars();
+        if(oi.flippyShitButton.get()) {
+            flippyShit.start();
+        }
     }
 
     @Override
@@ -116,6 +122,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
         SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
         SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
+//SmartDashboard.putNumber("Lift Encoder Counts", LiftSystem.getEncoderCounts());
         //SmartDashboard.putString("Current auto", gameData.charAt(0));
     }
 }

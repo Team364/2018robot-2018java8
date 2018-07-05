@@ -160,6 +160,8 @@ public class DriveSystem extends Subsystem {
             pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+            System.out.println("bLeft: " + pidOutputLeft);
+            System.out.println("bRight: " + pidOutputRight);            
             if(useGyro) {
                 leftRear.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
                 rightRear.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
@@ -171,6 +173,8 @@ public class DriveSystem extends Subsystem {
             pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
             pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
+            System.out.println("Left: " + pidOutputLeft);
+            System.out.println("Right: " + pidOutputRight);
             if(useGyro) {
                 leftRear.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
                 rightRear.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
