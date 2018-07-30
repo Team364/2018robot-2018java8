@@ -18,5 +18,6 @@ public class FlippyShit extends CommandGroup {
         addSequential(new FlipClawDown());
         addSequential(new OuttakeCube());
         addSequential(new FlipClawUp());
+        System.out.println("flip Sequence has been activated");
     }
 }

@@ -13,7 +13,7 @@ public class LeftSwitch3Cube extends CommandGroup {
         addSequential(new ResetEncoders());
         //Drive to Left Switch
         addSequential(new DriveStraightForCounts(1500, false, false));
-        addSequential(new TurnToHeading(-35));
+        addSequential(new TurnToHeading(-25));
         addSequential(new WaitCommand(0.2));
        addSequential(new DriveStraightForCounts(6000, false, false));
        //FlipShoot

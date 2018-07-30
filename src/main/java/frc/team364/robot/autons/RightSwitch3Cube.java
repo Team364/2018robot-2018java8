@@ -13,7 +13,7 @@ public class RightSwitch3Cube extends CommandGroup {
         addSequential(new ResetEncoders());
         //Drive to Left Switch
         addSequential(new DriveStraightForCounts(1500, false, false));
-        addSequential(new TurnToHeading(15));
+        addSequential(new TurnToHeading(21));
         addSequential(new WaitCommand(0.2));
        addSequential(new DriveStraightForCounts(5200, false, false));
        //FlipShoot
@@ -22,7 +22,7 @@ public class RightSwitch3Cube extends CommandGroup {
        addSequential(new OuttakeCube());
        addSequential(new FlipClawUp());
       //Get Second Cube
-       addSequential(new TurnToHeading(-65));
+       addSequential(new TurnToHeading(-64));
        addSequential(new FlipClawDown());
        addSequential(new ResetEncoders());
        addSequential(new WaitCommand(0.2));

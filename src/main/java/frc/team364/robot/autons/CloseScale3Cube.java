@@ -12,7 +12,7 @@ public class CloseScale3Cube extends CommandGroup {
     public CloseScale3Cube() {
         //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
         addSequential(new DriveStraightForCounts(15000, false, true)); // Drive to scale
-        addSequential(new TurnToHeading(-27)); // Turn towards scale--was -22
+        addSequential(new TurnToHeading(-22)); // Turn towards scale--was -22
         addParallel(new LiftBothStages(true)); // Lift cube
         addSequential(new DriveStraightForCounts(3500, false, false)); // Drive to scale dropoff point
         addSequential(new WaitCommand(0.3));

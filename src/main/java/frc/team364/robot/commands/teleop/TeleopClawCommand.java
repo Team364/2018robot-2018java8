@@ -39,10 +39,13 @@ public class TeleopClawCommand extends Command {
                     Robot.clawSystem.flipClawUp();
                     clawState = 1;
                     clawLatch = true;
+                     System.out.println("clawFlipped");
+                    
                 } else {
                     Robot.clawSystem.flipClawDown();
                     clawState = 0;
                     clawLatch = true;
+                     System.out.println("clawFlipped");
                 }
             } else {
                 Robot.clawSystem.clawOff();
@@ -52,16 +55,20 @@ public class TeleopClawCommand extends Command {
             clawLatch = false;
         }
 
+
+
         if(Robot.oi.pinchButton.get()) {
             if(!pincherLatch) {
                 if(pincherState == 0) {
                     Robot.clawSystem.openPincher();
                     pincherLatch = true;
                     pincherState = 1;
+                   System.out.println("PincherActivated");
                 } else {
                     Robot.clawSystem.closePincher();
                     pincherLatch = true;
                     pincherState = 0;
+                     System.out.println("PincherActivated");
                 }
             } else {
                 Robot.clawSystem.clawOff();

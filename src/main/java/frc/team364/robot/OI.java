@@ -14,6 +14,7 @@ public class OI {
 
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
+    //public JoystickButton secondClawButton;
 
     public JoystickButton clawButton;
     public JoystickButton pinchButton;
@@ -23,6 +24,7 @@ public class OI {
     public JoystickButton liftButton;
     public JoystickButton dropButton;
     public JoystickButton buddyBarButton;
+    
 
     public JoystickButton autoSelectorButton;
     public JoystickButton flippyShitButton;
@@ -35,6 +37,7 @@ public class OI {
 
         shiftLow = new JoystickButton(leftStick, 1);
         shiftHigh = new JoystickButton(rightStick, 1);
+       // secondClawButton = new JoystickButton(leftStick, 11);
 
         clawButton = new JoystickButton(operationStation, 6);
         pinchButton = new JoystickButton(operationStation, 3);

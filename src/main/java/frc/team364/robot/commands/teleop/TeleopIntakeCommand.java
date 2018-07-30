@@ -23,8 +23,10 @@ public class TeleopIntakeCommand extends Command {
         // No toggle.
         if(Robot.oi.intakeButton.get()) {
             Robot.intakeSystem.intake();
+            System.out.println("Intake is running");
         } else if(Robot.oi.outtakeButton.get()) {
             Robot.intakeSystem.outtake();
+            System.out.println("Outtake is running");
         } else {
             Robot.intakeSystem.intakeStop();
         }

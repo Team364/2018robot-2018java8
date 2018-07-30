@@ -34,16 +34,19 @@ public class TeleopLiftCommand extends Command {
                 liftSystem.firstStageControl(-1);
                 liftSystem.secondStageControl(1);
                 counts = liftSystem.getEncoderCounts();
+                System.out.println("Lift Encoder Counts: " + counts);
             } else if(Robot.oi.operationStation.getRawAxis(1) > 0.5) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
                 counts = liftSystem.getEncoderCounts();
+                 System.out.println("Lift Encoder Counts: " + counts);
             } else {
                 //Ghetto but it works
                 //liftSystem.firstStageControl(-0.06);
                 //liftSystem.secondStageControl(0.06);
                //-- liftSystem.stopBoth();
-               liftSystem.keepFirstStagePosition(counts);
+            
+               liftSystem.keepFirstStagePosition(counts);        
             }
         }
     }

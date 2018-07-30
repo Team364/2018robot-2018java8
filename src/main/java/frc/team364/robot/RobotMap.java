@@ -27,12 +27,12 @@ public class RobotMap {
     public static final int intakeRight = 2;
 
     // Intake/Claw objects
-    public static final int clawPistonPort1 = 1;
-    public static final int clawPistonPort2 = 6;
+    public static final int clawPistonPort1 = 0;//formerly 1--having electrical problems so Flipping claw and buddy
+    public static final int clawPistonPort2 = 7;//formerly 6
     public static final int pinchPistonPort1 = 2;
     public static final int pinchPistonPort2 = 5;
 
     // Buddy bar objects
-    public static final int buddyBarPistonPort1 = 0;
-    public static final int buddyBarPistonPort2 = 7;
+    public static final int buddyBarPistonPort1 = 1;//formerly 0
+    public static final int buddyBarPistonPort2 = 6;//formerly 7
 }
