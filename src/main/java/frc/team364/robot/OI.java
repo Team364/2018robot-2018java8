@@ -43,10 +43,9 @@ public class OI {
 
         clawButton = new JoystickButton(controller, 6);
         pinchButton = new JoystickButton(controller, 5);
-        firstStageLiftButton = new JoystickBase(controller, 4);
+        firstStageLiftButton = new JoystickButton(controller, 4);
         //dropButton = new JoystickButton(controller, 6); --Doesn't seem to be used in the code
         //liftButton = new JoystickButton(controller, 5); --Doesn't seem to be used in the code
-        //buddyBarButton = new JoystickButton(controller, 4); --we are not using this on the robot anymore
         flippyShitButton = new JoystickButton(controller, 2);
 
         //intakeButton = new JoystickButton(controller, 2);---Will be using axis for this

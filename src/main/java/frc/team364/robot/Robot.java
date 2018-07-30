@@ -14,7 +14,6 @@ public class Robot extends TimedRobot {
 
     public static DriveSystem driveSystem;
     public static LiftSystem liftSystem;
-    public static BuddySystem buddySystem;
     public static IntakeSystem intakeSystem;
     public static ClawSystem clawSystem;
     public String gameData = "";
@@ -41,7 +40,6 @@ public class Robot extends TimedRobot {
         setPeriod(0.02);
 	    driveSystem = new DriveSystem();
 	    liftSystem = new LiftSystem();
-	    buddySystem = new BuddySystem();
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
