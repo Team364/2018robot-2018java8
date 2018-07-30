@@ -8,6 +8,7 @@ public class OI {
     public Joystick leftStick;
     public Joystick rightStick;
     public Joystick operationStation;
+    public Joystick controller;
 
     public double leftPower;
     public double rightPower;
@@ -21,9 +22,9 @@ public class OI {
     public JoystickButton intakeButton;
     public JoystickButton outtakeButton;
     public JoystickButton firstStageLiftButton;
-    public JoystickButton liftButton;
-    public JoystickButton dropButton;
-    public JoystickButton buddyBarButton;
+    //public JoystickButton liftButton;
+    //public JoystickButton dropButton;
+    //public JoystickButton buddyBarButton;
     
 
     public JoystickButton autoSelectorButton;
