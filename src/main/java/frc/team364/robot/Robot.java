@@ -120,6 +120,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
         SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
         SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
+       //Potentiometer  SmartDashboard.putNumber("Pot Voltage", clawSystem.getPotVoltage());
 //SmartDashboard.putNumber("Lift Encoder Counts", LiftSystem.getEncoderCounts());
         //SmartDashboard.putString("Current auto", gameData.charAt(0));
     }

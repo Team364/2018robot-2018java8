@@ -24,8 +24,8 @@ public class TeleopIntakeCommand extends Command {
         if(Robot.oi.controller.getRawAxis(2) > 0.5) {
             Robot.intakeSystem.intake();
             System.out.println("Intake is running");
-        } else if(Robot.oi.controller.getRawAxis(3) > 0.5) {
-            Robot.intakeSystem.outtake();
+        } else if(Robot.oi.controller.getRawAxis(3) > 0.2) {
+            Robot.intakeSystem.outtakeForPressure();
             System.out.println("Outtake is running");
         } else {
             Robot.intakeSystem.intakeStop();
