@@ -33,22 +33,26 @@ public class OI {
 
         leftStick = new Joystick(0);
         rightStick = new Joystick(1);
-        operationStation = new Joystick(2);
+        operationStation = new Joystick(2); ///Changing Main Buttons to Gamepad--all thats left is the auto switch and it's literally in a cardboard box
+        controller = new Joystick(3);
 
         shiftLow = new JoystickButton(leftStick, 1);
         shiftHigh = new JoystickButton(rightStick, 1);
        // secondClawButton = new JoystickButton(leftStick, 11);
 
-        clawButton = new JoystickButton(operationStation, 6);
-        pinchButton = new JoystickButton(operationStation, 3);
-        intakeButton = new JoystickButton(operationStation, 1);
-        outtakeButton = new JoystickButton(operationStation, 2);
-        firstStageLiftButton = new JoystickButton(operationStation, 5);
-        liftButton = new JoystickButton(operationStation, 5);
-        dropButton = new JoystickButton(operationStation, 6);
-        buddyBarButton = new JoystickButton(operationStation, 4);
+        clawButton = new JoystickButton(controller, 6);
+        pinchButton = new JoystickButton(controller, 5);
+        firstStageLiftButton = new JoystickButton(controller, 4);
+        //dropButton = new JoystickButton(controller, 6); --Doesn't seem to be used in the code
+        //liftButton = new JoystickButton(controller, 5); --Doesn't seem to be used in the code
+        //buddyBarButton = new JoystickButton(controller, 4); --we are not using this on the robot anymore
+        flippyShitButton = new JoystickButton(controller, 2);
+
+        intakeButton = new JoystickButton(controller, 2);
+        outtakeButton = new JoystickButton(controller, 2);
+      
 
         autoSelectorButton = new JoystickButton(operationStation, 10);
-        flippyShitButton = new JoystickButton(operationStation, 11);
+       
     }
 }

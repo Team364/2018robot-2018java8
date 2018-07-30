@@ -7,8 +7,8 @@ import frc.team364.robot.subsystems.LiftSystem;
 public class TeleopLiftCommand extends Command {
     public static double currentCount;
     public LiftSystem liftSystem = Robot.liftSystem;
-    public boolean liftUp = Robot.oi.liftButton.get();
-    public boolean liftDown = Robot.oi.dropButton.get();
+   //public boolean liftUp = Robot.oi.liftButton.get();--aren't even used in code it seems
+    //public boolean liftDown = Robot.oi.dropButton.get();
     public int counts = 0;
 
     public TeleopLiftCommand() {
