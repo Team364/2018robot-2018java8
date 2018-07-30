@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
         closeAutonScale = new CloseScale3Cube();
         flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
-        camera.setResolution(640, 480);
+        camera.setResolution(160, 120);
         driveSystem.resetEncoders();
         driveSystem.resetHeading();
     }
