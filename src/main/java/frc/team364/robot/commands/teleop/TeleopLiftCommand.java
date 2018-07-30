@@ -26,16 +26,16 @@ public class TeleopLiftCommand extends Command {
     
     @Override
     protected void execute() {
-        if(Robot.oi.firstStageLiftButton.get()) {
+        if(Robot.oi.firstStageLiftButton.get() {
             liftSystem.firstStageControl(-1);
             counts = liftSystem.getEncoderCounts();
         } else {
-            if(Robot.oi.operationStation.getRawAxis(1) < -0.5) {
+            if(controller.getPOV() == 0) {
                 liftSystem.firstStageControl(-1);
                 liftSystem.secondStageControl(1);
                 counts = liftSystem.getEncoderCounts();
                 System.out.println("Lift Encoder Counts: " + counts);
-            } else if(Robot.oi.operationStation.getRawAxis(1) > 0.5) {
+            } else if(controller.getPOV() == 180) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
                 counts = liftSystem.getEncoderCounts();
