@@ -21,10 +21,10 @@ public class TeleopIntakeCommand extends Command {
        
         // Run the intake/outtake on button press.
         // No toggle.
-        if(Robot.oi.controller.getRawAxis(2) < 0.5) {
+        if(Robot.oi.controller.getRawAxis(2) > 0.5) {
             Robot.intakeSystem.intake();
             System.out.println("Intake is running");
-        } else if(Robot.oi.controller.getRawAxis(3) < 0.5) {
+        } else if(Robot.oi.controller.getRawAxis(3) > 0.5) {
             Robot.intakeSystem.outtake();
             System.out.println("Outtake is running");
         } else {
