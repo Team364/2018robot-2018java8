@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.teleop.TeleopIntakeCommand;
+import frc.team364.robot.Robot;
 
 public class IntakeSystem extends Subsystem {
 
@@ -28,6 +29,12 @@ public class IntakeSystem extends Subsystem {
     public void outtake() {
         leftIntake.set(ControlMode.PercentOutput, -1);
         rightIntake.set(ControlMode.PercentOutput, -1);
+    }
+    
+    public void outtakeForPressure(){
+
+            leftIntake.set(ControlMode.PercentOutput, -Robot.oi.controller.getRawAxis(3));
+            rightIntake.set(ControlMode.PercentOutput, -Robot.oi.controller.getRawAxis(3));
     }
 
     public void intakeStop() {
