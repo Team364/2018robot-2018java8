@@ -10,6 +10,7 @@ public class TeleopLiftCommand extends Command {
    //public boolean liftUp = Robot.oi.liftButton.get();--aren't even used in code it seems
     //public boolean liftDown = Robot.oi.dropButton.get();
     public int counts = 0;
+    public boolean auto = true;
 
     public TeleopLiftCommand() {
         requires(Robot.liftSystem);
@@ -35,18 +36,18 @@ public class TeleopLiftCommand extends Command {
                 liftSystem.secondStageControl(1);
                 counts = liftSystem.getEncoderCounts();
                 System.out.println("Lift Encoder Counts: " + counts);
+                auto = false;
             } else if(Robot.oi.controller.getPOV() == 180) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
                 counts = liftSystem.getEncoderCounts();
                  System.out.println("Lift Encoder Counts: " + counts);
+                 auto = false;
             } else {
-                //Ghetto but it works
-                //liftSystem.firstStageControl(-0.06);
-                //liftSystem.secondStageControl(0.06);
-               //-- liftSystem.stopBoth();
+               if(!auto){
             
                liftSystem.keepFirstStagePosition(counts);        
+            }
             }
         }
     }

@@ -19,6 +19,7 @@ public class LiftFirstStage extends Command {
     @Override
     protected void execute() {
        Robot.liftSystem.firstStageControl(-1);
+       
     }
 
     @Override

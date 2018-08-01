@@ -22,7 +22,7 @@ public class DriveStraightForCounts extends Command {
         Robot.driveSystem.pidLeft.resetPID();
         Robot.driveSystem.pidRight.resetPID();
         Robot.driveSystem.pidNavX.resetPID();
-        Robot.driveSystem.pidNavX.setPIDParameters(0.1, 0.1, 0, 0);
+        Robot.driveSystem.pidNavX.setPIDParameters(0.1, 0.1, 0, 0); //Robot.driveSystem.pidNavX.setPIDParameters(0.1, 0.1, 0, 0);
     }
 
     @Override

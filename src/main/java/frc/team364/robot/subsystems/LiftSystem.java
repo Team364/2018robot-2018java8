@@ -26,6 +26,7 @@ public class LiftSystem extends Subsystem {
     public final VictorSPX secondStage2;
     public PIDCalc pidLift;
     public double pidOutputLift;
+
     //public final DigitalInput firstStageTopLimit;
     //public final DigitalInput firstStageBottomLimit;
     //public final DigitalInput secondStageTopLimit;

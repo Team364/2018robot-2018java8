@@ -217,8 +217,8 @@ public class DriveSystem extends Subsystem {
      */ 
     public void turnToHeading(double heading) {
         pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.6);
-        rightRear.set(ControlMode.PercentOutput, pidOutputNavX * 0.6);
+        leftRear.set(ControlMode.PercentOutput, pidOutputNavX); //Was multiplied by 0.6
+        rightRear.set(ControlMode.PercentOutput, pidOutputNavX);
     }
 
     /**
