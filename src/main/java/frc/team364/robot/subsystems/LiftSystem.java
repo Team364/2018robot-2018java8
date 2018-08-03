@@ -26,6 +26,7 @@ public class LiftSystem extends Subsystem {
     public final VictorSPX secondStage2;
     public PIDCalc pidLift;
     public double pidOutputLift;
+    public int liftCountError;
 
     //public final DigitalInput firstStageTopLimit;
     //public final DigitalInput firstStageBottomLimit;
@@ -46,7 +47,7 @@ public class LiftSystem extends Subsystem {
         secondStage1 = new VictorSPX(RobotMap.secondStage1);
         secondStage2 = new VictorSPX(RobotMap.secondStage2);
         
-        pidLift = new PIDCalc(0.0003, 0, 0 , 0, "Lift"); //0.0003, 0, 0 , 0, "Lift"
+        pidLift = new PIDCalc(0.0004, 0, 0, 0, "Lift"); //0.0003, 0, 0 , 0, "Lift"
 
         //firstStageTopLimit = new DigitalInput(RobotMap.firstStageTopLimit);
         //firstStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);
@@ -121,7 +122,7 @@ public class LiftSystem extends Subsystem {
      * When the lift is not being told to move, it will be told to keep its current position.
      */
     public void keepFirstStagePosition(int counts) { 
-        pidOutputLift = pidLift.calculateOutput(counts, getEncoderCounts());  
+        pidOutputLift = pidLift.calculateOutput(counts + liftCountError, getEncoderCounts());  
         firstStage1.set(ControlMode.PercentOutput, -pidOutputLift);
         firstStage2.set(ControlMode.PercentOutput, -pidOutputLift);
         secondStage1.set(ControlMode.PercentOutput, 0);
