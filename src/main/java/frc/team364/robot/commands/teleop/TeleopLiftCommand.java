@@ -31,7 +31,9 @@ public class TeleopLiftCommand extends Command {
         if(liftSystem.getEncoderCounts() <= 0){
             liftSystem.resetEncoders();
         }
-
+        if(Robot.oi.resetLiftEncoderButton.get()){
+            liftSystem.resetEncoders();
+        }
         if(Robot.oi.firstStageLiftButton.get()) {
             liftSystem.firstStageControl(-1);
             counts = liftSystem.getEncoderCounts();

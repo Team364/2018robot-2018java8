@@ -22,6 +22,7 @@ public class OI {
     public JoystickButton intakeButton;
     public JoystickButton outtakeButton;
     public JoystickButton firstStageLiftButton;
+    public JoystickButton resetLiftEncoderButton;
     //public JoystickButton liftButton;
     //public JoystickButton dropButton;
     //public JoystickButton buddyBarButton;
@@ -44,6 +45,7 @@ public class OI {
         clawButton = new JoystickButton(controller, 6);
         pinchButton = new JoystickButton(controller, 5);
         firstStageLiftButton = new JoystickButton(controller, 4);//was 4
+        resetLiftEncoderButton = new JoystickButton(controller, 1);
         //dropButton = new JoystickButton(controller, 6); --Doesn't seem to be used in the code
         //liftButton = new JoystickButton(controller, 5); --Doesn't seem to be used in the code
         flippyShitButton = new JoystickButton(controller, 2);
