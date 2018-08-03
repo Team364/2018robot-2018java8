@@ -46,7 +46,7 @@ public class LiftSystem extends Subsystem {
         secondStage1 = new VictorSPX(RobotMap.secondStage1);
         secondStage2 = new VictorSPX(RobotMap.secondStage2);
         
-        pidLift = new PIDCalc(0.0003, 0.00015, 0 , 0, "Lift"); //0.0003, 0, 0 , 0, "Lift"
+        pidLift = new PIDCalc(0.0003, 0, 0 , 0, "Lift"); //0.0003, 0, 0 , 0, "Lift"
 
         //firstStageTopLimit = new DigitalInput(RobotMap.firstStageTopLimit);
         //firstStageBottomLimit = new DigitalInput(RobotMap.secondStageBottomLimit);

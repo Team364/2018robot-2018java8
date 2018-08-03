@@ -27,6 +27,7 @@ public class TeleopLiftCommand extends Command {
     
     @Override
     protected void execute() {
+        auto = false;
         if(Robot.oi.firstStageLiftButton.get()) {
             liftSystem.firstStageControl(-1);
             counts = liftSystem.getEncoderCounts();
@@ -36,13 +37,13 @@ public class TeleopLiftCommand extends Command {
                 liftSystem.secondStageControl(1);
                 counts = liftSystem.getEncoderCounts();
                 System.out.println("Lift Encoder Counts: " + counts);
-                auto = false;
+              //  auto = false;
             } else if(Robot.oi.controller.getPOV() == 180) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
                 counts = liftSystem.getEncoderCounts();
                  System.out.println("Lift Encoder Counts: " + counts);
-                 auto = false;
+               //  auto = false;
             } else {
                if(!auto){
             
