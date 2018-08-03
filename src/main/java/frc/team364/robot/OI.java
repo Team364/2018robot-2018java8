@@ -42,8 +42,8 @@ public class OI {
         shiftHigh = new JoystickButton(rightStick, 1);
        // secondClawButton = new JoystickButton(leftStick, 11);
 
-        clawButton = new JoystickButton(controller, 6);
-        pinchButton = new JoystickButton(controller, 5);
+        clawButton = new JoystickButton(controller, 5);
+        pinchButton = new JoystickButton(controller, 6);
         firstStageLiftButton = new JoystickButton(controller, 4);//was 4
         resetLiftEncoderButton = new JoystickButton(controller, 1);
         //dropButton = new JoystickButton(controller, 6); --Doesn't seem to be used in the code
