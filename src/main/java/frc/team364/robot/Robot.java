@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
         rightAutonSwitch = new RightSwitch3Cube();
         farAutonScale = new FarScale1Cube();
         closeAutonScale = new CloseScale3Cube();
-        flippyShit = new FlippyShit();
+        //flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setResolution(320, 240);
         driveSystem.resetEncoders();

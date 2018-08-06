@@ -1,4 +1,4 @@
-package frc.team364.robot.autons;
+package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.team364.robot.commands.auto.claw.*;
