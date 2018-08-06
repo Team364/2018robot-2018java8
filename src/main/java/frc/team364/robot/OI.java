@@ -15,7 +15,6 @@ public class OI {
 
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
-    //public JoystickButton secondClawButton;
 
     public JoystickButton clawButton;
     public JoystickButton pinchButton;
@@ -23,9 +22,6 @@ public class OI {
     public JoystickButton outtakeButton;
     public JoystickButton firstStageLiftButton;
     public JoystickButton resetLiftEncoderButton;
-    //public JoystickButton liftButton;
-    //public JoystickButton dropButton;
-    //public JoystickButton buddyBarButton;
     
 
     public JoystickButton autoSelectorButton;
