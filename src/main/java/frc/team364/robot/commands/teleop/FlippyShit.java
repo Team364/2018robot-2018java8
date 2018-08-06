@@ -2,10 +2,7 @@ package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.team364.robot.commands.auto.claw.*;
-import frc.team364.robot.commands.auto.drive.*;
 import frc.team364.robot.commands.auto.intake.*;
-import frc.team364.robot.commands.auto.lift.*;
-import frc.team364.robot.commands.auto.misc.*;
 
 public class FlippyShit extends CommandGroup {
 

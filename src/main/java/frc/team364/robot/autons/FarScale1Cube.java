@@ -10,7 +10,7 @@ import frc.team364.robot.commands.auto.misc.*;
 public class FarScale1Cube extends CommandGroup {
 
     public FarScale1Cube() {
-        //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
+        
         addSequential(new DriveStraightForCounts(16000, false, true));
         addSequential(new ResetEncoders());
         addSequential(new TurnToHeading(-75));
