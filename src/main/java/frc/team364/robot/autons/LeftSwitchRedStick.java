@@ -17,7 +17,17 @@ public class LeftSwitchRedStick extends CommandGroup {
      * <p>6 Drive towards left switch
      * <p>7 Flip Claw Down
      * <p>8 Shoot Cube
-     * <p>9 
+     * <p>9 Drop Lift as te robt backs up
+     * <p>10 Back up away from switch
+     * <p>11 Turn towards second cube/cube stack
+     * <p>12 Drive into cube and intake
+     * <P>13 Back away from cube stack intaking
+     * <p>14 Turn towards Switch
+     * <P>15 Lift Second stage on lift
+     * <p>16 Drive towards switch
+     * <p>17 Outtake Cube into switch
+     * <p>18 drop second stage as robot backs up
+     * <p>19 back away from switch
      */
 
     public LeftSwitchRedStick() {
@@ -30,21 +40,20 @@ public class LeftSwitchRedStick extends CommandGroup {
        addSequential(new FlipClawDown());//7
        addSequential(new OuttakeCube());//8
        addParallel(new DropSecondStage());//9
-       addSequential(new DriveStraightForCounts(1500, true, false));//Back up
+       addSequential(new DriveStraightForCounts(1500, true, false));//10
        //SecondCube
-       addSequential(new TurnToHeading(34));//Turn towards second cube
-       addSequential(new DriveStraightForCountsIntake(3000, false, false));//Drive into cube
-       addSequential(new WaitCommand(0.2));
-       addSequential(new ShortIntakeCube());//Intake cube
-       addSequential(new DriveStraightForCountsIntake(2400, true, false));//Back up from Cube Stack
-       addSequential(new TurnToHeading(-33));//Turn Towards switch
-       addSequential(new ResetEncoders());
-       addSequential(new LiftSecondStageHalfway());
-       addSequential(new ResetEncoders());
-       addSequential(new DriveStraightForCounts(2000, false, false));
-       addSequential(new OuttakeCube());
-       addParallel(new DropSecondStage());
-       addSequential(new DriveStraightForCounts(1500, true, false));
+       addSequential(new TurnToHeading(34));//11
+       addSequential(new DriveStraightForCountsIntake(3000, false, false));//12
+       addSequential(new WaitCommand(0.2));//12
+       addSequential(new DriveStraightForCountsIntake(2400, true, false));//13
+       addSequential(new TurnToHeading(-33));//14
+       addSequential(new ResetEncoders());//14
+       addSequential(new LiftSecondStageHalfway());//15
+       addSequential(new ResetEncoders());//15
+       addSequential(new DriveStraightForCounts(2000, false, false));//16
+       addSequential(new OuttakeCube());//17
+       addParallel(new DropSecondStage());//18
+       addSequential(new DriveStraightForCounts(1500, true, false));//19
 
     }
 }
