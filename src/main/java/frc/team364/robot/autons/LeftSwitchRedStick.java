@@ -8,17 +8,28 @@ import frc.team364.robot.commands.auto.lift.*;
 import frc.team364.robot.commands.auto.misc.*;
 
 public class LeftSwitchRedStick extends CommandGroup {
+    /**
+     * <p>1 move away from wall 
+     * <p>2 Turn Left
+     * <p>3 Drive Foward
+     * <p>4 Turn towards left switch
+     * <p>5 Lift Second Stage as Robot Drives
+     * <p>6 Drive towards left switch
+     * <p>7 Flip Claw Down
+     * <p>8 Shoot Cube
+     * <p>
+     */
 
     public LeftSwitchRedStick() {
-       addSequential(new DriveStraightForCounts(1500, false, false));//Move away from wall
-       addSequential(new TurnToHeading(-26));//Turn left
-       addSequential(new DriveStraightForCounts(5000, false, false));//Drive forward
-       addSequential(new TurnToHeading(20));//Turn towards switch
-       addParallel(new LiftSecondStage());
-       addSequential(new DriveStraightForCounts(2800, false, false));//Drive to switch
-       addSequential(new FlipClawDown());
-       addSequential(new OuttakeCube());
-       addParallel(new DropSecondStage());
+       addSequential(new DriveStraightForCounts(1500, false, false));//1
+       addSequential(new TurnToHeading(-26));//2
+       addSequential(new DriveStraightForCounts(5000, false, false));//3
+       addSequential(new TurnToHeading(20));//4
+       addParallel(new LiftSecondStage());//5
+       addSequential(new DriveStraightForCounts(2800, false, false));//6
+       addSequential(new FlipClawDown());//7
+       addSequential(new OuttakeCube());//8
+       addParallel(new DropSecondStage());//9
        addSequential(new DriveStraightForCounts(1500, true, false));//Back up
        //SecondCube
        addSequential(new TurnToHeading(37));//Turn towards second cube
