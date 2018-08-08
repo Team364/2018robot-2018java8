@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
         clawSystem = new ClawSystem();
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitchRedStick();
-        rightAutonSwitch = new RightSwitch3Cube();
+        rightAutonSwitch = new RightSwitchRedStick();
         farAutonScale = new FarScale1Cube();
         closeAutonScale = new CloseScale3Cube();
         //flippyShit = new FlippyShit();

@@ -31,29 +31,29 @@ public class RightSwitchRedStick extends CommandGroup {
      */
 
     public RightSwitchRedStick() {
+       addSequential(new ResetHeading());//1
        addSequential(new DriveStraightForCounts(1500, false, false));//1
        addSequential(new TurnToHeading(15));//2
-       addSequential(new DriveStraightForCounts(3000, false, false));//3
+       addSequential(new DriveStraightForCounts(5000, false, false));//3
        addSequential(new TurnToHeading(-15));//4
-       //addParallel(new LiftSecondStage());//5
-       //addSequential(new DriveStraightForCounts(3800, false, false));//6
-       //addSequential(new FlipClawDown());//7
-       //addSequential(new OuttakeCube());//8
-       //addParallel(new DropSecondStage());//9
-       //addSequential(new DriveStraightForCounts(1500, true, false));//10
+       addParallel(new LiftSecondStage(), 1);//5
+       addSequential(new DriveStraightForCountsQuick(1700, false, false));//6
+       addSequential(new FlipClawDown());//7
+       addSequential(new OuttakeCube());//8
+       addParallel(new DropSecondStage());//9
+       addSequential(new DriveStraightForCounts(1500, true, false));//10
        //SecondCube
-       //addSequential(new TurnToHeading(-34));//11
-       //addSequential(new DriveStraightForCountsIntake(3000, false, false));//12
-       //addSequential(new WaitCommand(0.2));//12
-       //addSequential(new DriveStraightForCountsIntake(2400, true, false));//13
-       //addSequential(new TurnToHeading(33));//14
-       //addSequential(new ResetEncoders());//14
-       //addSequential(new LiftSecondStageHalfway());//15
-       //addSequential(new ResetEncoders());//15
-       //addSequential(new DriveStraightForCounts(2000, false, false));//16
-       //addSequential(new OuttakeCube());//17
-       //addParallel(new DropSecondStage());//18
-       //addSequential(new DriveStraightForCounts(1500, true, false));//19
-
+       addSequential(new TurnToHeading(-32));//11
+       addSequential(new DriveStraightForCountsIntakeQuick(2500, false, false));//12
+       addParallel(new IntakeCube());//12
+       addSequential(new WaitCommand(0.5));//12
+       addSequential(new DriveStraightForCountsIntakeQuick(2700, true, false));//13
+       addSequential(new TurnToHeading(33));//14
+       addSequential(new LiftSecondStageHalfway());//15
+       addSequential(new DriveStraightForCountsQuick(3000, false, false));//16
+       addSequential(new OuttakeCube());//17
+       addParallel(new DropSecondStageHalfway());//18
+       addSequential(new DriveStraightForCounts(1500, true, false));//19
+       addSequential(new FlipClawUp());//20
     }
 }
