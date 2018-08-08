@@ -25,6 +25,20 @@ public class IntakeSystem extends Subsystem {
         leftIntake.set(ControlMode.PercentOutput, 1);
         rightIntake.set(ControlMode.PercentOutput, 1);
     }
+    /**
+     * intended for auto
+     * - if the robot is moving backwards then the intake will run slower
+     */
+    public void intakeWhileMoving(boolean backwards) {
+        if(!backwards){
+            leftIntake.set(ControlMode.PercentOutput, 0.5);
+            rightIntake.set(ControlMode.PercentOutput, 0.5);
+        }else{ 
+            leftIntake.set(ControlMode.PercentOutput, 1);
+            rightIntake.set(ControlMode.PercentOutput, 1);
+        }
+       
+    }
 
     public void outtake() {
         leftIntake.set(ControlMode.PercentOutput, -1);

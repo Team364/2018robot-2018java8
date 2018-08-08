@@ -11,7 +11,7 @@ public class DropBothStages extends Command {
         if(scale){
       setTimeout(1.5);
         } else{
-            setTimeout(0.55);
+            setTimeout(0.75);
         }
     }
 

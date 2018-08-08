@@ -41,7 +41,7 @@ public class DriveStraightForCountsIntake extends Command {
     @Override
     protected void execute() {
         Robot.driveSystem.driveStraightToEncoderCounts(driveCounts, driveBackwards, driveWithGyro);
-        Robot.intakeSystem.intake();
+        Robot.intakeSystem.intakeWhileMoving(driveBackwards);
     }
 
     @Override

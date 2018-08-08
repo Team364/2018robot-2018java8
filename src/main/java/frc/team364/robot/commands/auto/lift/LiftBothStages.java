@@ -10,7 +10,7 @@ public class LiftBothStages extends Command {
        if(scale){
            setTimeout(1.35);
        } else {
-           setTimeout(0.5);
+           setTimeout(0.7);
        }
       
     }
