@@ -9,7 +9,7 @@ import frc.team364.robot.commands.auto.misc.*;
 
 public class LeftSwitchRedStick extends CommandGroup {
     /**
-     * <p>1 move away from wall 
+     * <p>1 Move away from wall 
      * <p>2 Turn Left
      * <p>3 Drive Foward
      * <p>4 Turn towards left switch
@@ -17,17 +17,17 @@ public class LeftSwitchRedStick extends CommandGroup {
      * <p>6 Drive towards left switch
      * <p>7 Flip Claw Down
      * <p>8 Shoot Cube
-     * <p>9 Drop Lift as te robt backs up
+     * <p>9 Drop Lift as te robot backs up
      * <p>10 Back up away from switch
-     * <p>11 Turn towards second cube/cube stack
+     * <p>11 Turn right towards second cube/cube stack
      * <p>12 Drive into cube and intake
      * <P>13 Back away from cube stack intaking
-     * <p>14 Turn towards Switch
+     * <p>14 Turn towards left switch
      * <P>15 Lift Second stage on lift
-     * <p>16 Drive towards switch
-     * <p>17 Outtake Cube into switch
-     * <p>18 drop second stage as robot backs up
-     * <p>19 back away from switch
+     * <p>16 Drive towards left switch
+     * <p>17 Outtake Cube into left switch
+     * <p>18 Drop second stage as robot backs up
+     * <p>19 Back away from left switch
      */
 
     public LeftSwitchRedStick() {
