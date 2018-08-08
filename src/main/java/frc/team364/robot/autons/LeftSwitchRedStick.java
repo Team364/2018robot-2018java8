@@ -49,7 +49,8 @@ public class LeftSwitchRedStick extends CommandGroup {
        addSequential(new DriveStraightForCountsIntake(3000, false, false));//12
        addParallel(new IntakeCube());//12
        addSequential(new WaitCommand(0.5));//12
-       addParallel(new ClosePincher());//13
+       addParallel(new IntakeCube());
+       addSequential(new ClosePincher());//13
        addSequential(new DriveStraightForCountsIntake(2400, true, false));//13
        addSequential(new TurnToHeading(-33));//14
        addSequential(new ResetEncoders());//14
