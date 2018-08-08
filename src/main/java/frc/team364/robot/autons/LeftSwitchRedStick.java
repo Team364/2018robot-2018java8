@@ -17,7 +17,7 @@ public class LeftSwitchRedStick extends CommandGroup {
      * <p>6 Drive towards left switch
      * <p>7 Flip Claw Down
      * <p>8 Shoot Cube
-     * <p>9 Drop Lift as te robot backs up
+     * <p>9 Drop Lift as th e robot backs up
      * <p>10 Back up away from switch
      * <p>11 Turn right towards second cube/cube stack
      * <p>12 Drive into cube and intake
@@ -36,7 +36,7 @@ public class LeftSwitchRedStick extends CommandGroup {
        addSequential(new DriveStraightForCounts(5500, false, false));//3
        addSequential(new TurnToHeading(26));//4
        addParallel(new LiftSecondStage());//5
-       addSequential(new DriveStraightForCounts(3800, false, false));//6
+       addSequential(new DriveStraightForCounts(3600, false, false));//6
        addSequential(new FlipClawDown());//7
        addSequential(new OuttakeCube());//8
        addParallel(new DropSecondStage());//9
@@ -49,10 +49,10 @@ public class LeftSwitchRedStick extends CommandGroup {
        addSequential(new TurnToHeading(-33));//14
        addSequential(new ResetEncoders());//14
        addSequential(new LiftSecondStageHalfway());//15
-       addSequential(new ResetEncoders());//15
-       addSequential(new DriveStraightForCounts(2000, false, false));//16
+       //addSequential(new ResetEncoders());//15
+       addSequential(new DriveStraightForCountsQuick(2000, false, false));//16
        addSequential(new OuttakeCube());//17
-       addParallel(new DropSecondStage());//18
+       addParallel(new DropSecondStageHalfway());//18
        addSequential(new DriveStraightForCounts(1500, true, false));//19
 
     }
