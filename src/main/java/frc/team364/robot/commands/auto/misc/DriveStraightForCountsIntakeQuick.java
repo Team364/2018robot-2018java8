@@ -8,7 +8,13 @@ public class DriveStraightForCountsIntakeQuick extends Command {
     private int driveCounts;
     private boolean driveBackwards;
     private boolean driveWithGyro;
-
+    /**
+     * DriveStraightforCountsIntakeQuick
+     * Auto command intended for use under 2000 counts. The robot will intake while driving
+     * @param counts encoder count distance to move
+     * @param backwards specifies whether or not the robot is to move backwards
+     * @param useGyro specifies whether or not gyro is to correct path and keep straight
+     */
     public DriveStraightForCountsIntakeQuick(int counts, boolean backwards, boolean useGyro) {
         requires(Robot.driveSystem);
         driveCounts = counts;

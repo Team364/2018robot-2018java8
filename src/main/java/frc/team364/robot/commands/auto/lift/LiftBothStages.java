@@ -5,6 +5,10 @@ import frc.team364.robot.Robot;
 
 
 public class LiftBothStages extends Command {
+    /**
+     * Both Stages move at Full power 0.7 seconds for false and 1.35 seconds for true
+     * @param scale indicates whether or not scale is attempted to be scored on
+     */
     public LiftBothStages(boolean scale) {
        requires(Robot.liftSystem);
        if(scale){

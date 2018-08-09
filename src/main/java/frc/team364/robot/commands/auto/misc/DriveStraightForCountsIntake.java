@@ -9,6 +9,13 @@ public class DriveStraightForCountsIntake extends Command {
     private boolean driveBackwards;
     private boolean driveWithGyro;
 
+    /**
+     * DriveStraightForCountsIntake()
+     * The robot will drive to a desired straight to a specified encoder based distance while the intake runs
+     * @param counts Counts desired for the robot to move
+     * @param backwards specifies whether or not the robot is to move backwards
+     * @param useGyro specifies whether or not the gyro is to correct the path
+     */
     public DriveStraightForCountsIntake(int counts, boolean backwards, boolean useGyro) {
         requires(Robot.driveSystem);
         driveCounts = counts;

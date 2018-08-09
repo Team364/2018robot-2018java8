@@ -6,6 +6,10 @@ import frc.team364.robot.Robot;
 
 public class DropBothStages extends Command {
 
+    /**
+     * Both Stages move at Full negative power 0.7 seconds for false and 1.35 seconds for true
+     * @param scale indicates whether or not scale is attempted to be scored on
+     */
     public DropBothStages(boolean scale) {
         requires(Robot.liftSystem);
         if(scale){

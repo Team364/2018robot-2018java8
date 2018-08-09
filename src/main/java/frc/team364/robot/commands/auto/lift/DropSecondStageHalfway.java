@@ -6,6 +6,10 @@ import frc.team364.robot.Robot;
 
 public class DropSecondStageHalfway extends Command {
 
+    /**
+     * DropSecondStageHalfway()
+     * Second Stage moves down at full power for 1.55 seconds
+     */
     public DropSecondStageHalfway() {
         requires(Robot.liftSystem);
         setTimeout(1.55);

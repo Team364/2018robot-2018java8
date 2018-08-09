@@ -5,7 +5,10 @@ import frc.team364.robot.Robot;
 
 
 public class LiftSecondStageHalfway extends Command {
-
+    /**
+     * LiftSecondStageHalfway()
+     * Auto Command - The second stage runs at full power for 1.5 seconds
+     */
     public LiftSecondStageHalfway() {
         requires(Robot.liftSystem);
         setTimeout(1.5);

@@ -6,6 +6,10 @@ import frc.team364.robot.Robot;
 
 public class LiftFirstStage extends Command {
 
+    /**
+     * LiftFirstStage()
+     * The the first stage moves at full power for 1 second
+     */
     public LiftFirstStage() {
         requires(Robot.liftSystem);
         setTimeout(1);
