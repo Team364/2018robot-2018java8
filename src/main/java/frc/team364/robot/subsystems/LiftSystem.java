@@ -136,7 +136,10 @@ public class LiftSystem extends Subsystem {
     public int getEncoderCounts() {
         return firstStage1.getSelectedSensorPosition(0);
     }
-    
+    /**
+     * resetEncoders()
+     * sets firstStageEncoders to zero
+     */
     public void resetEncoders() {
         firstStage1.setSelectedSensorPosition(0, 0, 0);
     }
