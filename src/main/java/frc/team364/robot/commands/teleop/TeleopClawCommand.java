@@ -18,6 +18,9 @@ public class TeleopClawCommand extends Command {
     private int pincherState;
     private boolean pincherLatch;
 
+    /**
+     * Command used for teleop control specific to the claw system
+     */
     public TeleopClawCommand() {
         requires(Robot.clawSystem);
         clawState = 0;
