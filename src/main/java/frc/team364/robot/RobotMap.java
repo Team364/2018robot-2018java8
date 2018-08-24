@@ -17,7 +17,7 @@ public class RobotMap {
     public static final int shifterPort2 = 4;
 
     // First stage elevator objects
-    public static final int firstStage1 = 3;
+    public static final int firstStage1 = 8;//was 3
     public static final int firstStage2 = 13;
     public static final int firstStageBottomLimit = 1;
     public static final int firstStageTopLimit = 0;
