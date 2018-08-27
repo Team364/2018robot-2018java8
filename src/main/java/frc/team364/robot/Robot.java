@@ -34,7 +34,6 @@ public class Robot extends TimedRobot {
 	    driveSystem = new DriveSystem();
 	    oi = new OI();
         trajectory = new FollowPathAuto();
-        //flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setResolution(320, 240);
         driveSystem.resetEncoders();
