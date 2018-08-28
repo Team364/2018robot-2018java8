@@ -42,14 +42,13 @@ public class TeleopLiftCommand extends Command {
                 liftSystem.firstStageControl(-1);
                 liftSystem.secondStageControl(1);
                 //counts = liftSystem.getEncoderCounts();
-                System.out.println("Lift Encoder Counts: " + liftSystem.getEncoderCounts());
               //  auto = false;
                 liftSystem.liftCountError = 200;
             } else if(Robot.oi.controller.getPOV() == 180) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
                 //counts = liftSystem.getEncoderCounts();
-                 System.out.println("Lift Encoder Counts: " + liftSystem.getEncoderCounts());
+                 
                   liftSystem.liftCountError = 100;
                //  auto = false;
             } else {

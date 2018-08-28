@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 	    oi = new OI();
 	    leftAutonSwitch = new LeftSwitchRedStick();
         rightAutonSwitch = new RightSwitchRedStick();
-        farAutonScale = new FarScale1Cube();
+        farAutonScale = new FollowPathAuto();
         closeAutonScale = new CloseScale3Cube();
         //flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
@@ -120,8 +120,5 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
         SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
         SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
-       //Potentiometer  SmartDashboard.putNumber("Pot Voltage", clawSystem.getPotVoltage());
-SmartDashboard.putNumber("Lift Encoder Counts", liftSystem.getEncoderCounts());
-        //SmartDashboard.putString("Current auto", gameData.charAt(0));
     }
 }
