@@ -49,8 +49,8 @@ public class FollowPath extends Command {
         right = new EncoderFollower(rightTraj);
         left.configureEncoder(0, 4096, 0.1524);
         right.configureEncoder(0, 4096, 0.1524);
-        left.configurePIDVA(0.25, 0, 0, 1/6, 0);
-        right.configurePIDVA(0.25, 0, 0, 1/6, 0);
+        left.configurePIDVA(0.1, 0, 0, 1/6, 0);
+        right.configurePIDVA(0.1, 0, 0, 1/6, 0);
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
     }
@@ -67,7 +67,7 @@ public class FollowPath extends Command {
         turn = 0.8 * (-1.0/80.0) * angleDifference;
 
         Robot.driveSystem.setLeftDrivePower(leftCalculatedOutput + turn);
-        Robot.driveSystem.setRightDrivePower((rightCalculatedOutput*-1 + turn));
+        Robot.driveSystem.setRightDrivePower((rightCalculatedOutput - turn)*-1);
 
         SmartDashboard.putNumber("Trag leftCalculatedOutput: ", leftCalculatedOutput);
         SmartDashboard.putNumber("Trag rightCalculatedOutput: ", rightCalculatedOutput);
@@ -75,6 +75,8 @@ public class FollowPath extends Command {
         SmartDashboard.putNumber("Trag desiredHeading: ", desiredHeading);
         SmartDashboard.putNumber("Trag angleDifference: ", angleDifference);
         SmartDashboard.putNumber("Trag turn: ", turn);
+        SmartDashboard.putNumber("Trag leftEncoderCounts: ", Robot.driveSystem.getLeftEncoderPosition());
+        SmartDashboard.putNumber("Trag rightEncoderCounts: ", Robot.driveSystem.getRightEncoderPosition());
 
 
     }

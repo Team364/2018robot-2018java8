@@ -271,6 +271,7 @@ public class DriveSystem extends Subsystem {
      * @param points waypoints to follow
      * @return returns a TankModifier based off our drivetrain
      */ 
+    /*
     public TankModifier configTrajectory(Waypoint[] points) {
         Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
         Trajectory trajectory = Pathfinder.generate(points, config);
@@ -278,7 +279,7 @@ public class DriveSystem extends Subsystem {
         TankModifier modifier = new TankModifier(trajectory).modify(0.658368);
         return modifier;
     }
-
+*/
     public void resetEncoders() {
         leftRear.setSelectedSensorPosition(0, 0, 0);
         rightRear.setSelectedSensorPosition(0, 0, 0);

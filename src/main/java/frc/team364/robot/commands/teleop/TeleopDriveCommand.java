@@ -10,6 +10,7 @@ package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopDriveCommand extends Command {
 
@@ -32,6 +33,8 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void execute() {
+        SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0)*(1/1024)*(6* Math.PI));//Velocity in feet
+        
         Robot.driveSystem.tankDrive(Robot.oi.leftStick.getRawAxis(1), Robot.oi.rightStick.getRawAxis(1));
         if(Robot.oi.shiftHigh.get()) {
             Robot.driveSystem.shiftHigh();
