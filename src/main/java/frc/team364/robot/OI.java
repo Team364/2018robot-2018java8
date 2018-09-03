@@ -5,13 +5,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
 
-    public Joystick leftStick;
-    public Joystick rightStick;
     public Joystick operationStation;
     public Joystick controller;
-
-    public double leftPower;
-    public double rightPower;
+    public Joystick driverController;
 
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
@@ -29,13 +25,13 @@ public class OI {
 
     public OI() {
 
-        leftStick = new Joystick(0);
-        rightStick = new Joystick(1);
+        controller = new Joystick(0);
+        driverController = new Joystick(1);
         operationStation = new Joystick(2); ///Changing Main Buttons to Gamepad--all thats left is the auto switch and it's literally in a cardboard box
-        controller = new Joystick(3);
+        
 
-        shiftLow = new JoystickButton(leftStick, 1);
-        shiftHigh = new JoystickButton(rightStick, 1);
+        shiftLow = new JoystickButton(driverController, 5);
+        shiftHigh = new JoystickButton(driverController, 6);
        // secondClawButton = new JoystickButton(leftStick, 11);
 
         clawButton = new JoystickButton(controller, 5);
