@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.PIDCalc;
+import frc.team364.robot.Robot;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.teleop.TeleopDriveCommand;
 import jaci.pathfinder.Pathfinder;
@@ -37,9 +38,11 @@ public class DriveSystem extends Subsystem {
     public PIDCalc pidNavX;
     public PIDCalc pidLeft;
     public PIDCalc pidRight;
+    public PIDCalc pidRampDown;
     public double pidOutputNavX;
     public double pidOutputLeft;
     public double pidOutputRight;
+    public double pidOutputRampDown;
     public Pathfinder pathfinder;
 
     /**
@@ -80,6 +83,7 @@ public class DriveSystem extends Subsystem {
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
+        pidRampDown = new PIDCalc(0.0005, 0, 0, 0, "RampDown");
     }
 
     @Override
@@ -234,6 +238,27 @@ public class DriveSystem extends Subsystem {
      */ 
     public boolean reachedHeading(double heading) {
         if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+        /**
+     * turnToHeading()
+     * Slows the robot down
+     */ 
+    public void rampDown() {
+        pidOutputRampDown = pidNavX.calculateOutput(50, Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));
+        leftRear.set(ControlMode.PercentOutput, pidOutputRampDown); //Was multiplied by 0.6
+        rightRear.set(ControlMode.PercentOutput, pidOutputRampDown);
+    }
+
+    /**
+     * reachedHeading()
+     * Determines if the drivetrain has stopped
+     */ 
+    public boolean reachedSmoothStop() {
+        if(Robot.driveSystem.leftRear.getSelectedSensorPosition(0) <= 100) {
             return true;
         } else {
             return false;

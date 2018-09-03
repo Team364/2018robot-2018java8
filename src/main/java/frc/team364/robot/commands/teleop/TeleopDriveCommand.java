@@ -14,11 +14,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopDriveCommand extends Command {
 
+    public double leftControllerInput;
+    public double rightControllerInput;
+    public static Command RampDown;
     /**
      * Command used for teleop control specific to the drive system
      */
     public TeleopDriveCommand() {
         requires(Robot.driveSystem);
+        RampDown = new RampDown();
     }
 
     @Override
@@ -33,9 +37,21 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void execute() {
+        rightControllerInput = Robot.oi.driverController.getRawAxis(1);
+        leftControllerInput = Robot.oi.driverController.getRawAxis(5);
+        SmartDashboard.putData("RampDownStatus: ", RampDown);
         SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0)*(1/1024)*(6* Math.PI));//Velocity in feet
-        
-        Robot.driveSystem.tankDrive(Robot.oi.driverController.getRawAxis(1), Robot.oi.driverController.getRawAxis(5));
+       
+        Robot.driveSystem.tankDrive(leftControllerInput, rightControllerInput);
+
+        if((leftControllerInput <= 0.2) && (rightControllerInput <= 0.2)){
+            RampDown.start();
+        }else{
+            RampDown.cancel();
+        }
+
+       
+
         if(Robot.oi.shiftHigh.get()) {
             Robot.driveSystem.shiftHigh();
         } else if(Robot.oi.shiftLow.get()) {
