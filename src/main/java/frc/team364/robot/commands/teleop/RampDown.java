@@ -6,15 +6,16 @@ import frc.team364.robot.Robot;
 
 public class RampDown extends Command {
 
+    public boolean forward;
 
-    public RampDown() {
+    public RampDown(boolean forward) {
         requires(Robot.driveSystem);
-        setTimeout(1);
+        setTimeout(0.3);
     }
 
     @Override
     protected void initialize() {
-        Robot.driveSystem.pidRampDown.setPIDParameters(1, 0.01, 0, 1); // Robot.driveSystem.pidNavX.setPIDParameters(0.05, 0.01, 0, 0);
+        Robot.driveSystem.pidRampDown.setPIDParameters(0.1, 0, 0, 0); // Robot.driveSystem.pidNavX.setPIDParameters(0.05, 0.01, 0, 0);
         Robot.driveSystem.stop();
         Robot.driveSystem.resetHeading();
         Robot.driveSystem.pidRampDown.resetPID();
@@ -24,13 +25,13 @@ public class RampDown extends Command {
 
     @Override
     protected void execute() {
-        Robot.driveSystem.rampDown();
+        Robot.driveSystem.rampDown(forward);
     }
 
     @Override
     protected boolean isFinished() {
 
-        return Robot.driveSystem.reachedSmoothStop() || isTimedOut();
+        return isTimedOut();//Robot.driveSystem.reachedSmoothStop() ||
     }
 
     @Override

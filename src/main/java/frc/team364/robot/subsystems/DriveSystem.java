@@ -13,6 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team364.robot.PIDCalc;
 import frc.team364.robot.Robot;
 import frc.team364.robot.RobotMap;
@@ -83,7 +84,7 @@ public class DriveSystem extends Subsystem {
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
-        pidRampDown = new PIDCalc(0.0005, 0, 0, 0, "RampDown");
+        pidRampDown = new PIDCalc(0.0001, 0, 0, 0, "RampDown");
     }
 
     @Override
@@ -247,18 +248,29 @@ public class DriveSystem extends Subsystem {
      * turnToHeading()
      * Slows the robot down
      */ 
-    public void rampDown() {
-        pidOutputRampDown = pidNavX.calculateOutput(50, Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));
-        leftRear.set(ControlMode.PercentOutput, pidOutputRampDown); //Was multiplied by 0.6
-        rightRear.set(ControlMode.PercentOutput, pidOutputRampDown);
+    
+    public void rampDown(boolean forward) {
+        
+        if(forward){
+        pidOutputRampDown = pidNavX.calculateOutput(0.2, Robot.driveSystem.leftRear.getMotorOutputPercent());
+        SmartDashboard.putNumber("PidOutputRamp: ", pidOutputRampDown);
+        leftRear.set(ControlMode.Velocity, -pidOutputRampDown); //Was multiplied by 0.6
+        rightRear.set(ControlMode.Velocity, pidOutputRampDown);
+    }else{
+        pidOutputRampDown = pidNavX.calculateOutput(-0.2, Robot.driveSystem.leftRear.getMotorOutputPercent());
+        SmartDashboard.putNumber("PidOutputRamp: ", pidOutputRampDown);
+        leftRear.set(ControlMode.Velocity, -pidOutputRampDown); //Was multiplied by 0.6
+        rightRear.set(ControlMode.Velocity, pidOutputRampDown);
     }
+}
+
 
     /**
      * reachedHeading()
      * Determines if the drivetrain has stopped
      */ 
     public boolean reachedSmoothStop() {
-        if(Robot.driveSystem.leftRear.getSelectedSensorPosition(0) <= 100) {
+        if(Math.abs(Robot.driveSystem.leftRear.getMotorOutputPercent()) <= 0.01) {
             return true;
         } else {
             return false;
