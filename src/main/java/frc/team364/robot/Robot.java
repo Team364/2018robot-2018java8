@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
-	    leftAutonSwitch = new LeftSwitchRedStick();
+	    leftAutonSwitch = new TurnTuning();
         rightAutonSwitch = new RightSwitchRedStick();
         farAutonScale = new FollowPathAuto();
         closeAutonScale = new CloseScale3Cube();

@@ -34,7 +34,8 @@ public class TeleopDriveCommand extends Command {
     @Override
     protected void execute() {
         SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0)*(1/1024)*(6* Math.PI));//Velocity in feet
-        
+        SmartDashboard.putNumber("Heading: ", Robot.driveSystem.getGyroAngle());
+
         Robot.driveSystem.tankDrive(Robot.oi.leftStick.getRawAxis(1), Robot.oi.rightStick.getRawAxis(1));
         if(Robot.oi.shiftHigh.get()) {
             Robot.driveSystem.shiftHigh();
@@ -42,6 +43,10 @@ public class TeleopDriveCommand extends Command {
             Robot.driveSystem.shiftLow();
         } else {
             Robot.driveSystem.noShiftInput();
+        }
+
+        if(Robot.oi.showAngle.get()){
+            System.out.println(Robot.driveSystem.getGyroAngle());
         }
     }
 

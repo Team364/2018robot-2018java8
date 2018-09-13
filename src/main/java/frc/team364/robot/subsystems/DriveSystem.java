@@ -233,7 +233,7 @@ public class DriveSystem extends Subsystem {
      * @return returns true if the robot is within 2 degrees of wanted heading
      */ 
     public boolean reachedHeading(double heading) {
-        if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
+        if(navX.getYaw() <= (heading + 2) && navX.getYaw() >= (heading - 2)) {
             return true;
         } else {
             return false;

@@ -49,8 +49,8 @@ public class FollowPath extends Command {
         right = new EncoderFollower(rightTraj);
         left.configureEncoder(0, 4096, 0.1524);
         right.configureEncoder(0, 4096, 0.1524);
-        left.configurePIDVA(0.25, 0, 0, 1/6, 0);
-        right.configurePIDVA(0.25, 0, 0, 1/6, 0);
+        left.configurePIDVA(0.25, 0, 0, 1/10, 0);
+        right.configurePIDVA(0.25, 0, 0, 1/10, 0);
         Robot.driveSystem.resetEncoders();
         Robot.driveSystem.resetHeading();
     }
@@ -64,7 +64,7 @@ public class FollowPath extends Command {
         desiredHeading = Pathfinder.r2d(left.getHeading());
 
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
-        turn = 0.51* (-1.0/80.0) * angleDifference;
+        turn = 0; //0.51* (-1.0/80.0) * angleDifference
 
         Robot.driveSystem.setLeftDrivePower(leftCalculatedOutput + turn);
         Robot.driveSystem.setRightDrivePower((rightCalculatedOutput - turn)*-1);

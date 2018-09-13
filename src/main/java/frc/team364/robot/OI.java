@@ -15,6 +15,7 @@ public class OI {
 
     public JoystickButton shiftLow;
     public JoystickButton shiftHigh;
+    public JoystickButton showAngle;
 
     public JoystickButton clawButton;
     public JoystickButton pinchButton;
@@ -36,6 +37,7 @@ public class OI {
 
         shiftLow = new JoystickButton(leftStick, 1);
         shiftHigh = new JoystickButton(rightStick, 1);
+        showAngle = new JoystickButton(rightStick, 3);
        // secondClawButton = new JoystickButton(leftStick, 11);
 
         clawButton = new JoystickButton(controller, 5);
