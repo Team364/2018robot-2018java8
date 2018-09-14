@@ -18,7 +18,7 @@ public class OI {
     public JoystickButton outtakeButton;
     public JoystickButton firstStageLiftButton;
     public JoystickButton resetLiftEncoderButton;
-    
+    public JoystickButton dataButton;
 
     public JoystickButton autoSelectorButton;
     public JoystickButton flippyShitButton;
@@ -28,7 +28,7 @@ public class OI {
         controller = new Joystick(0);
         driverController = new Joystick(1);
         operationStation = new Joystick(2); ///Changing Main Buttons to Gamepad--all thats left is the auto switch and it's literally in a cardboard box
-        
+        dataButton = new JoystickButton(driverController, 7);
 
         shiftLow = new JoystickButton(driverController, 5);
         shiftHigh = new JoystickButton(driverController, 6);

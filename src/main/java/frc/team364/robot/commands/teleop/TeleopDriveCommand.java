@@ -21,17 +21,25 @@ public class TeleopDriveCommand extends Command {
     public boolean forward;
     public double leftVelocity;
     public double rightVelocity;
+    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN}
+    public DriveStates driveState;
+    public double tankLeft;
+    public double tankRight;
+    public boolean CancelRamp;
     /**
      * Command used for teleop control specific to the drive system
      */
     public TeleopDriveCommand() {
         requires(Robot.driveSystem);
-        RampDown = new RampDown(forward);
+        RampDown = new RampDown();
+        CancelRamp = false;
     }
 
     @Override
     protected void initialize() {
+        driveState = DriveStates.STATE_NOT_MOVING;
         rampDownSequence = false;
+        
     }
 
     @Override
@@ -53,10 +61,54 @@ public class TeleopDriveCommand extends Command {
 
         //normal tank drive control
         
-        Robot.driveSystem.tankDrive(leftControllerInput, rightControllerInput);
+            if(Robot.oi.dataButton.get())
+            {
+                System.out.println(leftControllerInput + " " + rightControllerInput);
+                System.out.println(driveState);
+            }        
+    
+            if(driveState == DriveStates.STATE_NOT_MOVING){
+                tankLeft = 0;
+                tankRight = 0;
+            if((Math.abs(leftControllerInput) >= 0.25) && (Math.abs(rightControllerInput) >= 0.25))
+            {
+                System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
+                driveState = DriveStates.STATE_DIRECT_DRIVE;
+               
+            }
+        }
+            else if (driveState == DriveStates.STATE_DIRECT_DRIVE){
+                
+                tankLeft = leftControllerInput;
+                tankRight = rightControllerInput;
+            if ((Math.abs(leftControllerInput) < 0.2) && (Math.abs(rightControllerInput) < 0.2))
+            {
+                System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
+                driveState = DriveStates.STATE_RAMP_DOWN;
+                
+            }
+        }
+            else if(driveState == DriveStates.STATE_RAMP_DOWN){
+                RampDown.start();
+            if ((Math.abs(leftControllerInput) > 0.25) && (Math.abs(rightControllerInput) > 0.25))
+            {
+                driveState = DriveStates.STATE_DIRECT_DRIVE;
+                System.out.println("STATE_RAMP_DOWN->STATE_DIRECT_DRIVE");
 
-
-        //Executing ramping down command
+            }
+            else if (Robot.driveSystem.leftRear.getMotorOutputPercent() <= 0.1)
+            {
+                driveState = DriveStates.STATE_NOT_MOVING;
+                System.out.println("STATE_RAMP_DOWN->STATE_NOT_MOVING");
+            }
+        }
+            else{
+            //This condition should never happen!
+            driveState = DriveStates.STATE_NOT_MOVING;
+            }
+        
+        Robot.driveSystem.tankDrive(tankLeft, tankRight);
+        /*//Executing ramping down command
         if(rampDownSequence){
         if((leftControllerInput <= 0.5) && (rightControllerInput <= 0.5) && (Math.abs(leftControllerInput) <= 0.5)){
             RampDown.start();
@@ -74,7 +126,7 @@ public class TeleopDriveCommand extends Command {
     //IF turning, deactivate sequence
         if(Math.abs(leftControllerInput - rightControllerInput) >= 0.3){
             rampDownSequence = false;
-        }
+        }*/
 
 
        

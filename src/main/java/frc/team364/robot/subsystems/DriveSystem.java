@@ -249,19 +249,13 @@ public class DriveSystem extends Subsystem {
      * Slows the robot down
      */ 
     
-    public void rampDown(boolean forward) {
+    public void rampDown() {
         
-        if(forward){
-        pidOutputRampDown = pidNavX.calculateOutput(0.2, Robot.driveSystem.leftRear.getMotorOutputPercent());
+        pidOutputRampDown = pidNavX.calculateOutput(0, Robot.driveSystem.leftRear.getMotorOutputPercent());
         SmartDashboard.putNumber("PidOutputRamp: ", pidOutputRampDown);
-        leftRear.set(ControlMode.Velocity, -pidOutputRampDown); //Was multiplied by 0.6
-        rightRear.set(ControlMode.Velocity, pidOutputRampDown);
-    }else{
-        pidOutputRampDown = pidNavX.calculateOutput(-0.2, Robot.driveSystem.leftRear.getMotorOutputPercent());
-        SmartDashboard.putNumber("PidOutputRamp: ", pidOutputRampDown);
-        leftRear.set(ControlMode.Velocity, -pidOutputRampDown); //Was multiplied by 0.6
-        rightRear.set(ControlMode.Velocity, pidOutputRampDown);
-    }
+        leftRear.set(ControlMode.PercentOutput, -pidOutputRampDown); //Was multiplied by 0.6
+        rightRear.set(ControlMode.PercentOutput, pidOutputRampDown);
+
 }
 
 
