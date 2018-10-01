@@ -70,7 +70,7 @@ public class TeleopDriveCommand extends Command {
             if(driveState == DriveStates.STATE_NOT_MOVING){
                 tankLeft = 0;
                 tankRight = 0;
-            if((Math.abs(leftControllerInput) >= 0.25) && (Math.abs(rightControllerInput) >= 0.25))
+            if((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25))
             {
                 System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
