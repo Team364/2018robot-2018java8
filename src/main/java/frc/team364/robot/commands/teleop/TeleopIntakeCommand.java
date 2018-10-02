@@ -24,7 +24,7 @@ public class TeleopIntakeCommand extends Command {
        
  // Run the intake and outtake are run on triggers(axis)
         //If the trigger is pressed more than halfway then the intake will run
-        if(Robot.oi.controller.getRawAxis(2) > 0.5) {
+        if(Robot.oi.controller.getRawAxis(4) > 0.5) {
             Robot.intakeSystem.intake();
             System.out.println("Intake is running");
         //If the trigger is pressed lightly then the outtake for variable trigger pressure will run
