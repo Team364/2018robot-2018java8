@@ -61,8 +61,8 @@ public class IntakeSystem extends Subsystem {
      */  
     public void outtakeForPressure(){
 
-            leftIntake.set(ControlMode.PercentOutput, -Robot.oi.controller.getRawAxis(3));
-            rightIntake.set(ControlMode.PercentOutput, -Robot.oi.controller.getRawAxis(3));
+            leftIntake.set(ControlMode.PercentOutput, Robot.oi.controller.getRawAxis(3));
+            rightIntake.set(ControlMode.PercentOutput, Robot.oi.controller.getRawAxis(3));
     }
     /**
      * intakeStop()
