@@ -64,7 +64,7 @@ public class FollowPath extends Command {
         desiredHeading = Pathfinder.r2d(left.getHeading());
 
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
-        turn = 0; //0.51* (-1.0/80.0) * angleDifference
+        turn = 0.8 * (-1.0/80.0) * angleDifference;
 
         Robot.driveSystem.setLeftDrivePower(leftCalculatedOutput + turn);
         Robot.driveSystem.setRightDrivePower((rightCalculatedOutput - turn)*-1);
