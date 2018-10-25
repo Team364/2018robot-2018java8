@@ -17,7 +17,7 @@ public class Robot extends TimedRobot {
 
     public static OI oi;
 
-    public static Command trajectory;
+    public static Command driveStraightAuto;
 
     public UsbCamera camera;
 
@@ -32,8 +32,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         setPeriod(0.02);
 	    driveSystem = new DriveSystem();
-	    oi = new OI();
-        trajectory = new FollowPathAuto();
+        oi = new OI();
+        driveStraightAuto = new DriveForwardAuto();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setResolution(320, 240);
         driveSystem.resetEncoders();
@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
 	    gameData = DriverStation.getInstance().getGameSpecificMessage();
-        trajectory.start();
+        driveStraightAuto.start();
         driveSystem.resetHeading();
         driveSystem.resetEncoders();
     }

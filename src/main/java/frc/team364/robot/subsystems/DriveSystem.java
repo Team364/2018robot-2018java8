@@ -1,5 +1,4 @@
 /*
- * George and Keandre:
  * This is the DriveSystem class. It holds objects for all of the motor controllers,
  * shift pistons, PID, and the navX. It also has functions for running DriveToDistance and
  * TurnToHeading.
@@ -16,11 +15,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.PIDCalc;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.teleop.TeleopDriveCommand;
-import jaci.pathfinder.Pathfinder;
-import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.Waypoint;
-import jaci.pathfinder.modifiers.TankModifier;
-
 
 /**
  * @author Landon Haugh
@@ -40,7 +34,6 @@ public class DriveSystem extends Subsystem {
     public double pidOutputNavX;
     public double pidOutputLeft;
     public double pidOutputRight;
-    public Pathfinder pathfinder;
 
     /**
      * DriveSystem()
@@ -49,7 +42,6 @@ public class DriveSystem extends Subsystem {
      * Maps all pistons
      * Creates PID objects
      * Initializes navX
-     * Initializes Pathfinder class
      */ 
     public DriveSystem() {
         
@@ -74,9 +66,8 @@ public class DriveSystem extends Subsystem {
         rightRear.config_kP(0, 0.25, 100);
         rightRear.config_kF(0, 1, 100);
 
-	    // Init the navX, Pathfinder, and PIDCalc
+	    // Init the navX and PIDCalc
         navX = new AHRS(SPI.Port.kMXP);
-        pathfinder = new Pathfinder();
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
@@ -264,20 +255,9 @@ public class DriveSystem extends Subsystem {
         shifter.set(DoubleSolenoid.Value.kOff);
     }
 
-    /**
-     * configTrajectory()
-     * Creates a trajectory based on waypoints specified
-     * Takes a long time to run, use a motion profile generator and load files from roboRIO instead
-     * @param points waypoints to follow
-     * @return returns a TankModifier based off our drivetrain
-     */ 
-    public TankModifier configTrajectory(Waypoint[] points) {
-        Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, 1.7, 2.0, 60.0);
-        Trajectory trajectory = Pathfinder.generate(points, config);
-        // 2.16 feet in meters = 0.658368
-        TankModifier modifier = new TankModifier(trajectory).modify(0.658368);
-        return modifier;
-    }
+    /** 
+     * resets both right and left encoders for the drive base
+     */
 
     public void resetEncoders() {
         leftRear.setSelectedSensorPosition(0, 0, 0);

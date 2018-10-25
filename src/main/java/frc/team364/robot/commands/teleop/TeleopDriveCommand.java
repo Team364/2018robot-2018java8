@@ -1,10 +1,3 @@
-/*
- *  George and Keanu:
- *  This is the TeleopDriveCommand. This runs whenever there isn't another command
- *  running that requries the DriveSystem class. In Execute, the drive motors are
- *  given an output from the joysticks using a variable in the OI (Operator Interface) class.
- *  The shifters are also set using the triggers from each joystick.
- */
 
 package frc.team364.robot.commands.teleop;
 
@@ -26,7 +19,7 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void end() {
-        // This will probably never be called.
+
         Robot.driveSystem.stop();
     }
 
