@@ -1,4 +1,3 @@
-
 package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -6,6 +5,7 @@ import frc.team364.robot.Robot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class TeleopDriveCommand extends Command {
+
     public Joystick leftStick;
     public Joystick rightStick;
 
