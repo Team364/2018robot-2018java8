@@ -3,36 +3,26 @@ package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class TeleopDriveCommand extends Command {
+    public Joystick leftStick;
+    public Joystick rightStick;
 
-    /**
-     * Command used for teleop control specific to the drive system
-     */
     public TeleopDriveCommand() {
         requires(Robot.driveSystem);
-    }
-
-    @Override
-    protected void initialize() {
+        leftStick = new Joystick(0);
+        rightStick = new Joystick(1);
     }
 
     @Override
     protected void end() {
-
         Robot.driveSystem.stop();
     }
 
     @Override
     protected void execute() {
-        Robot.driveSystem.tankDrive(Robot.oi.leftStick.getRawAxis(1), Robot.oi.rightStick.getRawAxis(1));
-        if(Robot.oi.shiftHigh.get()) {
-            Robot.driveSystem.shiftHigh();
-        } else if(Robot.oi.shiftLow.get()) {
-            Robot.driveSystem.shiftLow();
-        } else {
-            Robot.driveSystem.noShiftInput();
-        }
+        Robot.driveSystem.tankDrive(leftStick.getRawAxis(1), rightStick.getRawAxis(1));
     }
 
     @Override

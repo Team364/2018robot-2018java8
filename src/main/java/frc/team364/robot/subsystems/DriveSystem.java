@@ -8,69 +8,27 @@ package frc.team364.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.team364.robot.PIDCalc;
-import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.teleop.TeleopDriveCommand;
 
-/**
- * @author Landon Haugh
- * @version v1.0
- */ 
+
 public class DriveSystem extends Subsystem {
 
     public TalonSRX leftFront;
     public TalonSRX leftRear;
     public TalonSRX rightFront;
     public TalonSRX rightRear;
-    public DoubleSolenoid shifter;
-    public AHRS navX;
-    public PIDCalc pidNavX;
-    public PIDCalc pidLeft;
-    public PIDCalc pidRight;
-    public double pidOutputNavX;
-    public double pidOutputLeft;
-    public double pidOutputRight;
 
-    /**
-     * DriveSystem()
-     * Constructor for the DriveSystem class
-     * Maps all TalonSRX's and configures settings
-     * Maps all pistons
-     * Creates PID objects
-     * Initializes navX
-     */ 
     public DriveSystem() {
         
-        // Initialize TalonSRX objects
-        leftFront = new TalonSRX(RobotMap.leftFrontDrive);
-        leftRear = new TalonSRX(RobotMap.leftRearDrive);
-        rightFront = new TalonSRX(RobotMap.rightFrontDrive);
-        rightRear = new TalonSRX(RobotMap.rightRearDrive);
+        leftFront = new TalonSRX(14);
+        leftRear = new TalonSRX(15);
+        rightFront = new TalonSRX(10);
+        rightRear = new TalonSRX(11);
 
-        // Initialize DoubleSolenoid shifter object
-        shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
-        
-	    // Set the front drive motors to follow the rear
         leftFront.follow(leftRear);
         rightFront.follow(rightRear);
-
-	    // Config PF on left side
-        leftRear.config_kP(0, 0.25, 100);
-        leftRear.config_kF(0, 1, 100);
-
-	    // Config PF on right side
-        rightRear.config_kP(0, 0.25, 100);
-        rightRear.config_kF(0, 1, 100);
-
-	    // Init the navX and PIDCalc
-        navX = new AHRS(SPI.Port.kMXP);
-        pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-        pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
-        pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
     }
 
     @Override
@@ -98,31 +56,6 @@ public class DriveSystem extends Subsystem {
         leftRear.set(ControlMode.PercentOutput, 0);
         rightRear.set(ControlMode.PercentOutput, 0);
     }
-
-    /**
-     * getLeftEncoderPosition()
-     * @return returns the left encoder position in counts
-     */ 
-    public int getLeftEncoderPosition() {
-        return leftRear.getSelectedSensorPosition(0);
-    }
-
-    /**
-     * getRightEncoderPosition()
-     * @return returns the right encoder position in counts
-     */ 
-    public int getRightEncoderPosition() {
-        return -rightRear.getSelectedSensorPosition(0);
-    }
-
-    /**
-     * getGyroAngle()
-     * @return returns the navX angle (yaw)
-     */ 
-    public double getGyroAngle() {
-        return navX.getYaw();
-    }
-
     /**
      * setLeftDrivePower()
      * Use this for motion profiling to set the left drive power
@@ -146,122 +79,4 @@ public class DriveSystem extends Subsystem {
         setLeftDrivePower(power);
 
     }
-    /**
-     * driveStraightToEcnoderCounts()
-     * Uses the TalonSRX PID to drive to a certain number of counts
-     * @param counts specify encoder counts to drive to
-     */ 
-    public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
-        if(backwards) {
-            pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
-            pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
-            pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            System.out.println("bLeft: " + pidOutputLeft);
-            System.out.println("bRight: " + pidOutputRight);            
-            if(useGyro) {
-                leftRear.set(ControlMode.PercentOutput, -pidOutputLeft + pidOutputNavX);
-                rightRear.set(ControlMode.PercentOutput, pidOutputRight + pidOutputNavX);
-            } else {
-                leftRear.set(ControlMode.PercentOutput, -pidOutputLeft);
-                rightRear.set(ControlMode.PercentOutput, pidOutputRight);
-            }
-        } else {
-            pidOutputLeft = pidLeft.calculateOutput(counts, getLeftEncoderPosition());
-            pidOutputRight = pidRight.calculateOutput(counts, getRightEncoderPosition());
-            pidOutputNavX = pidNavX.calculateOutput(0, getGyroAngle());
-            System.out.println("Left: " + pidOutputLeft);
-            System.out.println("Right: " + pidOutputRight);
-            if(useGyro) {
-                leftRear.set(ControlMode.PercentOutput, pidOutputLeft + pidOutputNavX);
-                rightRear.set(ControlMode.PercentOutput, -pidOutputRight + pidOutputNavX);
-            } else {
-                leftRear.set(ControlMode.PercentOutput, pidOutputLeft);
-                rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
-            }
-        }
-    }
-
-    /**
-     * withinEncoderRange()
-     * Checks if the drivetrain has reached the target counts
-     * @param counts counts to reach
-     * @return returns true if counts is within 10 of wanted counts
-     */ 
-    public boolean withinEncoderCountRange(int counts) {
-
-        double leftRearPos = leftRear.getSelectedSensorPosition(0);
-        if(Math.abs(leftRearPos) >= (counts - 100)) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    /**
-     * resetHeading()
-     * Resets navX gyro heading
-     */ 
-    public void resetHeading() {
-        navX.reset();
-    }
-
-    /**
-     * turnToHeading()
-     * Turns the robot to a specified heading using PIDCalc and the navX
-     * @param heading heading to turn to
-     */ 
-    public void turnToHeading(double heading) {
-        pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
-        leftRear.set(ControlMode.PercentOutput, pidOutputNavX); //Was multiplied by 0.6
-        rightRear.set(ControlMode.PercentOutput, pidOutputNavX);
-    }
-
-    /**
-     * reachedHeading()
-     * Determines if the drivetrain has reached the target heading
-     * @param heading heading to be reached
-     * @return returns true if the robot is within 2 degrees of wanted heading
-     */ 
-    public boolean reachedHeading(double heading) {
-        if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * shiftHigh()
-     * Shifts the drivetrain into high gear
-     */ 
-    public void shiftHigh() {
-        shifter.set(DoubleSolenoid.Value.kForward);
-    }
-
-    /**
-     * shiftLow()
-     * Shifts the drivetrain into low gear
-     */ 
-    public void shiftLow() {
-        shifter.set(DoubleSolenoid.Value.kReverse);
-    }
-
-    /**
-     * noShiftInput()
-     * Leaves the shifters where they're at
-     */ 
-    public void noShiftInput() {
-        shifter.set(DoubleSolenoid.Value.kOff);
-    }
-
-    /** 
-     * resets both right and left encoders for the drive base
-     */
-
-    public void resetEncoders() {
-        leftRear.setSelectedSensorPosition(0, 0, 0);
-        rightRear.setSelectedSensorPosition(0, 0, 0);
-    }
-
 }

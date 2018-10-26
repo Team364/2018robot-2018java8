@@ -13,48 +13,23 @@ import frc.team364.robot.subsystems.*;
 public class Robot extends TimedRobot {
 
     public static DriveSystem driveSystem;
-    public String gameData = "";
+    public static Command auto;
 
-    public static OI oi;
-
-    public static Command driveStraightAuto;
-
-    public UsbCamera camera;
-
-    /**
-     * robotInit()
-     * Note the setPeriod(0.05) function. This is a function with the
-     * TimedRobot class that sets the robot loop period (50ms in this case).
-     * This will allow the motion profiling code to run at a constant rate without
-     * fluctuation. 
-     */
 	@Override
     public void robotInit() {
         setPeriod(0.02);
 	    driveSystem = new DriveSystem();
-        oi = new OI();
-        driveStraightAuto = new DriveForwardAuto();
-        camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
-        camera.setResolution(320, 240);
-        driveSystem.resetEncoders();
-        driveSystem.resetHeading();
+        auto = new DriveForwardAuto();
     }
-
-    @Override
-    public void disabledInit() { }
 
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-	    gameData = DriverStation.getInstance().getGameSpecificMessage();
-        driveStraightAuto.start();
-        driveSystem.resetHeading();
-        driveSystem.resetEncoders();
+        auto.start();
     }
 
     @Override
     public void autonomousPeriodic() {
-        putSmartDashVars();
         Scheduler.getInstance().run();
     }
 
@@ -71,24 +46,12 @@ public class Robot extends TimedRobot {
     }
 
     @Override
-    public void disabledPeriodic() {
-        putSmartDashVars();
-    }
-
-    @Override
     public void teleopPeriodic() {
 	    Scheduler.getInstance().run();
-        putSmartDashVars();
     }
 
     @Override
     public void testPeriodic() { 
 
-    }
-
-    private void putSmartDashVars() {
-        SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
-        SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
-        SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
     }
 }

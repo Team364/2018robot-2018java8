@@ -6,9 +6,7 @@ import frc.team364.robot.commands.auto.drive.*;
 public class DriveForwardAuto extends CommandGroup {
 
     public DriveForwardAuto() {
-
-        addSequential(new DriveforPower(1, 3));
-        
+        addSequential(new DriveforPower(1, 3));      
     }
 
 }
