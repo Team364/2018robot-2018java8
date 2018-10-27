@@ -34,17 +34,9 @@ public class DriveSystem extends Subsystem {
         rightRear.set(ControlMode.PercentOutput, -right);
     }
 //Auto
-    public void setLeftDrivePower(double power) {
-        leftRear.set(ControlMode.PercentOutput, power);
-    }
-
-    public void setRightDrivePower(double power) {
-        rightRear.set(ControlMode.PercentOutput, power);
-    }
-
     public void driveForPower(double power){
-        setRightDrivePower(power);
-        setLeftDrivePower(power);
+        rightRear.set(ControlMode.PercentOutput, power);
+        leftRear.set(ControlMode.PercentOutput, power);
     }
     public void stop() {
         leftRear.set(ControlMode.PercentOutput, 0);

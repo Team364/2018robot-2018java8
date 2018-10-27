@@ -16,11 +16,6 @@ public class TeleopDriveCommand extends Command {
     }
 
     @Override
-    protected void end() {
-        Robot.driveSystem.stop();
-    }
-
-    @Override
     protected void execute() {
         Robot.driveSystem.tankDrive(leftStick.getRawAxis(1), rightStick.getRawAxis(1));
     }
@@ -28,6 +23,11 @@ public class TeleopDriveCommand extends Command {
     @Override
     protected boolean isFinished() {
         return false;
+    }
+
+    @Override
+    protected void end() {
+        Robot.driveSystem.stop();
     }
 
 }
