@@ -2,7 +2,6 @@ package frc.team364.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.commands.teleop.TeleopDriveCommand;
 
@@ -46,11 +45,9 @@ public class DriveSystem extends Subsystem {
     public void driveForPower(double power){
         setRightDrivePower(power);
         setLeftDrivePower(power);
-
+    }
     public void stop() {
         leftRear.set(ControlMode.PercentOutput, 0);
         rightRear.set(ControlMode.PercentOutput, 0);
         }
-    
-    }
 }
