@@ -10,6 +10,7 @@ public class TeleopLiftCommand extends Command {
    //public boolean liftUp = Robot.oi.liftButton.get();--aren't even used in code it seems
     //public boolean liftDown = Robot.oi.dropButton.get();
     public int counts = 0;
+    public boolean auto = true;
 
     public TeleopLiftCommand() {
         requires(Robot.liftSystem);
@@ -26,6 +27,13 @@ public class TeleopLiftCommand extends Command {
     
     @Override
     protected void execute() {
+        auto = false;
+        if(liftSystem.getEncoderCounts() <= 0){
+            liftSystem.resetEncoders();
+        }
+        if(Robot.oi.resetLiftEncoderButton.get()){
+            liftSystem.resetEncoders();
+        }
         if(Robot.oi.firstStageLiftButton.get()) {
             liftSystem.firstStageControl(-1);
             counts = liftSystem.getEncoderCounts();
@@ -33,20 +41,23 @@ public class TeleopLiftCommand extends Command {
             if(Robot.oi.controller.getPOV() == 0) {
                 liftSystem.firstStageControl(-1);
                 liftSystem.secondStageControl(1);
-                counts = liftSystem.getEncoderCounts();
-                System.out.println("Lift Encoder Counts: " + counts);
+                //counts = liftSystem.getEncoderCounts();
+              //  auto = false;
+                liftSystem.liftCountError = 200;
             } else if(Robot.oi.controller.getPOV() == 180) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
-                counts = liftSystem.getEncoderCounts();
-                 System.out.println("Lift Encoder Counts: " + counts);
+                //counts = liftSystem.getEncoderCounts();
+                 
+                  liftSystem.liftCountError = 100;
+               //  auto = false;
             } else {
-                //Ghetto but it works
-                //liftSystem.firstStageControl(-0.06);
-                //liftSystem.secondStageControl(0.06);
-               //-- liftSystem.stopBoth();
-            
+               if(!auto){
+             //   setTimeout(0.3);
+                counts = liftSystem.getEncoderCounts();
+
                liftSystem.keepFirstStagePosition(counts);        
+            }
             }
         }
     }

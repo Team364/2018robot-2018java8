@@ -10,7 +10,7 @@ import frc.team364.robot.commands.auto.misc.*;
 public class CloseScale2Cube extends CommandGroup {
 
     public CloseScale2Cube() {
-        //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
+        
         addSequential(new DriveStraightForCounts(15000, false, true)); // Drive to scale
         addSequential(new TurnToHeading(-22)); // Turn towards scale
         addSequential(new DriveStraightForCounts(3500, false, false)); // Drive to scale dropoff point

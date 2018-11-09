@@ -43,13 +43,13 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
-	    leftAutonSwitch = new LeftSwitch3Cube();
-        rightAutonSwitch = new RightSwitch3Cube();
-        farAutonScale = new FarScale1Cube();
+	    leftAutonSwitch = new LeftSwitchRedStick();
+        rightAutonSwitch = new RightSwitchRedStick();
+        farAutonScale = new FollowPathAuto();
         closeAutonScale = new CloseScale3Cube();
-        flippyShit = new FlippyShit();
+        //flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
-        camera.setResolution(160, 120);
+        camera.setResolution(320, 240);
         driveSystem.resetEncoders();
         driveSystem.resetHeading();
     }
@@ -120,8 +120,5 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
         SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
         SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
-       //Potentiometer  SmartDashboard.putNumber("Pot Voltage", clawSystem.getPotVoltage());
-//SmartDashboard.putNumber("Lift Encoder Counts", LiftSystem.getEncoderCounts());
-        //SmartDashboard.putString("Current auto", gameData.charAt(0));
     }
 }

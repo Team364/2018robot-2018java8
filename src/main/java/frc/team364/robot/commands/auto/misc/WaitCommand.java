@@ -5,7 +5,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class WaitCommand extends Command {
 
-
+    /**
+     * WaitCommand()
+     * Autonomous wait command
+     * @param time delay in seconds
+     */
     public WaitCommand(double time) {
         setTimeout(time);
     }

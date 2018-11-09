@@ -10,11 +10,12 @@ import frc.team364.robot.commands.auto.misc.*;
 public class CloseScale3Cube extends CommandGroup {
 
     public CloseScale3Cube() {
-        //TODO: Add sensors to IntakeSystem to determine if we are holding a cube
-        addSequential(new DriveStraightForCounts(15000, false, true)); // Drive to scale
-        addSequential(new TurnToHeading(-22)); // Turn towards scale--was -22
+        
+        addSequential(new DriveStraightForCounts(17750, false, true)); // Drive to scale
+        addSequential(new StopMotors());
+        addSequential(new TurnToHeading(-24)); // Turn towards scale--was -22
         addParallel(new LiftBothStages(true)); // Lift cube
-        addSequential(new DriveStraightForCounts(3500, false, false)); // Drive to scale dropoff point
+        addSequential(new DriveStraightForCountsQuick(1200, false, false)); // Drive to scale dropoff point
         addSequential(new WaitCommand(0.3));
         addSequential(new FlipClawDown()); // Drop claw for cube placement
         addSequential(new WaitCommand(0.1));
@@ -24,7 +25,7 @@ public class CloseScale3Cube extends CommandGroup {
         addSequential(new TurnToHeading(-120)); // Total -155 deg
         addSequential(new FlipClawDown()); // Drop claw for intake
         addSequential(new OpenPincher()); // Open picher for cube intake
-        addParallel(new IntakeCube()); // Intake cube while driving forward
+       /* addParallel(new IntakeCube()); // Intake cube while driving forward
         addSequential(new ResetEncoders());
         addSequential(new DriveStraightForCounts(2600, false, false)); // Drive forward
         addSequential(new ClosePincher()); // Pinch cube
@@ -52,5 +53,6 @@ public class CloseScale3Cube extends CommandGroup {
         addSequential(new OuttakeCube());
         addParallel(new FlipClawUp());
         addParallel(new DropBothStages(true));
+        */
     }
 }

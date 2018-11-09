@@ -6,6 +6,10 @@ import frc.team364.robot.Robot;
 
 public class DropSecondStage extends Command {
 
+    /**
+     * DropSecondStage()
+     * Second stage moves at full negative power for 1 second
+     */
     public DropSecondStage() {
         requires(Robot.liftSystem);
         setTimeout(1);

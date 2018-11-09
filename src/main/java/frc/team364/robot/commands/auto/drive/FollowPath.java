@@ -7,6 +7,7 @@ import jaci.pathfinder.followers.EncoderFollower;
 import java.io.File;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team364.robot.Robot;
 
 public class FollowPath extends Command {
@@ -16,6 +17,7 @@ public class FollowPath extends Command {
 
     private double leftCalculatedOutput;
     private double rightCalculatedOutput;
+    public double leftOututCalculated;
     private double heading;
     private double desiredHeading;
     private double angleDifference;
@@ -30,6 +32,13 @@ public class FollowPath extends Command {
         leftFile = new File(leftFileName);
         rightFile = new File(rightFileName);
         requires(Robot.driveSystem);
+    }
+
+    /**
+     * @return the leftCalculatedOutput
+     */
+    public double getLeftCalculatedOutput() {
+        return leftCalculatedOutput;
     }
 
     @Override
@@ -55,10 +64,21 @@ public class FollowPath extends Command {
         desiredHeading = Pathfinder.r2d(left.getHeading());
 
         angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - heading);
-        turn = 0.8 * (-1.0/80.0) * angleDifference;
+        turn = 0.51* (-1.0/80.0) * angleDifference;
 
         Robot.driveSystem.setLeftDrivePower(leftCalculatedOutput + turn);
-        Robot.driveSystem.setRightDrivePower(rightCalculatedOutput - turn);
+        Robot.driveSystem.setRightDrivePower((rightCalculatedOutput - turn)*-1);
+
+        SmartDashboard.putNumber("Trag leftCalculatedOutput: ", leftCalculatedOutput);
+        SmartDashboard.putNumber("Trag rightCalculatedOutput: ", rightCalculatedOutput);
+        SmartDashboard.putNumber("Trag heading: ", heading);
+        SmartDashboard.putNumber("Trag desiredHeading: ", desiredHeading);
+        SmartDashboard.putNumber("Trag angleDifference: ", angleDifference);
+        SmartDashboard.putNumber("Trag turn: ", turn);
+        SmartDashboard.putNumber("Trag leftEncoderCounts: ", Robot.driveSystem.getLeftEncoderPosition());
+        SmartDashboard.putNumber("Trag rightEncoderCounts: ", Robot.driveSystem.getRightEncoderPosition());
+
+
     }
 
 	@Override
