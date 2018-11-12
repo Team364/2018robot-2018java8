@@ -11,12 +11,7 @@ public class StopMotors extends Command {
         requires(Robot.driveSystem);
         setTimeout(0.1);
     }
-
-    @Override
-    protected void initialize() {
-        
-    }
-
+    
     @Override
     protected void execute() {
         Robot.driveSystem.stop();
@@ -30,8 +25,6 @@ public class StopMotors extends Command {
     @Override
     protected void end() {
         Robot.driveSystem.stop();
-        Robot.driveSystem.resetHeading();
-        System.out.println("Reached target heading." + Robot.driveSystem.getGyroAngle());
     }
 
     @Override

@@ -1,15 +1,8 @@
-/*
- *  George and Keanu:
- *  This is the TeleopDriveCommand. This runs whenever there isn't another command
- *  running that requries the DriveSystem class. In Execute, the drive motors are
- *  given an output from the joysticks using a variable in the OI (Operator Interface) class.
- *  The shifters are also set using the triggers from each joystick.
- */
-
 package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopDriveCommand extends Command {
@@ -46,10 +39,24 @@ public class TeleopDriveCommand extends Command {
     protected void end() {
         // This will probably never be called.
         Robot.driveSystem.stop();
+=======
+import edu.wpi.first.wpilibj.Joystick;
+
+public class TeleopDriveCommand extends Command {
+
+    public Joystick leftStick;
+    public Joystick rightStick;
+
+    public TeleopDriveCommand() {
+        requires(Robot.driveSystem);
+        leftStick = new Joystick(0);
+        rightStick = new Joystick(1);
+>>>>>>> c6f78589a35c0b920c2ed32eaf2ab52f328cff1a
     }
 
     @Override
     protected void execute() {
+<<<<<<< HEAD
         rightControllerInput = Robot.oi.driverController.getRawAxis(1);
         leftControllerInput = Robot.oi.driverController.getRawAxis(5);
         rightVelocity = Robot.driveSystem.rightRear.getSelectedSensorVelocity(0);
@@ -130,11 +137,19 @@ public class TeleopDriveCommand extends Command {
         SmartDashboard.putNumber("GetRightRear: ", Robot.driveSystem.rightRear.getMotorOutputPercent());
         SmartDashboard.putNumber("GetLeftContr: ", leftControllerInput);
         SmartDashboard.putNumber("GetRightContr: ", rightControllerInput);
+=======
+        Robot.driveSystem.tankDrive(leftStick.getRawAxis(1), rightStick.getRawAxis(1));
+>>>>>>> c6f78589a35c0b920c2ed32eaf2ab52f328cff1a
     }
 
     @Override
     protected boolean isFinished() {
         return false;
+    }
+
+    @Override
+    protected void end() {
+        Robot.driveSystem.stop();
     }
 
 }

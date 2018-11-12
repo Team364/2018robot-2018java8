@@ -15,11 +15,6 @@ public class DriveforPower extends Command {
     }
 
     @Override
-    protected void initialize() {
-        
-    }
-
-    @Override
     protected void execute() {
         Robot.driveSystem.driveForPower(power);
     }
@@ -31,9 +26,7 @@ public class DriveforPower extends Command {
 
     @Override
     protected void end() {
-        Robot.driveSystem.stop();
-        Robot.driveSystem.resetHeading();
-        System.out.println("Reached target heading." + Robot.driveSystem.getGyroAngle());
+       Robot.driveSystem.stop();
     }
 
     @Override
