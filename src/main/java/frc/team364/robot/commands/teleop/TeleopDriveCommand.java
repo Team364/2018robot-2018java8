@@ -39,7 +39,7 @@ public class TeleopDriveCommand extends Command {
     protected void initialize() {
         driveState = DriveStates.STATE_NOT_MOVING;
         rampDownSequence = false;
-        
+
     }
 
     @Override
@@ -56,84 +56,71 @@ public class TeleopDriveCommand extends Command {
         leftVelocity = Robot.driveSystem.leftRear.getSelectedSensorVelocity(0);
         SmartDashboard.putBoolean("RampDown: ", rampDownSequence);
         SmartDashboard.putData("RampDownStatus: ", RampDown);
-        SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));//Velocity in feet
-       
+        SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));// Velocity in
+                                                                                                        // feet
 
-        //normal tank drive control
-        
-            if(Robot.oi.dataButton.get())
-            {
-                System.out.println(leftControllerInput + " " + rightControllerInput);
-                System.out.println(driveState);
-            }        
-    
-            if(driveState == DriveStates.STATE_NOT_MOVING){
-                tankLeft = 0;
-                tankRight = 0;
-            if((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25))
-            {
+        // normal tank drive control
+
+        if (Robot.oi.dataButton.get()) {
+            System.out.println(leftControllerInput + " " + rightControllerInput);
+            System.out.println(driveState);
+        }
+
+        if (driveState == DriveStates.STATE_NOT_MOVING) {
+            tankLeft = 0;
+            tankRight = 0;
+            if ((Math.abs(leftControllerInput) >= 0.25) || (Math.abs(rightControllerInput) >= 0.25)) {
                 System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
-               
             }
-        }
-            else if (driveState == DriveStates.STATE_DIRECT_DRIVE){
-                
-                tankLeft = leftControllerInput;
-                tankRight = rightControllerInput;
-            if ((Math.abs(leftControllerInput) < 0.2) && (Math.abs(rightControllerInput) < 0.2))
-            {
+
+        } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
+            tankLeft = leftControllerInput;
+            tankRight = rightControllerInput;
+            if ((Math.abs(leftControllerInput) < 0.2) && (Math.abs(rightControllerInput) < 0.2)) {
                 System.out.println("STATE_DIRECT_DRIVE->STATE_RAMP_DOWN");
                 driveState = DriveStates.STATE_RAMP_DOWN;
-                
             }
-        }
-            else if(driveState == DriveStates.STATE_RAMP_DOWN){
-                RampDown.start();
-            if ((Math.abs(leftControllerInput) > 0.25) && (Math.abs(rightControllerInput) > 0.25))
-            {
+
+        } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
+            RampDown.start();
+            if ((Math.abs(leftControllerInput) > 0.25) && (Math.abs(rightControllerInput) > 0.25)) {
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
                 System.out.println("STATE_RAMP_DOWN->STATE_DIRECT_DRIVE");
-
-            }
-            else if (Robot.driveSystem.leftRear.getMotorOutputPercent() <= 0.1)
-            {
+            } else if (Robot.driveSystem.leftRear.getMotorOutputPercent() <= 0.1) {
                 driveState = DriveStates.STATE_NOT_MOVING;
                 System.out.println("STATE_RAMP_DOWN->STATE_NOT_MOVING");
             }
-        }
-            else{
-            //This condition should never happen!
+            
+        } else {
+            // This condition should never happen!
             driveState = DriveStates.STATE_NOT_MOVING;
-            }
-        
+        }
+
         Robot.driveSystem.tankDrive(tankLeft, tankRight);
         /*//Executing ramping down command
         if(rampDownSequence){
-        if((leftControllerInput <= 0.5) && (rightControllerInput <= 0.5) && (Math.abs(leftControllerInput) <= 0.5)){
-            RampDown.start();
-            forward = true;
-        }else if((leftControllerInput <= -0.5) && (rightControllerInput <= -0.5) && (Math.abs(leftControllerInput) <= 0.5)){
-            RampDown.start();
-            forward = false;
-        }else{
-           // RampDown.cancel();
+            if((leftControllerInput <= 0.5) && (rightControllerInput <= 0.5) && (Math.abs(leftControllerInput) <= 0.5)){
+                RampDown.start();
+                forward = true;
+            } else if((leftControllerInput <= -0.5) && (rightControllerInput <= -0.5) && (Math.abs(leftControllerInput) <= 0.5)){
+                RampDown.start();
+                forward = false;
+            } else{
+                // RampDown.cancel();
+            }
+        } else if((Math.abs(leftControllerInput) >= 0.5) && (Math.abs(rightControllerInput) >= 0.5)){
+            rampDownSequence = true;
         }
-    }else if((Math.abs(leftControllerInput) >= 0.5) && (Math.abs(rightControllerInput) >= 0.5)){
-        rampDownSequence = true;
-    }
-    //These will turn off the sequence before it is attempted to be executed
-    //IF turning, deactivate sequence
+        //These will turn off the sequence before it is attempted to be executed
+        //IF turning, deactivate sequence
         if(Math.abs(leftControllerInput - rightControllerInput) >= 0.3){
             rampDownSequence = false;
         }*/
 
-
-       
-
-        if(Robot.oi.shiftHigh.get()) {
+        if (Robot.oi.shiftHigh.get()) {
             Robot.driveSystem.shiftHigh();
-        } else if(Robot.oi.shiftLow.get()) {
+        } else if (Robot.oi.shiftLow.get()) {
             Robot.driveSystem.shiftLow();
         } else {
             Robot.driveSystem.noShiftInput();
