@@ -100,8 +100,8 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
-        leftFront.set(left);
-        leftRear.set(left);
+        leftFront.set(-left);
+        leftRear.set(-left);
         rightFront.set(-right);
         rightRear.set(-right);
         

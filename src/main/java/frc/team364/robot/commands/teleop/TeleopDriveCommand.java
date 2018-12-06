@@ -54,18 +54,18 @@ public class TeleopDriveCommand extends Command {
         leftControllerInput = Robot.oi.driverController.getRawAxis(5);
         //rightVelocity = Robot.driveSystem.rightRear.getSelectedSensorVelocity(0);
         //leftVelocity = Robot.driveSystem.leftRear.getSelectedSensorVelocity(0);
-        SmartDashboard.putBoolean("RampDown: ", rampDownSequence);
-        SmartDashboard.putData("RampDownStatus: ", RampDown);
+        //SmartDashboard.putBoolean("RampDown: ", rampDownSequence);
+        //SmartDashboard.putData("RampDownStatus: ", RampDown);
        // SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));// Velocity in
                                                                                                         // feet
 
         // normal tank drive control
-
+       
+           
         if (Robot.oi.dataButton.get()) {
             System.out.println(leftControllerInput + " " + rightControllerInput);
             System.out.println(driveState);
         }
-
         if (driveState == DriveStates.STATE_NOT_MOVING) {
             tankLeft = 0;
             tankRight = 0;
