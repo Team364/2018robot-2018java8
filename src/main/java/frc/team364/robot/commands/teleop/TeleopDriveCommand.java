@@ -31,7 +31,7 @@ public class TeleopDriveCommand extends Command {
      */
     public TeleopDriveCommand() {
         requires(Robot.driveSystem);
-        RampDown = new RampDown();
+       // RampDown = new RampDown();
         CancelRamp = false;
     }
 
@@ -52,11 +52,11 @@ public class TeleopDriveCommand extends Command {
     protected void execute() {
         rightControllerInput = Robot.oi.driverController.getRawAxis(1);
         leftControllerInput = Robot.oi.driverController.getRawAxis(5);
-        rightVelocity = Robot.driveSystem.rightRear.getSelectedSensorVelocity(0);
-        leftVelocity = Robot.driveSystem.leftRear.getSelectedSensorVelocity(0);
+        //rightVelocity = Robot.driveSystem.rightRear.getSelectedSensorVelocity(0);
+        //leftVelocity = Robot.driveSystem.leftRear.getSelectedSensorVelocity(0);
         SmartDashboard.putBoolean("RampDown: ", rampDownSequence);
         SmartDashboard.putData("RampDownStatus: ", RampDown);
-        SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));// Velocity in
+       // SmartDashboard.putNumber("Velocity: ", Robot.driveSystem.leftRear.getSelectedSensorVelocity(0));// Velocity in
                                                                                                         // feet
 
         // normal tank drive control
@@ -83,14 +83,15 @@ public class TeleopDriveCommand extends Command {
             }
 
         } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
-            RampDown.start();
-            if ((Math.abs(leftControllerInput) > 0.25) && (Math.abs(rightControllerInput) > 0.25)) {
+           // RampDown.start();
+           driveState = DriveStates.STATE_NOT_MOVING;
+           /* if ((Math.abs(leftControllerInput) > 0.25) && (Math.abs(rightControllerInput) > 0.25)) {
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
                 System.out.println("STATE_RAMP_DOWN->STATE_DIRECT_DRIVE");
-            } else if (Robot.driveSystem.leftRear.getMotorOutputPercent() <= 0.1) {
+            } else if (Robot.driveSystem.leftRear.get() <= 0.1) {
                 driveState = DriveStates.STATE_NOT_MOVING;
                 System.out.println("STATE_RAMP_DOWN->STATE_NOT_MOVING");
-            }
+            }*/
             
         } else {
             // This condition should never happen!
@@ -126,8 +127,8 @@ public class TeleopDriveCommand extends Command {
             Robot.driveSystem.noShiftInput();
         }
 
-        SmartDashboard.putNumber("GetLeftRear: ", Robot.driveSystem.leftRear.getMotorOutputPercent());
-        SmartDashboard.putNumber("GetRightRear: ", Robot.driveSystem.rightRear.getMotorOutputPercent());
+        SmartDashboard.putNumber("GetLeftRear: ", Robot.driveSystem.leftRear.get());
+        SmartDashboard.putNumber("GetRightRear: ", Robot.driveSystem.rightRear.get());
         SmartDashboard.putNumber("GetLeftContr: ", leftControllerInput);
         SmartDashboard.putNumber("GetRightContr: ", rightControllerInput);
     }

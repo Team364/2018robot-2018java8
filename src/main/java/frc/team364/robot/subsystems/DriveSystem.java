@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team364.robot.PIDCalc;
@@ -30,10 +31,10 @@ import jaci.pathfinder.modifiers.TankModifier;
  */ 
 public class DriveSystem extends Subsystem {
 
-    public TalonSRX leftFront;
-    public TalonSRX leftRear;
-    public TalonSRX rightFront;
-    public TalonSRX rightRear;
+    public VictorSP leftFront;
+    public VictorSP leftRear;
+    public VictorSP rightFront;
+    public VictorSP rightRear;
     public DoubleSolenoid shifter;
     public AHRS navX;
     public PIDCalc pidNavX;
@@ -58,15 +59,15 @@ public class DriveSystem extends Subsystem {
     public DriveSystem() {
         
         // Initialize TalonSRX objects
-        leftFront = new TalonSRX(RobotMap.leftFrontDrive);
-        leftRear = new TalonSRX(RobotMap.leftRearDrive);
-        rightFront = new TalonSRX(RobotMap.rightFrontDrive);
-        rightRear = new TalonSRX(RobotMap.rightRearDrive);
+        leftFront = new VictorSP(RobotMap.leftFrontDrive);
+        leftRear = new VictorSP(RobotMap.leftRearDrive);
+        rightFront = new VictorSP(RobotMap.rightFrontDrive);
+        rightRear = new VictorSP(RobotMap.rightRearDrive);
 
         // Initialize DoubleSolenoid shifter object
         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
         
-	    // Set the front drive motors to follow the rear
+	    /*// Set the front drive motors to follow the rear
         leftFront.follow(leftRear);
         rightFront.follow(rightRear);
 
@@ -84,7 +85,7 @@ public class DriveSystem extends Subsystem {
         pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
         pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
         pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
-        pidRampDown = new PIDCalc(0.0001, 0, 0, 0, "RampDown");
+        pidRampDown = new PIDCalc(0.0001, 0, 0, 0, "RampDown");*/
     }
 
     @Override
@@ -99,8 +100,11 @@ public class DriveSystem extends Subsystem {
      * @param right sets the right drive power
      */
     public void tankDrive(double left, double right) {
-        leftRear.set(ControlMode.PercentOutput, left);
-        rightRear.set(ControlMode.PercentOutput, -right);
+        leftFront.set(left);
+        leftRear.set(left);
+        rightFront.set(-right);
+        rightRear.set(-right);
+        
     }
 
     /**
@@ -109,63 +113,65 @@ public class DriveSystem extends Subsystem {
      * Use this in auto to stop the drivetrain inbetween commands
      */ 
     public void stop() {
-        leftRear.set(ControlMode.PercentOutput, 0);
-        rightRear.set(ControlMode.PercentOutput, 0);
+        leftFront.set(0);
+        leftRear.set(0);
+        rightFront.set(0);
+        rightRear.set(0);
     }
 
     /**
      * getLeftEncoderPosition()
      * @return returns the left encoder position in counts
      */ 
-    public int getLeftEncoderPosition() {
+   /* public int getLeftEncoderPosition() {
         return leftRear.getSelectedSensorPosition(0);
-    }
+    }*/
 
     /**
      * getRightEncoderPosition()
      * @return returns the right encoder position in counts
      */ 
-    public int getRightEncoderPosition() {
+   /* public int getRightEncoderPosition() {
         return -rightRear.getSelectedSensorPosition(0);
-    }
+    }*/
 
     /**
      * getGyroAngle()
      * @return returns the navX angle (yaw)
      */ 
-    public double getGyroAngle() {
+   /* public double getGyroAngle() {
         return navX.getYaw();
-    }
+    }*/
 
     /**
      * setLeftDrivePower()
      * Use this for motion profiling to set the left drive power
      * @param power sets the left drive power
      */ 
-    public void setLeftDrivePower(double power) {
+    /*public void setLeftDrivePower(double power) {
         leftRear.set(ControlMode.PercentOutput, power);
-    }
+    }*/
 
     /**
      * setRightDrivePower()
      * Use this for motion profiling to set the right drive power
      * @param power sets the right drive power
      */ 
-    public void setRightDrivePower(double power) {
+   /* public void setRightDrivePower(double power) {
         rightRear.set(ControlMode.PercentOutput, power);
-    }
+    }*/
 
-    public void driveForPower(double power){
+    /*public void driveForPower(double power){
         setRightDrivePower(power);
         setLeftDrivePower(power);
 
-    }
+    }*/
     /**
      * driveStraightToEcnoderCounts()
      * Uses the TalonSRX PID to drive to a certain number of counts
      * @param counts specify encoder counts to drive to
      */ 
-    public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
+   /* public void driveStraightToEncoderCounts(int counts, boolean backwards, boolean useGyro) {
         if(backwards) {
             pidOutputLeft = pidLeft.calculateOutput(counts, -getLeftEncoderPosition());
             pidOutputRight = pidRight.calculateOutput(counts, -getRightEncoderPosition());
@@ -193,7 +199,7 @@ public class DriveSystem extends Subsystem {
                 rightRear.set(ControlMode.PercentOutput, -pidOutputRight);
             }
         }
-    }
+    }*/
 
     /**
      * withinEncoderRange()
@@ -201,7 +207,7 @@ public class DriveSystem extends Subsystem {
      * @param counts counts to reach
      * @return returns true if counts is within 10 of wanted counts
      */ 
-    public boolean withinEncoderCountRange(int counts) {
+    /*public boolean withinEncoderCountRange(int counts) {
 
         double leftRearPos = leftRear.getSelectedSensorPosition(0);
         if(Math.abs(leftRearPos) >= (counts - 100)) {
@@ -210,7 +216,7 @@ public class DriveSystem extends Subsystem {
             return false;
         }
 
-    }
+    }*/
 
     /**
      * resetHeading()
@@ -225,11 +231,11 @@ public class DriveSystem extends Subsystem {
      * Turns the robot to a specified heading using PIDCalc and the navX
      * @param heading heading to turn to
      */ 
-    public void turnToHeading(double heading) {
+    /*public void turnToHeading(double heading) {
         pidOutputNavX = pidNavX.calculateOutput(heading, navX.getYaw());
         leftRear.set(ControlMode.PercentOutput, pidOutputNavX); //Was multiplied by 0.6
         rightRear.set(ControlMode.PercentOutput, pidOutputNavX);
-    }
+    }*/
 
     /**
      * reachedHeading()
@@ -237,39 +243,39 @@ public class DriveSystem extends Subsystem {
      * @param heading heading to be reached
      * @return returns true if the robot is within 2 degrees of wanted heading
      */ 
-    public boolean reachedHeading(double heading) {
+    /*public boolean reachedHeading(double heading) {
         if(navX.getYaw() <= (heading + 5) && navX.getYaw() >= (heading - 5)) {
             return true;
         } else {
             return false;
         }
-    }
+    }*/
         /**
      * turnToHeading()
      * Slows the robot down
      */ 
     
-    public void rampDown() {
+    /*public void rampDown() {
         
-        pidOutputRampDown = pidNavX.calculateOutput(0, Robot.driveSystem.leftRear.getMotorOutputPercent());
+        pidOutputRampDown = pidNavX.calculateOutput(0, Robot.driveSystem.leftRear.get());
         SmartDashboard.putNumber("PidOutputRamp: ", pidOutputRampDown);
-        leftRear.set(ControlMode.PercentOutput, -pidOutputRampDown); //Was multiplied by 0.6
-        rightRear.set(ControlMode.PercentOutput, pidOutputRampDown);
+        leftRear.set( -pidOutputRampDown); //Was multiplied by 0.6
+        rightRear.set(pidOutputRampDown);
 
-}
+}*/
 
 
     /**
      * reachedHeading()
      * Determines if the drivetrain has stopped
      */ 
-    public boolean reachedSmoothStop() {
+   /* public boolean reachedSmoothStop() {
         if(Math.abs(Robot.driveSystem.leftRear.getMotorOutputPercent()) <= 0.01) {
             return true;
         } else {
             return false;
         }
-    }
+    }*/
 
     /**
      * shiftHigh()
@@ -311,9 +317,9 @@ public class DriveSystem extends Subsystem {
         return modifier;
     }
 */
-    public void resetEncoders() {
+   /* public void resetEncoders() {
         leftRear.setSelectedSensorPosition(0, 0, 0);
         rightRear.setSelectedSensorPosition(0, 0, 0);
-    }
+    }*/
 
 }
