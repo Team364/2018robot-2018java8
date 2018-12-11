@@ -41,6 +41,10 @@ public class TeleopLiftCommand extends Command {
                  
                   //liftSystem.liftCountError = 100;
                //  auto = false;
+              
+            } else{
+                liftSystem.firstStageControl(0);
+                liftSystem.secondStageControl(0);
             }
         }
     }

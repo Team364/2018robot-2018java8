@@ -89,7 +89,7 @@ public class LiftSystem extends Subsystem {
         }
         */
         firstStage1.set(speed);
-        firstStage2.set(speed);
+        firstStage2.set(0);
     }
 
     /**
@@ -112,8 +112,8 @@ public class LiftSystem extends Subsystem {
             secondStage1.set(0);
         }
         */
-        secondStage1.set(-speed);
-        secondStage2.set(speed);
+        secondStage1.set(0);
+        secondStage2.set(0);
     }
 
     /**

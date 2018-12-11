@@ -50,8 +50,8 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void execute() {
-        rightControllerInput = Robot.oi.driverController.getRawAxis(1);
-        leftControllerInput = Robot.oi.driverController.getRawAxis(5);
+        rightControllerInput = Robot.oi.driverController.getRawAxis(5);
+        leftControllerInput = Robot.oi.driverController.getRawAxis(1);
         //rightVelocity = Robot.driveSystem.rightRear.getSelectedSensorVelocity(0);
         //leftVelocity = Robot.driveSystem.leftRear.getSelectedSensorVelocity(0);
         //SmartDashboard.putBoolean("RampDown: ", rampDownSequence);
