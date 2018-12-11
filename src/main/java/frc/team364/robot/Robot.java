@@ -37,7 +37,6 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
-	    //flippyShit = new FlippyShit();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setResolution(320, 240);
         //driveSystem.resetEncoders();
@@ -63,7 +62,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().removeAll();
         //driveSystem.leftRear.configOpenloopRamp(0, 0);
         //driveSystem.rightRear.configOpenloopRamp(0, 0); 
-        liftSystem.resetEncoders();
+        //liftSystem.resetEncoders();
     }
 
     @Override
