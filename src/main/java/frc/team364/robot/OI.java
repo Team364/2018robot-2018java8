@@ -26,27 +26,13 @@ public class OI {
     public OI() {
 
         controller = new Joystick(0);
-        driverController = new Joystick(1);
-        operationStation = new Joystick(2); ///Changing Main Buttons to Gamepad--all thats left is the auto switch and it's literally in a cardboard box
-        dataButton = new JoystickButton(driverController, 7);
-
-        shiftLow = new JoystickButton(driverController, 5);
-        shiftHigh = new JoystickButton(driverController, 6);
-       // secondClawButton = new JoystickButton(leftStick, 11);
+        shiftLow = new JoystickButton(controller, 7);
+        shiftHigh = new JoystickButton(controller, 8);
 
         clawButton = new JoystickButton(controller, 5);
         pinchButton = new JoystickButton(controller, 6);
         firstStageLiftButton = new JoystickButton(controller, 4);//was 4
         resetLiftEncoderButton = new JoystickButton(controller, 1);
-        //dropButton = new JoystickButton(controller, 6); --Doesn't seem to be used in the code
-        //liftButton = new JoystickButton(controller, 5); --Doesn't seem to be used in the code
-        flippyShitButton = new JoystickButton(controller, 2);
-
-        //intakeButton = new JoystickButton(controller, 2);---Will be using axis for this
-        //outtakeButton = new JoystickButton(controller, 2); ---Will be using axis for this
-      
-
-        autoSelectorButton = new JoystickButton(operationStation, 10);
        
     }
 }

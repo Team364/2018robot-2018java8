@@ -37,10 +37,6 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
-        camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
-        camera.setResolution(320, 240);
-        //driveSystem.resetEncoders();
-        //driveSystem.resetHeading();
     }
 
     @Override
@@ -88,8 +84,5 @@ public class Robot extends TimedRobot {
     }
 
     private void putSmartDashVars() {
-        //SmartDashboard.putNumber("Gyro Angle", driveSystem.getGyroAngle());
-        //SmartDashboard.putNumber("Left Encoder Counts", driveSystem.getLeftEncoderPosition());
-        //SmartDashboard.putNumber("Right Encoder Counts", driveSystem.getRightEncoderPosition());
     }
 }

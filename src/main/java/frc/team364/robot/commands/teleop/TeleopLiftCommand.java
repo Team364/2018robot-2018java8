@@ -32,15 +32,10 @@ public class TeleopLiftCommand extends Command {
             if(Robot.oi.controller.getPOV() == 0) {
                 liftSystem.firstStageControl(-1);
                 liftSystem.secondStageControl(1);
-                //counts = liftSystem.getEncoderCounts();
-              //  auto = false;
+                
             } else if(Robot.oi.controller.getPOV() == 180) {
                 liftSystem.firstStageControl(1);
                 liftSystem.secondStageControl(-1);
-                //counts = liftSystem.getEncoderCounts();
-                 
-                  //liftSystem.liftCountError = 100;
-               //  auto = false;
               
             } else{
                 liftSystem.firstStageControl(0);

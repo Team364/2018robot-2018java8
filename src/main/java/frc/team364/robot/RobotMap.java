@@ -13,10 +13,10 @@ public class RobotMap {
 
     // First stage elevator objects
     public static final int firstStage1 = 7;//was 4 -- trying 7 swapping 7 and 8 ----does nothing maybe wrong ID in general
-    public static final int firstStage2 = 9;//was 5 -- trying 9 moves with bottom
+    public static final int firstStage2 = 6;//was 5 -- trying 9 moves with bottom
 
     // Second stage elevator objects
-    public static final int secondStage1 = 6;//was 6 -- movees on top
+    public static final int secondStage1 = 9;//was 6 -- movees on top
     public static final int secondStage2 = 8;//was 7 -- trying 8 swaping 7 and 8 -- does nothing maybe wrong ID in general 
    
     // Intake objects
