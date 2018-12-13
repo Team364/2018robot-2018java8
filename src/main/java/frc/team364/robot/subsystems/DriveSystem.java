@@ -67,25 +67,6 @@ public class DriveSystem extends Subsystem {
         // Initialize DoubleSolenoid shifter object
         shifter = new DoubleSolenoid(RobotMap.shifterPort1, RobotMap.shifterPort2);
         
-	    /*// Set the front drive motors to follow the rear
-        leftFront.follow(leftRear);
-        rightFront.follow(rightRear);
-
-	    // Config PF on left side
-        leftRear.config_kP(0, 0.25, 100);
-        leftRear.config_kF(0, 1, 100);
-
-	    // Config PF on right side
-        rightRear.config_kP(0, 0.25, 100);
-        rightRear.config_kF(0, 1, 100);
-
-	    // Init the navX, Pathfinder, and PIDCalc
-        navX = new AHRS(SPI.Port.kMXP);
-        pathfinder = new Pathfinder();
-        pidNavX = new PIDCalc(0.0005, 0.1, 50, 0, "NavX");
-        pidLeft = new PIDCalc(0.0005, 0, 0, 0, "Left");
-        pidRight = new PIDCalc(0.0005, 0, 0, 0, "Right");
-        pidRampDown = new PIDCalc(0.0001, 0, 0, 0, "RampDown");*/
     }
 
     @Override

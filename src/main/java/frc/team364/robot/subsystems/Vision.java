@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Vision extends Subsystem {
 
 	public PixyI2C gearPixy;
-	public PixyI2C boilerPixy;
 	Port port = Port.kOnboard;
 	String print;
 	public PixyPacket[] packet1 = new PixyPacket[7];
@@ -22,7 +21,6 @@ public class Vision extends Subsystem {
 
 	public Vision() {
 		gearPixy = new PixyI2C("gear", new I2C(port, 0x54), packet1, new PixyException(print), new PixyPacket());
-		boilerPixy = new PixyI2C("boiler", new I2C(port, 0x55), packet2, new PixyException(print), new PixyPacket());
 	}
 
 	public void initDefaultCommand() {
@@ -51,29 +49,6 @@ public class Vision extends Subsystem {
 			SmartDashboard.putNumber("gearPixy Height Value: " + i, packet1[i - 1].Height);
 			SmartDashboard.putString("gearPixy Error: " + i, "False");
 		}
-	}
-
-	public void testBoilerPixy() {
-		for (int i = 0; i < packet2.length; i++)
-			packet2[i] = null;
-		SmartDashboard.putString("boilerPixy hello", "working");
-		for (int i = 1; i < 8; i++) {
-			try {
-				packet2[i - 1] = boilerPixy.readPacket(i);
-			} catch (PixyException e) {
-				SmartDashboard.putString("boilerPixy Error: " + i, "exception");
-			}
-			if (packet2[i - 1] == null) {
-				SmartDashboard.putString("boilerPixy Error: " + i, "True");
-				continue;
-			}
-			SmartDashboard.putNumber("boilerPixy X Value: " + i, packet2[i - 1].X);
-			SmartDashboard.putNumber("boilerPixy Y Value: " + i, packet2[i - 1].Y);
-			SmartDashboard.putNumber("boilerPixy Width Value: " + i, packet2[i - 1].Width);
-			SmartDashboard.putNumber("boilerPixy Height Value: " + i, packet2[i - 1].Height);
-			SmartDashboard.putString("boilerPixy Error: " + i, "False");
-		}
-
 	}
 
 	// Get blocks that represent the vision tape on either side of the peg. This
