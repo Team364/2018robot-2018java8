@@ -90,16 +90,16 @@ public class Vision extends Subsystem {
 
 	// Using blocks from pixy, create a target class that will do all the magic
 	// math we need to determine angle and distance to peg.
-	public GearTarget getGearTarget() {
+	public VisionTarget getVisionTarget() {
 		PixyPacket[] packets = getPegPosition();
 		if (packets == null || (packets[0] == null && packets[1] == null))
 			return null;
-		return new GearTarget(packets[0], packets[1]);
+		return new VisionTarget(packets[0], packets[1]);
 	}
 
-	public GearTarget getGearTargetFiltered() {
+	public VisionTarget getVisionTargetFiltered() {
 		for (int i = 0; i < 10; i++) {
-			GearTarget t = getGearTarget();
+			VisionTarget t = getVisionTarget();
 			if (t != null) {
 				return t;
 			}
