@@ -15,6 +15,7 @@ public class Robot extends TimedRobot {
     public static LiftSystem liftSystem;
     public static IntakeSystem intakeSystem;
     public static ClawSystem clawSystem;
+    public static Vision vision;
     public String gameData = "";
 
     public static OI oi;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
 	    oi = new OI();
+        vision = new Vision();
     }
 
     @Override
@@ -56,9 +58,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         Scheduler.getInstance().removeAll();
-        //driveSystem.leftRear.configOpenloopRamp(0, 0);
-        //driveSystem.rightRear.configOpenloopRamp(0, 0); 
-        //liftSystem.resetEncoders();
     }
 
     @Override
