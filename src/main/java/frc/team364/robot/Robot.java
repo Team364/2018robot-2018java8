@@ -36,7 +36,9 @@ public class Robot extends TimedRobot {
 	    liftSystem = new LiftSystem();
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
-	    oi = new OI();
+        oi = new OI();
+        camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
+        camera.setResolution(320, 240);
     }
 
     @Override
