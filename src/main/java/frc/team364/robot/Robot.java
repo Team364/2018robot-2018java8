@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
         clawSystem = new ClawSystem();
         oi = new OI();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
+        camera.setFPS(60);
         camera.setResolution(320, 240);
     }
 
