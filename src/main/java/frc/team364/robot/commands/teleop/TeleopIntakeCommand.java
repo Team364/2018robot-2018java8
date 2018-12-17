@@ -28,7 +28,7 @@ public class TeleopIntakeCommand extends Command {
             Robot.intakeSystem.intake();
             System.out.println("Intake is running");
         //If the trigger is pressed lightly then the outtake for variable trigger pressure will run
-        } else if(Robot.oi.controller.getRawAxis(4) > 0.2) {
+        } else if(Robot.oi.controller.getRawAxis(2) > 0.2) {
             Robot.intakeSystem.outtakeForPressure();
             System.out.println("Outtake is running");
         } else {
