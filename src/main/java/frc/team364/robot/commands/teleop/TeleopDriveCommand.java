@@ -1,11 +1,3 @@
-/*
- *  George and Keanu:
- *  This is the TeleopDriveCommand. This runs whenever there isn't another command
- *  running that requries the DriveSystem class. In Execute, the drive motors are
- *  given an output from the joysticks using a variable in the OI (Operator Interface) class.
- *  The shifters are also set using the triggers from each joystick.
- */
-
 package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.HLUsageReporting.Null;
@@ -24,19 +16,19 @@ public class TeleopDriveCommand extends Command {
     public boolean forward;
     public double leftVelocity;
     public double rightVelocity;
-    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, FOLLOW_CUBE}
+    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN}//FOLLOW_CUBE
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
     public boolean CancelRamp;
-    public NetworkTableEntry centerX;
-    public NetworkTableEntry area;
-    public PIDCalc pid;
-    public double pidOutput;
-    public PIDCalc pida;
-    public double pidOutputa;
-    public double[] x;
-    public double[] a;
+    //public NetworkTableEntry centerX;
+    //public NetworkTableEntry area;
+    //public PIDCalc pid;
+    //public double pidOutput;
+    //public PIDCalc pida;
+    //public double pidOutputa;
+    //public double[] x;
+    //public double[] a;
 
     /**
      * Command used for teleop control specific to the drive system
@@ -51,12 +43,12 @@ public class TeleopDriveCommand extends Command {
     protected void initialize() {
         driveState = DriveStates.STATE_NOT_MOVING;
         rampDownSequence = false;
-        NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        NetworkTable table = inst.getTable("GRIP/contours");
-        centerX = table.getEntry("centerX");
-        area = table.getEntry("area");
-        pid = new PIDCalc(0.003, 0.001, 0.0, 0.0, "follow");
-        pida = new PIDCalc(0.0001, 0.0, 0.0, 0.0, "area");
+        //NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        //NetworkTable table = inst.getTable("GRIP/contours");
+        //centerX = table.getEntry("centerX");
+        //area = table.getEntry("area");
+        //pid = new PIDCalc(0.003, 0.001, 0.0, 0.0, "follow");
+        //pida = new PIDCalc(0.0001, 0.0, 0.0, 0.0, "area");
     }
 
     @Override
@@ -67,8 +59,8 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void execute() {
-        rightControllerInput = -Robot.oi.controller.getRawAxis(5);
-        leftControllerInput = -Robot.oi.controller.getRawAxis(1);
+        rightControllerInput = -Robot.oi.controller.getRawAxis(1);
+        leftControllerInput = -Robot.oi.controller.getRawAxis(5);
 
 
         // normal tank drive control
@@ -79,10 +71,10 @@ public class TeleopDriveCommand extends Command {
                 System.out.println("STATE_NOT_MOVING->STATE_DIRECT_DRIVE");
                 driveState = DriveStates.STATE_DIRECT_DRIVE;
             }
-            if(Robot.oi.controller.getRawButton(10)) {
+            /*if(Robot.oi.controller.getRawButton(10)) {
                 System.out.println("STATE_NOT_MOVING->FOLLOW_CUBE");
                 driveState = DriveStates.FOLLOW_CUBE;
-            }
+            }*/
 
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
             tankLeft = leftControllerInput;
@@ -92,7 +84,7 @@ public class TeleopDriveCommand extends Command {
                 driveState = DriveStates.STATE_RAMP_DOWN;
             }
 
-        } else if (driveState == DriveStates.FOLLOW_CUBE) {
+        }/* else if (driveState == DriveStates.FOLLOW_CUBE) {
             if(!Robot.oi.controller.getRawButton(10)) {
                 System.out.println("FOLLOW_CUBE->STATE_NOT_MOVING");
                 driveState = DriveStates.STATE_NOT_MOVING;
@@ -109,7 +101,7 @@ public class TeleopDriveCommand extends Command {
                 tankRight = -pidOutput + pidOutputa;
             }
         
-        } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
+        } */else if (driveState == DriveStates.STATE_RAMP_DOWN) {
            driveState = DriveStates.STATE_NOT_MOVING;
             
         } else {
