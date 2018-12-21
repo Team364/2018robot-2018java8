@@ -24,7 +24,7 @@ public class TeleopDriveCommand extends Command {
     public boolean forward;
     public double leftVelocity;
     public double rightVelocity;
-    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, FOLLOW_CUBE}
+    static enum DriveStates {STATE_NOT_MOVING, STATE_DIRECT_DRIVE, STATE_RAMP_DOWN, FOLLOW_CUBE, FIND_CUBE, FOLLOW_CUBE2}
     public DriveStates driveState;
     public double tankLeft;
     public double tankRight;
@@ -69,7 +69,9 @@ public class TeleopDriveCommand extends Command {
     protected void execute() {
         rightControllerInput = -Robot.oi.controller.getRawAxis(5);
         leftControllerInput = -Robot.oi.controller.getRawAxis(1);
-
+        if(Robot.visionSystem.lockedOn(Robot.visionSystem.x)){
+            System.out.println("DriveSystem confirms that the vision system reports being locked on");
+        }
 
         // normal tank drive control
         if (driveState == DriveStates.STATE_NOT_MOVING) {
@@ -82,6 +84,10 @@ public class TeleopDriveCommand extends Command {
             if(Robot.oi.controller.getRawButton(10)) {
                 System.out.println("STATE_NOT_MOVING->FOLLOW_CUBE");
                 driveState = DriveStates.FOLLOW_CUBE;
+            }
+            if((Robot.oi.controller.getPOV() == 270)||(Robot.oi.controller.getPOV() == 90)){
+                System.out.println("STATE_NOT_MOVING->FIND_CUBE");
+                driveState = DriveStates.FIND_CUBE;
             }
 
         } else if (driveState == DriveStates.STATE_DIRECT_DRIVE) {
@@ -108,8 +114,35 @@ public class TeleopDriveCommand extends Command {
                 tankLeft = pidOutput + pidOutputa;
                 tankRight = -pidOutput + pidOutputa;
             }
-        
-        } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
+            
+        } else if (driveState == DriveStates.FIND_CUBE) {
+                if(!((Robot.oi.controller.getPOV() == 270)||(Robot.oi.controller.getPOV() == 90))) {
+                    System.out.println("FIND_CUBE->STATE_NOT_MOVING");
+                    driveState = DriveStates.STATE_NOT_MOVING;
+                }
+                double[] defaultValue = {160.0};
+                x = centerX.getDoubleArray(defaultValue);
+                SmartDashboard.putNumberArray("xarray", x);
+                if(x.length >= 1) {
+                    System.out.println("Found Cube, Locking On");
+                    pidOutput = pid.calculateOutput(160, x[0]);
+                    tankLeft = pidOutput;
+                    tankRight = -pidOutput;
+                    if(pidOutput < 0.2){
+                        System.out.println("Locked On!");
+                    }
+                } else{
+                    System.out.println("Looking For Cube");
+                    if(Robot.oi.controller.getPOV() == 270){
+                        tankLeft = 0.4;
+                        tankRight = -0.4;
+                    }else if(Robot.oi.controller.getPOV() == 90){
+                        tankLeft = -0.4;
+                        tankRight = 0.4;
+                    }
+
+                }
+                } else if (driveState == DriveStates.STATE_RAMP_DOWN) {
            driveState = DriveStates.STATE_NOT_MOVING;
             
         } else {

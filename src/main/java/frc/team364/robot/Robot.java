@@ -15,6 +15,7 @@ public class Robot extends TimedRobot {
     public static LiftSystem liftSystem;
     public static IntakeSystem intakeSystem;
     public static ClawSystem clawSystem;
+    public static VisionSystem visionSystem;
     public String gameData = "";
 
     public static OI oi;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
         intakeSystem = new IntakeSystem();
         clawSystem = new ClawSystem();
         oi = new OI();
+        visionSystem = new VisionSystem();
         camera = CameraServer.getInstance().startAutomaticCapture("Video", 0);
         camera.setFPS(60);
         camera.setResolution(320, 240);

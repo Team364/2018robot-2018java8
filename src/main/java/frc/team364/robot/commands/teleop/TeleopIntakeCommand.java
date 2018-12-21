@@ -9,8 +9,14 @@ package frc.team364.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team364.robot.Robot;
+import edu.wpi.first.networktables.*;
+import frc.team364.robot.PIDCalc;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.HLUsageReporting.Null;
+
 
 public class TeleopIntakeCommand extends Command {
+
 
     /**
      * Command used for teleop control specific to the intake system
@@ -20,11 +26,13 @@ public class TeleopIntakeCommand extends Command {
     }
 
     @Override
+    protected void initialize() {
+
+    }
+
+    @Override
     protected void execute() {
-       
- // Run the intake and outtake are run on triggers(axis)
-        //If the trigger is pressed more than halfway then the intake will run
-        if(Robot.oi.controller.getRawAxis(3) > 0.5) {
+   if(Robot.oi.controller.getRawAxis(3) > 0.5) {
             Robot.intakeSystem.intake();
             System.out.println("Intake is running");
         //If the trigger is pressed lightly then the outtake for variable trigger pressure will run

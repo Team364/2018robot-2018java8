@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team364.robot.RobotMap;
 import frc.team364.robot.commands.teleop.TeleopIntakeCommand;
 import frc.team364.robot.Robot;
+import frc.team364.robot.commands.teleop.*;
 
 public class IntakeSystem extends Subsystem {
 
@@ -58,5 +59,6 @@ public class IntakeSystem extends Subsystem {
         leftIntake.set(0);
         rightIntake.set(0);
     }
+ 
 
 }
