@@ -19,8 +19,8 @@ public class VisionCommand extends Command {
     protected void execute() {
         //See if you can move more of this into the visionSystem.
         if(Robot.oi.controller.getRawButton(2)){
-           if(Robot.visionSystem.cubeInSight(x)) {
-                if(Robot.visionSystem.lockedOn(Robot.visionSystem.x)){
+           if(Robot.visionSystem.cubeInSight()) {
+                if(Robot.visionSystem.lockedOn()){
                     System.out.println("Action would be executed ");
                    
             } else{

@@ -35,16 +35,23 @@ public class VisionSystem extends Subsystem {
     }
 
 
+    public double getCenterX(){
+        return x[0];
+    }
 
-    public boolean lockedOn(double[] xValue){
-        if((xValue[0] > 130) && (xValue[0] < 190)){
+    public double getArea(){
+        return a[0];
+    }
+
+    public boolean lockedOn(){
+        if((x[0] > 130) && (x[0] < 190)){
             return true;
         }else{
             return false;
         }
     }
-    public boolean cubeInSight(double[] xValue){
-        if(xValue.length >= 1){
+    public boolean cubeInSight(){
+        if(x.length >= 1){
             return true;
         }else{
             return false;

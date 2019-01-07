@@ -67,11 +67,9 @@ public class TeleopDriveCommand extends Command {
 
     @Override
     protected void execute() {
-        rightControllerInput = -Robot.oi.controller.getRawAxis(5);
-        leftControllerInput = -Robot.oi.controller.getRawAxis(1);
-        if(Robot.visionSystem.lockedOn(Robot.visionSystem.x)){
-            System.out.println("DriveSystem confirms that the vision system reports being locked on");
-        }
+        rightControllerInput = -Robot.oi.controller.getRawAxis(1);
+        leftControllerInput = -Robot.oi.controller.getRawAxis(5);
+      
 
         // normal tank drive control
         if (driveState == DriveStates.STATE_NOT_MOVING) {
